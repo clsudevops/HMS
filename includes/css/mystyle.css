@@ -133,8 +133,7 @@ footer {
 .sidenav .user-view{
     padding: 5px 32px;
     margin: 0;
-    background-color: #1d78d3;
-    opacity: 0.8;
+    background-color: gray;
     color:white;
 }
 .sidenav .user-divider{
@@ -186,7 +185,7 @@ input[type=time]:not(.browser-default) {
 }
 
 .tabcontainer{
-    padding: 10px 8px !important;
+    padding: 10px 8px 10px 0px !important;
 }
 
 .card .card-image{

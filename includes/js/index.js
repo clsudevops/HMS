@@ -1,5 +1,29 @@
 // indexe php start
 
+// function for creating rooms card
+
+function createCardRoom(roomNo, status, type, rate, checkoutDate){
+    var myRoom = '<div class="col s6 m3" style="padding-left:0px; padding-right:23px;">' +
+                    '<div class="card bedCards">' +
+                        '<div class="seperate" onmouseover="test(\'' + roomNo + '\', \'' + type + '\', \'' + rate + '\')" onmouseleave="test1(\'' + roomNo + '\', \'' + status + '\', \'' + checkoutDate + '\')">' +
+                            '<p class="roomNo" id="room_' + roomNo + '">Room No ' + roomNo + '</p>' +
+                            '<div class="card-image ' + status + '" id="img_' + roomNo + '">' +
+                                '<img class="materialboxed" src="includes/images/bed1.png">' +
+                            '</div>' +
+                            '<div class="card-content" id="content_' + roomNo + '" style="text-align:center;">' +
+                                status +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="card-action">' +
+                            '<a class="btn-floating btn-flat btn-small waves-effect light-green lighten-2"><i class="material-icons">done</i></a>' +
+                            '<a class="btn-floating btn-flat btn-small waves-effect light-blue lighten-2"><i class="material-icons">delete_sweep</i></a>' +
+                            '<a class="btn-floating btn-flat btn-small waves-effect orange lighten-2"><i class="material-icons">launch</i></a>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>'
+    return myRoom;
+}
+
 // function to sort the rooms by floor
 function populateRoomsbyFloor() {
     var floor = $('#floor').val();
@@ -16,28 +40,15 @@ function populateRoomsbyFloor() {
                 var rate = data[i].rate;
                 var checkoutDate = data[i].checkoutDate;
 
-                $('#roomsList').append(
-                    '<div class="col s6 m3">' +
-                        '<div class="card bedCards">' +
-                            '<div class="seperate" onmouseover="test(\'' + roomNo + '\', \'' + type + '\', \'' + rate + '\')" onmouseleave="test1(\'' + roomNo + '\', \'' + status + '\')">' +
-                                '<p class="roomNo" id="room_' + roomNo + '">Room No ' + roomNo + '</p>' +
-                                '<div class="card-image ' + status + '" id="img_'+ roomNo +'">' +
-                                    '<img class="materialboxed" src="includes/images/bed1.png">' +
-                                '</div>' +
-                                '<div class="card-content" id="content_' + roomNo + '" style="text-align:center;">' +
-                                    status +
-                                '</div>' +
-                            '</div>' +
-                            '<div class="card-action">' +
-                                '<a class="btn-floating btn-flat btn-small waves-effect light-green lighten-2"><i class="material-icons">done</i></a>' +
-                                '<a class="btn-floating btn-flat btn-small waves-effect light-blue lighten-2"><i class="material-icons">delete_sweep</i></a>' +
-                                '<a class="btn-floating btn-flat btn-small waves-effect orange lighten-2"><i class="material-icons">launch</i></a>' +
-                            '</div>' +
-                        '</div>' +
-                    '</div>'
-                );
-                
-                // $("#img_"+ roomNo).addClass("checkout");
+                $('#roomsList').append(createCardRoom(roomNo,status,type,rate,checkoutDate));
+
+                var myDateNow = getCurrentDate();
+                var checkoutDate = getMyDate(checkoutDate);
+
+                if (checkoutDate == myDateNow){
+                    $("#img_" + roomNo).addClass("checkout");
+                    $("#content_" + roomNo).text("Today's Checkout");
+                }
             }
         }
     });
@@ -56,31 +67,52 @@ function populateRoomsbyStatus(id) {
                 var status = data[i].status;
                 var type = data[i].type;
                 var rate = data[i].rate;
+                var checkoutDate = data[i].checkoutDate;
 
-                $('#roomsList').append(
-                    '<div class="col s6 m3">' +
-                    '<div class="card bedCards">' +
-                    '<div class="seperate" onmouseover="test(\'' + roomNo + '\', \'' + type + '\', \'' + rate + '\')" onmouseleave="test1(\'' + roomNo + '\', \'' + status + '\')">' +
-                    '<p class="roomNo" id="room_' + roomNo + '">Room No ' + roomNo + '</p>' +
-                    '<div class="card-image ' + status + '" >' +
-                    '<img class="materialboxed" src="includes/images/bed1.png">' +
-                    '</div>' +
-                    '<div class="card-content" id="content_' + roomNo + '" style="text-align:center;">' +
-                    status +
-                    '</div>' +
-                    '</div>' +
-                    '<div class="card-action">' +
-                    '<a class="btn-floating btn-flat btn-small waves-effect light-green lighten-2"><i class="material-icons">done</i></a>' +
-                    '<a class="btn-floating btn-flat btn-small waves-effect light-blue lighten-2"><i class="material-icons">delete_sweep</i></a>' +
-                    '<a class="btn-floating btn-flat btn-small waves-effect orange lighten-2"><i class="material-icons">launch</i></a>' +
-                    '</div>' +
-                    '</div>' +
-                    '</div>'
-                );
+                $('#roomsList').append(createCardRoom(roomNo, status, type, rate, checkoutDate));
+
+                var myDateNow = getCurrentDate();
+                var checkoutDate = getMyDate(checkoutDate);
+
+                if (checkoutDate == myDateNow) {
+                    $("#img_" + roomNo).addClass("checkout");
+                    $("#content_" + roomNo).text("Today's Checkout");
+                }
             }
         }
     });
 }
+// populate rooms by todays chackout
+function populateRoomsbyTodaysCheckout() {
+    $('#roomsList').html("");
+    $.ajax({
+        url: 'pages/api/getTodaysRoomCheckout.php',
+        data: "",
+        dataType: 'json',
+        success: function (data) {
+            for (var i = 0; i < data.length; i++) {
+                var roomNo = data[i].roomNo;
+                var status = data[i].status;
+                var type = data[i].type;
+                var rate = data[i].rate;
+                var checkoutDate = data[i].checkoutDate;
+
+                $('#roomsList').append(createCardRoom(roomNo, status, type, rate, checkoutDate));
+
+                var myDateNow = getCurrentDate();
+                var checkoutDate = getMyDate(checkoutDate);
+
+                if (checkoutDate == myDateNow) {
+                    $("#img_" + roomNo).addClass("checkout");
+                    $("#content_" + roomNo).text("Today's Checkout");
+                }
+            }
+        }
+    });
+}
+
+// function to add count to rooms summary
+
 function populateSummary() {
     $.ajax({
         url: 'pages/api/getRoomSummary.php',
@@ -91,6 +123,7 @@ function populateSummary() {
             $('#occupiedCount').text(data[0].Occupied);
             $('#cleaningCount').text(data[0].Cleaning);
             $('#maintenanceCount').text(data[0].Maintenance);
+            $('#todaysCheckoutCount').text(data[0].TodaysCheckout);
         }
     });
 }
@@ -128,14 +161,28 @@ $("#maintenance").click(function () {
     populateRoomsbyStatus(id);
 });
 
+$("#checkingOut").click(function () {
+    $('#roomsList').html("");
+    populateRoomsbyTodaysCheckout();
+});
+
 // hovering details of room
 function test(roomNo, type, rate) {
     $("#room_" + roomNo).text(type);
     $("#content_" + roomNo).text('Php ' + rate);
 }
-function test1(roomNo, status) {
+function test1(roomNo, status, checkoutDate) {
+    var myDateNow = getCurrentDate();
+    var checkoutDate = getMyDate(checkoutDate);
+    // console.log(myDateNow + "---" + checkoutDate);
     $("#room_" + roomNo).text('Room No ' + roomNo);
-    $("#content_" + roomNo).text(status);
+
+    if (checkoutDate == myDateNow) {
+        $("#content_" + roomNo).text("Today's Checkout");
+    }
+    else{
+        $("#content_" + roomNo).text(status);
+    }
 }
 
 // index.php js up to here

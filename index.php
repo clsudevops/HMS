@@ -38,7 +38,7 @@
                                     </h5>
                                     <div class="summary">
                                         <table class="striped highlight">
-                                            <tr id="vacant"><td>Vacant</td><td id="vacantCount"></td></tr>
+                                            <tr id="vacant"><td style="width:196px">Vacant</td><td id="vacantCount"></td></tr>
                                             <tr id="occupied"><td>Occupied</td><td id="occupiedCount"></td></tr>
                                             <tr id="cleaning"><td>Cleaning</td><td id="cleaningCount"></td></tr>
                                             <tr id="maintenance"><td>Maintenance</td><td id="maintenanceCount"></td></tr>
@@ -49,7 +49,7 @@
                                     </h5>
                                     <div class="summary">
                                         <table class="striped highlight">
-                                            <tr id="checkingOut"><td>Checking Out Today</td><td id="vacantCount"></td></tr>
+                                            <tr id="checkingOut"><td style="width:196px">Today's Checkout</td><td id="todaysCheckoutCount"></td></tr>
                                         </table>
                                     </div>
                                 </div>
