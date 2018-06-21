@@ -18,7 +18,7 @@
                     <div class="page-header valign-wrapper z-depth-1">
                         <h5>Guest Masterlist</h5>
                     </div>
-                    <div class="row">
+                    <div class="row" style="margin-bottom:10px;">
                         <div class="file-field input-field col m6 s12">
                             <a class="waves-effect waves btn right btn-1" href="" style="margin-left:5px;">
                                 <i class="material-icons left">search</i>Search</a>
@@ -38,7 +38,7 @@
                             </select>
                         </div>
                     </div>
-                    <table class="z-depth-2 centered highlight responsive-table roomtable">
+                    <table class="z-depth-2 centered highlight responsive-table guesttable">
                         <thead>
                             <tr>
                                 <th>Guest ID</th>

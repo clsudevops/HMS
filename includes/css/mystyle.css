@@ -114,11 +114,13 @@ a.btn{
     padding-bottom: 5px;
 }
 
-.roomtable th{
+.roomtable th, .guesttable th{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 600;
 }
-
+.guesttable td, .roomtable td{
+    font-family:  'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 header, main{
     padding-left: 300px;
 }
