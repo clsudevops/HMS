@@ -1,22 +1,17 @@
 // indexe php start
 
 // function for creating rooms card
-function createCardRoom(roomNo, status, type, rate, checkoutDate){
-    var myRoom = '<div class="col s6 m3" style="padding-left:0px; padding-right:23px;">' +
-                    '<div class="card bedCards">' +
-                        '<div class="seperate" onmouseover="test(\'' + roomNo + '\', \'' + type + '\', \'' + rate + '\')" onmouseleave="test1(\'' + roomNo + '\', \'' + status + '\', \'' + checkoutDate + '\')">' +
+function createCardRoom(roomNo,floor, status, type, rate, checkoutDate){
+    var myRoom = '<div class="col s6 m3" id="bedCardsContainer" style="padding-left:0px; padding-right:23px;">' +
+                    '<div class="card bedCards" id="bedCards_'+ roomNo +'">' +
+                        '<div class="seperate" onmouseover="test(\'' + roomNo + '\', \'' + type + '\', \'' + rate + '\')" onmouseleave="test1(\'' + roomNo + '\', \'' + checkoutDate + '\')">' +
                             '<p class="roomNo" id="room_' + roomNo + '">Room No ' + roomNo + '</p>' +
                             '<div class="card-image ' + status + '" id="img_' + roomNo + '">' +
                                 '<img class="materialboxed" src="includes/images/bed1.png">' +
                             '</div>' +
-                            '<div class="card-content" id="content_' + roomNo + '" style="text-align:center;">' +
-                                status +
-                            '</div>' +
                         '</div>' +
-                        '<div class="card-action">' +
-                            '<a class="btn-floating btn-flat btn-small waves-effect light-green lighten-2"><i class="material-icons">done</i></a>' +
-                            '<a class="btn-floating btn-flat btn-small waves-effect light-blue lighten-2"><i class="material-icons">delete_sweep</i></a>' +
-                            '<a class="btn-floating btn-flat btn-small waves-effect orange lighten-2"><i class="material-icons">launch</i></a>' +
+                        '<div class="card-action" id="content_' + roomNo + '">' +
+                                status +
                         '</div>' +
                     '</div>' +
                 '</div>'
@@ -27,12 +22,13 @@ function createCardRoom(roomNo, status, type, rate, checkoutDate){
 function cardLoop(data) {
     for (var i = 0; i < data.length; i++) {
         var roomNo = data[i].roomNo;
+        var floor = data[i].floor;
         var status = data[i].status;
         var type = data[i].type;
         var rate = data[i].rate;
         var checkoutDate = data[i].checkoutDate;
 
-        $('#roomsList').append(createCardRoom(roomNo, status, type, rate, checkoutDate));
+        $('#roomsList').append(createCardRoom(roomNo, floor, status, type, rate, checkoutDate));
 
         var myDateNow = getCurrentDate();
         var checkoutDate = getMyDate(checkoutDate);
@@ -41,6 +37,14 @@ function cardLoop(data) {
             $("#img_" + roomNo).addClass("checkout");
             $("#content_" + roomNo).text("For Checkout");
         }
+
+        if (checkoutDate == myDateNow || status == 'Occupied'){
+            $("#bedCards_" + roomNo).wrap('<a class="roomLink" href="checkOut.php"></a>');
+        }
+        else{
+            $("#bedCards_" + roomNo).wrap('<a class="roomLink" href="checkIn.php?roomNo='+ roomNo +'"></a>');
+        }
+
     }
 }
 
@@ -160,19 +164,16 @@ function typeFilter (type) {
 // hovering details of room
 function test(roomNo, type, rate) {
     $("#room_" + roomNo).text(type);
-    $("#content_" + roomNo).text('Php ' + rate);
+    $("#bedCards_" + roomNo).addClass('hoverable');
 }
 // mouse leave
-function test1(roomNo, status, checkoutDate) {
+function test1(roomNo, checkoutDate) {
     var myDateNow = getCurrentDate();
     var checkoutDate = getMyDate(checkoutDate);
     $("#room_" + roomNo).text('Room No ' + roomNo);
-
+    
     if (checkoutDate == myDateNow) {
         $("#content_" + roomNo).text("For Checkout");
-    }
-    else{
-        $("#content_" + roomNo).text(status);
     }
 }
 

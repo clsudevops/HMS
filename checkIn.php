@@ -73,6 +73,41 @@
                                     <input name="reservation_id" id="guest_id" type="text" class="validate">
                                 </div>
                             </div>
+                            <!-- room -->
+                            <div class="row">
+                                <div class="page-header2 valign-wrapper z-depth-1">
+                                    <h5>Room Information</h5>
+                                </div>
+                                <div class="input-field col s6 m2">
+                                    <label>Room No.</label>
+                                    <?php
+                                        if(isset($_GET['roomNo'])){
+                                            $roomNo = $_GET['roomNo'];    
+                                            echo'<input name="room_no" id="room_no" type="text" class="validate" required value="'. $roomNo .'">';
+                                        }
+                                        else{
+                                            echo'<input name="room_no"  id="room_no" type="text" class="validate" required>';
+                                        }
+                                    ?>
+                                    
+                                </div>
+                                <div class="input-field col s12 m3">
+                                    <label>Room Type</label>
+                                    <input name="room_type" id="room_type" type="text" class="validate" disabled>
+                                </div>
+                                <div class="input-field col s6 m2">
+                                    <label>Floor</label>
+                                    <input name="floor" id="floor"type="text" class="validate" disabled>
+                                </div>
+                                <div class="input-field col s6 m2">
+                                    <label>Beds</label>
+                                    <input name="beds" id="beds" type="text" class="validate" disabled>
+                                </div>
+                                <div class="input-field col s12 m3">
+                                    <label>Rate</label>
+                                    <input name="rate" id="rate" type="text" class="validate" disabled>
+                                </div>
+                            </div>
                             <!-- Guest -->
                             <div class="row">
                                 <div class="page-header2 valign-wrapper z-depth-1">
@@ -93,32 +128,6 @@
                                 <div class="input-field col s6 m4">
                                     <label>Email</label>
                                     <input name="email" id="email" type="email" class="validate" required>
-                                </div>
-                            </div>
-                            <!-- room -->
-                            <div class="row">
-                                <div class="page-header2 valign-wrapper z-depth-1">
-                                    <h5>Room Information</h5>
-                                </div>
-                                <div class="input-field col s6 m2">
-                                    <label>Room No.</label>
-                                    <input name="room_no" id="room_no" type="text" class="validate" required>
-                                </div>
-                                <div class="input-field col s12 m3">
-                                    <label>Room Type</label>
-                                    <input name="room_type" id="room_type" type="text" class="validate" disabled>
-                                </div>
-                                <div class="input-field col s6 m2">
-                                    <label>Floor</label>
-                                    <input name="floor" id="floor"type="text" class="validate" disabled>
-                                </div>
-                                <div class="input-field col s6 m2">
-                                    <label>Beds</label>
-                                    <input name="beds" id="beds" type="text" class="validate" disabled>
-                                </div>
-                                <div class="input-field col s12 m3">
-                                    <label>Rate</label>
-                                    <input name="rate" id="rate" type="text" class="validate" disabled>
                                 </div>
                             </div>
                             <!-- Check in Information -->
@@ -146,8 +155,8 @@
                             <div class="row">
                                 <div class="page-header2 valign-wrapper z-depth-1"></div>
                                 <button type="submit" name="submitCheckIn" class="waves-effect waves-green btn btn-2 right">
-                                    <i class="material-icons left">save</i>
-                                    Save   
+                                    <i class="material-icons left">send</i>
+                                    Check In   
                                 </button>
                             </div>
                             <!-- End of card-2 content -->
@@ -169,9 +178,8 @@
     </footer>
 
     <script>
-       $(document).ready(function(){
-            $('#room_no').blur(function(){
-                var roomNo = $('#room_no').val();
+        function populateRoomDetails(){
+             var roomNo = $('#room_no').val();
                 $('#room_type').val("");         
                 $('#floor').val("");  
                 $('#beds').val("");  
@@ -189,6 +197,11 @@
                         $('#rate').val(data[0].rate);      
                     } 
                 });
+        }
+        $(document).ready(function(){
+            populateRoomDetails();
+            $('#room_no').blur(function(){
+                populateRoomDetails();
             });
         });
     </script>

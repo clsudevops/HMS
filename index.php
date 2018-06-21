@@ -33,33 +33,37 @@
                                     ?>
                                 </select>
                                 <div>
-                                    <h5 class="sum-heading">
-                                        Rooms
-                                    </h5>
-                                    <div class="summary">
-                                        <table class="striped highlight">
-                                            <tr id="vacant" class="status"><td style="width:196px">Vacant</td><td id="vacantCount"></td></tr>
-                                            <tr id="occupied" class="status"><td>Occupied</td><td id="occupiedCount"></td></tr>
-                                            <tr id="cleaning" class="status"><td>Cleaning</td><td id="cleaningCount"></td></tr>
-                                            <tr id="maintenance" class="status"><td>Maintenance</td><td id="maintenanceCount"></td></tr>
-                                        </table>
-                                    </div>
-                                    <h5 class="sum-heading">
-                                        Checking out
-                                    </h5>
-                                    <div class="summary">
-                                        <table class="striped highlight">
-                                            <tr id="checkingOut"><td style="width:196px">Today's Checkout</td><td id="todaysCheckoutCount"></td></tr>
-                                        </table>
-                                    </div>
-                                    <h5 class="sum-heading">
-                                        Available Rooms
-                                    </h5>
-                                    <div class="summary">
-                                        <table class="striped highlight" id="bedTypes">
-                                            
-                                        </table>
-                                    </div>
+                                    <ul class="collapsible index-summaries ">
+                                        <li class="active">
+                                            <div class="collapsible-header"><i class="material-icons">hotel</i>Rooms</div>
+                                            <div class="collapsible-body">
+                                                <table class="highlight">
+                                                    <tr id="vacant" class="status"><td style="width:196px">Vacant</td><td id="vacantCount"></td></tr>
+                                                    <tr id="occupied" class="status"><td>Occupied</td><td id="occupiedCount"></td></tr>
+                                                    <tr id="cleaning" class="status"><td>Cleaning</td><td id="cleaningCount"></td></tr>
+                                                    <tr id="maintenance" class="status"><td>Maintenance</td><td id="maintenanceCount"></td></tr>
+                                                </table>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <ul class="collapsible index-summaries ">
+                                        <li>
+                                            <div class="collapsible-header"><i class="material-icons">exit_to_app</i>Checking Out</div>
+                                            <div class="collapsible-body">
+                                                <table class="highlight">
+                                                    <tr id="checkingOut"><td style="width:196px">Today's Checkout</td><td id="todaysCheckoutCount"></td></tr>
+                                                </table>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <ul class="collapsible index-summaries ">
+                                        <li>
+                                            <div class="collapsible-header"><i class="material-icons">event_available</i>Available</div>
+                                            <div class="collapsible-body">
+                                                <table class="highlight" id="bedTypes"></table>
+                                            </div>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>

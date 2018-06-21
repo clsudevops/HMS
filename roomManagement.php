@@ -39,7 +39,7 @@
                         $result = mysqli_query($conn, $sql);
                     ?>
                     <div class="page-header valign-wrapper z-depth-1">
-                        <h5>Room Masterlist</h5>
+                        <h5>Room Management</h5>
                     </div>
                     <!-- Filterings -->
                     <div class="row">
@@ -87,7 +87,7 @@
                                 <th>No. of Beds</th>
                                 <th>Floor</th>
                                 <th>Rate</th>
-                                <th>Action</th>
+                                <th style="width:20%">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -105,12 +105,18 @@
                                         echo "<td>" . $row['beds'] . "</td>";
                                         echo "<td>" . $row['floor'] . "</td>";
                                         echo "<td>" . $row['rate'] . "</td>";
-                                        echo "<td>
-                                                    <a class='waves-effect btn btn-2 tooltipped' data-tooltip='View Details' href='#'>
+                                        echo   "<td>  
+                                                    <a class='waves-effect btn btn-2 tooltipped Maintenance' style='color:black;' data-tooltip='For Maintenance' href='#'>
                                                         <i class='material-icons left'>
-                                                            pageview
-                                                        </i>View
+                                                            launch
+                                                        </i>
                                                     </a>
+                                                    <a class='waves-effect btn btn-2 tooltipped Cleaning' style='color:black;' data-tooltip='Delete' href='#'>
+                                                        <i class='material-icons left'>
+                                                            delete
+                                                        </i>
+                                                    </a>
+                                                    
                                                 </td>";
                                         echo "</tr>";
                                     }

@@ -63,6 +63,7 @@ h5{
     color: white;
 }
 .page-header2{
+    /* background-color: #81c784; */
     background-color: #1563b2;
     opacity: 0.7;
     height: 40px;
@@ -187,6 +188,15 @@ input[type=time]:not(.browser-default) {
 .tabcontainer{
     padding: 10px 8px 10px 0px !important;
 }
+@media only screen and (max-width: 600px) {
+    #bedCardsContainer {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+    .tabcontainer{
+        padding: 10px 4px 10px 4px !important;
+    }
+}
 
 .card .card-image{
     padding: 0px 15px !important;
@@ -202,14 +212,14 @@ input[type=time]:not(.browser-default) {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 8px 0px !important;
+    padding: 3px 0px !important;
+    font-size: 18px !important;
 }
-.bedCards .card-action a.btn-floating{
-    margin: 0 3px;
-}
+
 .bedCards .seperate p.roomNo{
     text-align: center;
     margin: 5px 0px;
+    font-size: 15px;
 }
 
 /* room status backgrounds */
@@ -229,6 +239,7 @@ input[type=time]:not(.browser-default) {
 .checkout{
     background-color: #eeff41;
 }
+
 h5.sum-heading{
     background-color: #2b2929;
     opacity: 0.8;
@@ -243,4 +254,36 @@ h5.sum-heading{
 }
 .summary table td{
     cursor: pointer;
+}
+.index-summaries{
+    box-shadow: none;
+    margin: 5px 0px !important;
+}
+.index-summaries .collapsible-header{
+    padding: 8px 5px 8px 10px;
+    font-size: 16px !important;
+    /* background-color: #2b2929;
+    opacity: 0.8;
+    color: white; */
+    /* background-color: #f0eeee; */
+    background-color: #ebebeb; 
+}
+.index-summaries .collapsible-body{
+    padding: 0 !important;  
+}
+.index-summaries .collapsible-body table tr td{
+    padding: 10px 10px 10px 15px !important;  
+    
+}
+.index-summaries .collapsible-body table tr{
+    cursor:pointer;
+}
+.index-summaries .collapsible-body table tr:last-child{
+    border: none !important;
+}
+.roomLink{
+    color: black;
+}
+.checkInContainer input[type=text]:not(.browser-default):disabled{
+    color:black;
 }

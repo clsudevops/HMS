@@ -7,8 +7,7 @@
     <li><div class="divider user-divider"></div></li>
     <li><a href="index.php"><i class="material-icons">dashboard</i>Dashboard</a></li>
     <li><a href="checkIn.php"><i class="material-icons">event_available</i>Check In</a></li>
-    <li><a href="#!"><i class="material-icons">event_busy</i>Checkout</a></li>
-    <li><a href="roomMasterlist.php"><i class="material-icons">hotel</i>Room Masterlist</a></li>
+    <li><a href="roomManagement.php"><i class="material-icons">hotel</i>Room Management</a></li>
     <ul class="collapsible collapsible-accordion">
         <li>
             <a class="collapsible-header"><i class="material-icons">weekend</i>Room Types<i class="material-icons right">arrow_drop_down</i></a>
@@ -20,8 +19,9 @@
             </div>
         </li>
     </ul>
-    <li><a href="#"><i class="material-icons left">face</i>Guests</a></li>
-    <li><a href="#"><i class="material-icons left">attach_money</i>Payment</a></li>
+    <li><a href="guest.php"><i class="material-icons left">face</i>Guests</a></li>
+    <li><a href="#"><i class="material-icons left">keyboard_tab</i>Next Checkout</a></li>
+    <li><a href="#"><i class="material-icons left">payment</i>Payment</a></li>
     <li><a href="#"><i class="material-icons left">restaurant_menu</i>Kitchen</a></li>
    <!-- reports -->
     <ul class="collapsible collapsible-accordion">
