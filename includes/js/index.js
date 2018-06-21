@@ -137,7 +137,7 @@ $(document).ready(function () {
 });
 
 //calls sort the rooms by floor
-$("#floor").change(function () {
+$("#searchGuest").change(function () {
     $('#roomsList').html("");
     $(populateRoomsbyFloor);
 });

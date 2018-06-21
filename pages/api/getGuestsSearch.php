@@ -7,9 +7,9 @@
     // Create connection
     $conn = mysqli_connect($servername, $username, $password,$db);
 
-    $type = $_GET['type']; 
-    
-    $select = "SELECT * from roomDetails where type = '". $type ."' and status='Vacant' order by roomNo";
+    $search = $_GET['search'];
+
+    $select = "Select * from guestdetails where id = '". $search ."' or name like '%". $search ."%'";
     $result = mysqli_query($conn, $select);
 
     $rows = array();

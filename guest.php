@@ -20,22 +20,12 @@
                     </div>
                     <div class="row" style="margin-bottom:10px;">
                         <div class="file-field input-field col m6 s12">
-                            <a class="waves-effect waves btn right btn-1" href="" style="margin-left:5px;">
+                            <a class="btn right btn-1" id="searchGuest" style="margin-left:5px;">
                                 <i class="material-icons left">search</i>Search</a>
         
                             <div class="file-path-wrapper">
-                                <input placeholder="Search Guest" class="file-path validate myinput" type="text" required />
+                                <input placeholder="Search Guest" id="search" class="file-path validate myinput" type="text" required/>
                             </div>
-                        </div>
-                        <div class="input-field col m2 s12">
-                            <select>
-                                <option value="" disabled selected>Floor</option>
-                                <?php
-                                    for($i = 1 ; $i <= 11 ; $i++){
-                                        echo "<option value=" . $i . ">" . $i . "</option>";
-                                    }
-                                ?>
-                            </select>
                         </div>
                     </div>
                     <table class="z-depth-2 centered highlight responsive-table guesttable">

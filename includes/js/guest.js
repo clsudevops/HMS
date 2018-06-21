@@ -2,6 +2,12 @@ $(document).ready(function () {
     $(populateGuests());
 });
 
+
+$("#searchGuest").on("click", function () {
+    var search = $('#search').val();
+    populateGuestsbySearch(search);
+});
+
 function createGuestTable(guestID, name, mobile, roomNo, floor, checkInDate, checkOutDate) {
     var myRoom = '<tr>' +
                     '<td>'+ guestID +'</td>' +
@@ -15,6 +21,7 @@ function createGuestTable(guestID, name, mobile, roomNo, floor, checkInDate, che
     return myRoom;
 }
 function loopGuests(data){
+    $('#guestTable').html("");
     for (var i = 0; i < data.length; i++) {
         var guestID = data[i].id;
         var name = data[i].name;
@@ -24,7 +31,6 @@ function loopGuests(data){
         var checkInDate = data[i].checkin;
         var checkOutDate = data[i].checkOutDate;
 
-        // $('#guestTable').append(createGuestTable(data));
         $('#guestTable').append(createGuestTable(guestID, name, mobile, roomNo, floor, checkInDate, checkOutDate));
     }
 }
@@ -32,6 +38,16 @@ function populateGuests() {
     $.ajax({
         url: 'pages/api/getGuests.php',
         data: "",
+        dataType: 'json',
+        success: function (data) {
+            loopGuests(data);
+        }
+    });
+}
+function populateGuestsbySearch(search) {
+    $.ajax({
+        url: 'pages/api/getGuestsSearch.php',
+        data: "search=" + search,
         dataType: 'json',
         success: function (data) {
             loopGuests(data);
