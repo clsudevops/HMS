@@ -38,7 +38,22 @@
                             </select>
                         </div>
                     </div>
-                   
+                    <table class="z-depth-2 centered highlight responsive-table roomtable">
+                        <thead>
+                            <tr>
+                                <th>Guest ID</th>
+                                <th>Name</th>
+                                <th>Mobile</th>
+                                <th>Room No</th>
+                                <th>Floor</th>
+                                <th>Checkin Date</th>
+                                <th>Checkout Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="guestTable">
+                            
+                        </tbody>
+                    </table>
                     <!-- <ul class="pagination right">
                         <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
                         <li class="active"><a href="#!">1</a></li>
@@ -68,6 +83,7 @@
 
 <section class="jsIncludes">
     <?php require('jsInclude.php') ?>
+    <script type="text/javascript" src="includes/js/guest.js"></script>
 </section>
 
 </html>
