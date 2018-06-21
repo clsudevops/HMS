@@ -1,7 +1,6 @@
 // indexe php start
 
 // function for creating rooms card
-
 function createCardRoom(roomNo, status, type, rate, checkoutDate){
     var myRoom = '<div class="col s6 m3" style="padding-left:0px; padding-right:23px;">' +
                     '<div class="card bedCards">' +
@@ -47,13 +46,40 @@ function populateRoomsbyFloor() {
 
                 if (checkoutDate == myDateNow){
                     $("#img_" + roomNo).addClass("checkout");
-                    $("#content_" + roomNo).text("Today's Checkout");
+                    $("#content_" + roomNo).text("For Checkout");
                 }
             }
         }
     });
 }
+// populate rooms by type
+// function populateRoomsbyType(id) {
+//     $('#roomsList').html("");
+//     $.ajax({
+//         url: 'pages/api/getRoombyType.php',
+//         data: "type=" + id,
+//         dataType: 'json',
+//         success: function (data) {
+//             for (var i = 0; i < data.length; i++) {
+//                 var roomNo = data[i].roomNo;
+//                 var status = data[i].status;
+//                 var type = data[i].type;
+//                 var rate = data[i].rate;
+//                 var checkoutDate = data[i].checkoutDate;
 
+//                 $('#roomsList').append(createCardRoom(roomNo, status, type, rate, checkoutDate));
+
+//                 var myDateNow = getCurrentDate();
+//                 var checkoutDate = getMyDate(checkoutDate);
+
+//                 if (checkoutDate == myDateNow) {
+//                     $("#img_" + roomNo).addClass("checkout");
+//                     $("#content_" + roomNo).text("For Checkout");
+//                 }
+//             }
+//         }
+//     });
+// }
 // function that sorts room by Status
 function populateRoomsbyStatus(id) {
     $('#roomsList').html("");
@@ -76,7 +102,7 @@ function populateRoomsbyStatus(id) {
 
                 if (checkoutDate == myDateNow) {
                     $("#img_" + roomNo).addClass("checkout");
-                    $("#content_" + roomNo).text("Today's Checkout");
+                    $("#content_" + roomNo).text("For Checkout");
                 }
             }
         }
@@ -104,7 +130,7 @@ function populateRoomsbyTodaysCheckout() {
 
                 if (checkoutDate == myDateNow) {
                     $("#img_" + roomNo).addClass("checkout");
-                    $("#content_" + roomNo).text("Today's Checkout");
+                    $("#content_" + roomNo).text("For Checkout");
                 }
             }
         }
@@ -127,10 +153,23 @@ function populateSummary() {
         }
     });
 }
+function populateAvailableRooms(){
+    $.ajax({
+        url: 'pages/api/getAvailableRooms.php',
+        data: "",
+        dataType: 'json',
+        success: function (data) {
+            for (var i = 0; i < data.length; i++) {
+                $('#bedTypes').append('<tr class="RoomFilter" id="'+ data[i].type +'"><td style="width:196px">' + data[i].type + '</td><td>' + data[i].count +'</td></tr>');
+            }
+        }
+    });
+}
 // initial loading
 $(document).ready(function () {
     $(populateRoomsbyFloor);
     $(populateSummary);
+    populateAvailableRooms();
 });
 
 //calls sort the rooms by floor
@@ -165,6 +204,15 @@ $("#checkingOut").click(function () {
     $('#roomsList').html("");
     populateRoomsbyTodaysCheckout();
 });
+// sort by room type
+$(".RoomFilter").click(function () {
+    // var id = this.id;
+    // $('#roomsList').html("");
+    // populateRoomsbyType(id);
+    alert();
+});
+
+
 
 // hovering details of room
 function test(roomNo, type, rate) {
@@ -178,7 +226,7 @@ function test1(roomNo, status, checkoutDate) {
     $("#room_" + roomNo).text('Room No ' + roomNo);
 
     if (checkoutDate == myDateNow) {
-        $("#content_" + roomNo).text("Today's Checkout");
+        $("#content_" + roomNo).text("For Checkout");
     }
     else{
         $("#content_" + roomNo).text(status);

@@ -10,6 +10,7 @@ function getCurrentDate(){
 
     return currentDate;
 }
+
 function getMyDate(date1){
 
     var today = new Date(date1);

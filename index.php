@@ -52,6 +52,14 @@
                                             <tr id="checkingOut"><td style="width:196px">Today's Checkout</td><td id="todaysCheckoutCount"></td></tr>
                                         </table>
                                     </div>
+                                    <h5 class="sum-heading">
+                                        Available
+                                    </h5>
+                                    <div class="summary">
+                                        <table class="striped highlight" id="bedTypes">
+                                            
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
