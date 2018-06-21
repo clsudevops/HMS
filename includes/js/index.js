@@ -23,6 +23,27 @@ function createCardRoom(roomNo, status, type, rate, checkoutDate){
     return myRoom;
 }
 
+// loop the rooms cards
+function cardLoop(data) {
+    for (var i = 0; i < data.length; i++) {
+        var roomNo = data[i].roomNo;
+        var status = data[i].status;
+        var type = data[i].type;
+        var rate = data[i].rate;
+        var checkoutDate = data[i].checkoutDate;
+
+        $('#roomsList').append(createCardRoom(roomNo, status, type, rate, checkoutDate));
+
+        var myDateNow = getCurrentDate();
+        var checkoutDate = getMyDate(checkoutDate);
+
+        if (checkoutDate == myDateNow) {
+            $("#img_" + roomNo).addClass("checkout");
+            $("#content_" + roomNo).text("For Checkout");
+        }
+    }
+}
+
 // function to sort the rooms by floor
 function populateRoomsbyFloor() {
     var floor = $('#floor').val();
@@ -32,54 +53,23 @@ function populateRoomsbyFloor() {
         data: "floor=" + floor,
         dataType: 'json',
         success: function (data) {
-            for (var i = 0; i < data.length; i++) {
-                var roomNo = data[i].roomNo;
-                var status = data[i].status;
-                var type = data[i].type;
-                var rate = data[i].rate;
-                var checkoutDate = data[i].checkoutDate;
-
-                $('#roomsList').append(createCardRoom(roomNo,status,type,rate,checkoutDate));
-
-                var myDateNow = getCurrentDate();
-                var checkoutDate = getMyDate(checkoutDate);
-
-                if (checkoutDate == myDateNow){
-                    $("#img_" + roomNo).addClass("checkout");
-                    $("#content_" + roomNo).text("For Checkout");
-                }
-            }
+            cardLoop(data);
         }
     });
 }
 // populate rooms by type
-// function populateRoomsbyType(id) {
-//     $('#roomsList').html("");
-//     $.ajax({
-//         url: 'pages/api/getRoombyType.php',
-//         data: "type=" + id,
-//         dataType: 'json',
-//         success: function (data) {
-//             for (var i = 0; i < data.length; i++) {
-//                 var roomNo = data[i].roomNo;
-//                 var status = data[i].status;
-//                 var type = data[i].type;
-//                 var rate = data[i].rate;
-//                 var checkoutDate = data[i].checkoutDate;
+function populateRoomsbyType(id) {
+    $('#roomsList').html("");
+    $.ajax({
+        url: 'pages/api/getRoombyType.php',
+        data: "type=" + id,
+        dataType: 'json',
+        success: function (data) {
+            cardLoop(data);
+        }
+    });
+}
 
-//                 $('#roomsList').append(createCardRoom(roomNo, status, type, rate, checkoutDate));
-
-//                 var myDateNow = getCurrentDate();
-//                 var checkoutDate = getMyDate(checkoutDate);
-
-//                 if (checkoutDate == myDateNow) {
-//                     $("#img_" + roomNo).addClass("checkout");
-//                     $("#content_" + roomNo).text("For Checkout");
-//                 }
-//             }
-//         }
-//     });
-// }
 // function that sorts room by Status
 function populateRoomsbyStatus(id) {
     $('#roomsList').html("");
@@ -88,27 +78,12 @@ function populateRoomsbyStatus(id) {
         data: "status=" + id,
         dataType: 'json',
         success: function (data) {
-            for (var i = 0; i < data.length; i++) {
-                var roomNo = data[i].roomNo;
-                var status = data[i].status;
-                var type = data[i].type;
-                var rate = data[i].rate;
-                var checkoutDate = data[i].checkoutDate;
-
-                $('#roomsList').append(createCardRoom(roomNo, status, type, rate, checkoutDate));
-
-                var myDateNow = getCurrentDate();
-                var checkoutDate = getMyDate(checkoutDate);
-
-                if (checkoutDate == myDateNow) {
-                    $("#img_" + roomNo).addClass("checkout");
-                    $("#content_" + roomNo).text("For Checkout");
-                }
-            }
+            cardLoop(data);
         }
     });
 }
-// populate rooms by todays chackout
+
+// populate rooms by todays checkout
 function populateRoomsbyTodaysCheckout() {
     $('#roomsList').html("");
     $.ajax({
@@ -116,29 +91,12 @@ function populateRoomsbyTodaysCheckout() {
         data: "",
         dataType: 'json',
         success: function (data) {
-            for (var i = 0; i < data.length; i++) {
-                var roomNo = data[i].roomNo;
-                var status = data[i].status;
-                var type = data[i].type;
-                var rate = data[i].rate;
-                var checkoutDate = data[i].checkoutDate;
-
-                $('#roomsList').append(createCardRoom(roomNo, status, type, rate, checkoutDate));
-
-                var myDateNow = getCurrentDate();
-                var checkoutDate = getMyDate(checkoutDate);
-
-                if (checkoutDate == myDateNow) {
-                    $("#img_" + roomNo).addClass("checkout");
-                    $("#content_" + roomNo).text("For Checkout");
-                }
-            }
+            cardLoop(data);
         }
     });
 }
 
 // function to add count to rooms summary
-
 function populateSummary() {
     $.ajax({
         url: 'pages/api/getRoomSummary.php',
@@ -153,6 +111,8 @@ function populateSummary() {
         }
     });
 }
+
+// populate available rooms summary
 function populateAvailableRooms(){
     $.ajax({
         url: 'pages/api/getAvailableRooms.php',
@@ -160,7 +120,7 @@ function populateAvailableRooms(){
         dataType: 'json',
         success: function (data) {
             for (var i = 0; i < data.length; i++) {
-                $('#bedTypes').append('<tr class="RoomFilter" id="'+ data[i].type +'"><td style="width:196px">' + data[i].type + '</td><td>' + data[i].count +'</td></tr>');
+                $('#bedTypes').append('<tr class="RoomFilter" id="' + data[i].type + '" onclick="typeFilter(\'' + data[i].type + '\')"><td style="width:196px">' + data[i].type + '</td><td>' + data[i].count +'</td></tr>');
             }
         }
     });
@@ -179,39 +139,22 @@ $("#floor").change(function () {
 });
 
 // Sort by Room status
-$("#vacant").click(function () {
-    var id = this.id;
-    $('#roomsList').html("");
-    populateRoomsbyStatus(id);
-});
-$("#occupied").click(function () {
-    var id = this.id;
-    $('#roomsList').html("");
-    populateRoomsbyStatus(id);
-});
-$("#cleaning").click(function () {
-    var id = this.id;
-    $('#roomsList').html("");
-    populateRoomsbyStatus(id);
-});
-$("#maintenance").click(function () {
+$(".status").click(function () {
     var id = this.id;
     $('#roomsList').html("");
     populateRoomsbyStatus(id);
 });
 
+//Sort by checkin out today
 $("#checkingOut").click(function () {
     $('#roomsList').html("");
     populateRoomsbyTodaysCheckout();
 });
-// sort by room type
-$(".RoomFilter").click(function () {
-    // var id = this.id;
-    // $('#roomsList').html("");
-    // populateRoomsbyType(id);
-    alert();
-});
 
+// sort by room type
+function typeFilter (type) {
+    populateRoomsbyType(type);
+}
 
 
 // hovering details of room
@@ -219,10 +162,10 @@ function test(roomNo, type, rate) {
     $("#room_" + roomNo).text(type);
     $("#content_" + roomNo).text('Php ' + rate);
 }
+// mouse leave
 function test1(roomNo, status, checkoutDate) {
     var myDateNow = getCurrentDate();
     var checkoutDate = getMyDate(checkoutDate);
-    // console.log(myDateNow + "---" + checkoutDate);
     $("#room_" + roomNo).text('Room No ' + roomNo);
 
     if (checkoutDate == myDateNow) {

@@ -38,10 +38,10 @@
                                     </h5>
                                     <div class="summary">
                                         <table class="striped highlight">
-                                            <tr id="vacant"><td style="width:196px">Vacant</td><td id="vacantCount"></td></tr>
-                                            <tr id="occupied"><td>Occupied</td><td id="occupiedCount"></td></tr>
-                                            <tr id="cleaning"><td>Cleaning</td><td id="cleaningCount"></td></tr>
-                                            <tr id="maintenance"><td>Maintenance</td><td id="maintenanceCount"></td></tr>
+                                            <tr id="vacant" class="status"><td style="width:196px">Vacant</td><td id="vacantCount"></td></tr>
+                                            <tr id="occupied" class="status"><td>Occupied</td><td id="occupiedCount"></td></tr>
+                                            <tr id="cleaning" class="status"><td>Cleaning</td><td id="cleaningCount"></td></tr>
+                                            <tr id="maintenance" class="status"><td>Maintenance</td><td id="maintenanceCount"></td></tr>
                                         </table>
                                     </div>
                                     <h5 class="sum-heading">
@@ -53,7 +53,7 @@
                                         </table>
                                     </div>
                                     <h5 class="sum-heading">
-                                        Available
+                                        Available Rooms
                                     </h5>
                                     <div class="summary">
                                         <table class="striped highlight" id="bedTypes">

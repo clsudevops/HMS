@@ -29,3 +29,4 @@ function getMyDate(date1){
     mydate = yyyy + '-' + mm + '-' + dd;
     return mydate;
 }
+
