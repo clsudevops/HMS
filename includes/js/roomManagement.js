@@ -79,6 +79,18 @@ function createRoomTable(roomNo, type, floor, rate, status) {
 }
 
 function changeStatus(roomNo, status, curstatus){
-    // alert(status + '----' + curstatus);   
+    $.ajax({
+        url: 'pages/api/updateRoomStatus.php',
+        data: "roomNo=" + roomNo + "&status=" + curstatus,
+        type:"POST",
+        // dataType: 'json',
+        success: function () {
+            populateRoomsRoomNo();
+            M.AutoInit()
+        },
+        error: function(asd, asf ,ass){
+            console.log(asd);
+        }
+    });  
 }
 
