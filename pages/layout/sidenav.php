@@ -6,9 +6,26 @@
     </li>
     <li><div class="divider user-divider"></div></li>
     <li><a href="index.php"><i class="material-icons">dashboard</i>Dashboard</a></li>
-    <li><a href="checkIn.php"><i class="material-icons">event_available</i>Check In</a></li>
-    <li><a href="roomManagement.php"><i class="material-icons">hotel</i>Room Management</a></li>
+    <li><a href="index.php"><i class="material-icons">event</i>Reservations</a></li>
     <ul class="collapsible collapsible-accordion">
+        <!-- settings -->
+        <li>
+            <a class="collapsible-header"><i class="material-icons">face</i>Guests<i class="material-icons right">arrow_drop_down</i></a>
+            <div class="collapsible-body">
+                <ul>
+                    <li><a class="modal-trigger" href="guest.php"><i class="material-icons">group</i>Guest List</a></li>
+                </ul>
+                <ul>
+                    <li><a class="modal-trigger" href=""><i class="material-icons">storage</i>Archived Guest</a></li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+    <li><a href="#"><i class="material-icons left">keyboard_tab</i>Next Checkout</a></li>
+    <li><a href="#"><i class="material-icons left">restaurant_menu</i>Kitchen</a></li>
+    <!-- <li><a href="checkIn.php"><i class="material-icons">event_available</i>Check In</a></li> -->
+    <li><a href="roomManagement.php"><i class="material-icons">hotel</i>Room Management</a></li>
+    <!-- <ul class="collapsible collapsible-accordion">
         <li>
             <a class="collapsible-header"><i class="material-icons">weekend</i>Room Types<i class="material-icons right">arrow_drop_down</i></a>
             <div class="collapsible-body">
@@ -18,19 +35,19 @@
                 </ul>
             </div>
         </li>
-    </ul>
-    <li><a href="guest.php"><i class="material-icons left">face</i>Guests</a></li>
-    <li><a href="#"><i class="material-icons left">keyboard_tab</i>Next Checkout</a></li>
-    <li><a href="#"><i class="material-icons left">payment</i>Payment</a></li>
-    <li><a href="#"><i class="material-icons left">restaurant_menu</i>Kitchen</a></li>
+    </ul> -->
+    <!-- <li><a href="#"><i class="material-icons left">payment</i>Payment</a></li> -->
+
    <!-- reports -->
     <ul class="collapsible collapsible-accordion">
         <!-- settings -->
         <li>
-            <a class="collapsible-header"><i class="material-icons">settings</i>Settings<i class="material-icons right">arrow_drop_down</i></a>
+            <a class="collapsible-header"><i class="material-icons">settings</i>Manage<i class="material-icons right">arrow_drop_down</i></a>
             <div class="collapsible-body">
-                <ul>
-                    <li><a class="modal-trigger" href="#roomTypesModal"><i class="material-icons">weekend</i>Room Type</a></li>
+                <ul>  
+                    <li><a href="manageRooms.php"><i class="material-icons left">hotel</i>Rooms</a></li>
+                    <li><a href="manageRoomTypes.php"><i class="material-icons left">weekend</i>Room Types</a></li>
+                    <li><a href="roomTypes.php"><i class="material-icons">supervisor_account</i>Accounts</a></li>
                 </ul>
             </div>
         </li>

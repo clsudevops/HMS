@@ -9,17 +9,17 @@
 
     if(isset($_GET['floor'])){
         $floor = $_GET['floor']; 
-        $select = "SELECT * from roomDetails where floor = '". $floor ."' order by roomNo";
+        $select = "SELECT *,now() as curdate from roomDetails where floor = '". $floor ."' order by roomNo";
         $result = mysqli_query($conn, $select);
     }
     if(isset($_GET['status'])){
         $status = $_GET['status']; 
-        $select = "SELECT * from roomDetails where status = '". $status ."' order by roomNo";
+        $select = "SELECT *,now() as curdate from roomDetails where status = '". $status ."' order by roomNo";
         $result = mysqli_query($conn, $select);
     }
     if(isset($_GET['type'])){
         $type = $_GET['type']; 
-        $select = "SELECT * from roomDetails where type = '". $type ."' order by roomNo";
+        $select = "SELECT *,now() as curdate from roomDetails where type = '". $type ."' order by roomNo";
         $result = mysqli_query($conn, $select);
     }
     

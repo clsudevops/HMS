@@ -7,9 +7,10 @@
     // Create connection
     $conn = mysqli_connect($servername, $username, $password,$db);
 
-    $type = $_GET['type']; 
-    
-    $select = "SELECT * from roomDetails where type = '". $type ."' and status='Vacant' order by roomNo";
+    $select = "SELECT DISTINCT TYPE,
+                (SELECT COUNT(*) FROM roomdetails WHERE TYPE = A.`type` AND STATUS = 'Vacant') AS count
+                FROM roomDetails A order by type asc";
+                
     $result = mysqli_query($conn, $select);
 
     $rows = array();

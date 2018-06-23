@@ -27,15 +27,29 @@ function cardLoop(data) {
         var type = data[i].type;
         var rate = data[i].rate;
         var checkoutDate = data[i].checkoutDate;
+        var curdate = data[i].curdate;
 
         $('#roomsList').append(createCardRoom(roomNo, floor, status, type, rate, checkoutDate));
 
         var myDateNow = getCurrentDate();
-        var checkoutDate = getMyDate(checkoutDate);
+        var myCheckoutDate = getMyDate(checkoutDate);
 
-        if (checkoutDate == myDateNow) {
+        var date1 = new Date(curdate);
+        var date2 = new Date(checkoutDate);
+
+        console.log(myDateNow + '---' + checkoutDate);
+
+        if (myDateNow == myCheckoutDate) {
             $("#img_" + roomNo).addClass("checkout");
             $("#content_" + roomNo).text("For Checkout");
+        }
+
+        if (myCheckoutDate != "1970-01-01"){
+            if (date1 > date2) {
+                $("#img_" + roomNo).addClass("penalty");
+                $("#content_" + roomNo).text("Penalty");
+                // $("#content_" + roomNo).text(checkoutDate);
+            }
         }
 
         if (checkoutDate == myDateNow || status == 'Occupied'){
@@ -62,10 +76,10 @@ function populateRoomsbyFloor() {
     });
 }
 // populate rooms by type
-function populateRoomsbyType(id) {
+function populateRoomsbyAvailableType(id) {
     $('#roomsList').html("");
     $.ajax({
-        url: 'pages/api/getRoombyType.php',
+        url: 'pages/api/getAvailableRooms.php',
         data: "type=" + id,
         dataType: 'json',
         success: function (data) {
@@ -99,6 +113,29 @@ function populateRoomsbyTodaysCheckout() {
         }
     });
 }
+// populate rooms with penalty status
+function populateRoomsbyPenalty() {
+    $('#roomsList').html("");
+    $.ajax({
+        url: 'pages/api/getPenaltyRooms.php',
+        data: "",
+        dataType: 'json',
+        success: function (data) {
+            cardLoop(data);
+        }
+    });
+}
+function populateRoomsbyRoomNoSearch(roomNo) {
+    $('#roomsList').html("");
+    $.ajax({
+        url: 'pages/api/getRoomNoSearch.php',
+        data: "roomNo=" + roomNo,
+        dataType: 'json',
+        success: function (data) {
+            cardLoop(data);
+        }
+    });
+}
 
 // function to add count to rooms summary
 function populateSummary() {
@@ -112,14 +149,15 @@ function populateSummary() {
             $('#cleaningCount').text(data[0].Cleaning);
             $('#maintenanceCount').text(data[0].Maintenance);
             $('#todaysCheckoutCount').text(data[0].TodaysCheckout);
+            $('#penaltyCount').text(data[0].Penalty);
         }
     });
 }
 
 // populate available rooms summary
-function populateAvailableRooms(){
+function populateAvailableRoomsCount(){
     $.ajax({
-        url: 'pages/api/getAvailableRooms.php',
+        url: 'pages/api/getAvailableRoomsCount.php',
         data: "",
         dataType: 'json',
         success: function (data) {
@@ -133,31 +171,37 @@ function populateAvailableRooms(){
 $(document).ready(function () {
     $(populateRoomsbyFloor);
     $(populateSummary);
-    populateAvailableRooms();
+    populateAvailableRoomsCount();
 });
 
 //calls sort the rooms by floor
-$("#searchGuest").change(function () {
-    $('#roomsList').html("");
+$("#floor").change(function () {
     $(populateRoomsbyFloor);
 });
 
 // Sort by Room status
 $(".status").click(function () {
     var id = this.id;
-    $('#roomsList').html("");
     populateRoomsbyStatus(id);
+    $(populateSummary);
 });
 
 //Sort by checkin out today
 $("#checkingOut").click(function () {
-    $('#roomsList').html("");
     populateRoomsbyTodaysCheckout();
 });
-
+$("#penalty").click(function () {
+    populateRoomsbyPenalty();
+});
+// search by room No
+$("#searchRoomNo").on("click",function () {
+    var roomNo = $('#search').val();
+    // alert(roomNo);
+    populateRoomsbyRoomNoSearch(roomNo);
+});
 // sort by room type
 function typeFilter (type) {
-    populateRoomsbyType(type);
+    populateRoomsbyAvailableType(type);
 }
 
 

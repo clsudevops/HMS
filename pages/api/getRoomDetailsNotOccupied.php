@@ -8,12 +8,18 @@
     $conn = mysqli_connect($servername, $username, $password,$db);
 
     if($_GET['roomNo'] == ""){
-        $select = "Select * from roomdetails";
+        $select = "Select * from roomdetails where status != 'Occupied'";
     }
     else{
         $roomNo = $_GET['roomNo'];
-        $select = "Select * from roomdetails where roomNo = '". $roomNo ."'";
+        $select = "Select * from roomdetails where roomNo = '". $roomNo ."' and status != 'Occupied'";
     }
+
+    // if($_GET['type'] == ""){
+    //     $type = $_GET['type'];
+    //     $select = "Select * from roomdetails where status != 'Occupied' and type='". $type ."'";
+    // }
+
 
     // $select = "SELECT * from roomdetails order by createdDate desc";
 

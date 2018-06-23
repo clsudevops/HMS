@@ -7,16 +7,9 @@
     // Create connection
     $conn = mysqli_connect($servername, $username, $password,$db);
 
-    if($_GET['roomNo'] == ""){
-        $select = "Select * from roomdetails";
-    }
-    else{
-        $roomNo = $_GET['roomNo'];
-        $select = "Select * from roomdetails where roomNo = '". $roomNo ."'";
-    }
+    $roomNo = $_GET['roomNo'];
 
-    // $select = "SELECT * from roomdetails order by createdDate desc";
-
+    $select = "Select *,now() as curdate from roomdetails where roomNo = '". $roomNo. "'";
     $result = mysqli_query($conn, $select);
 
     $rows = array();

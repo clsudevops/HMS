@@ -24,7 +24,7 @@
                                 <i class="material-icons left">search</i>Search</a>
         
                             <div class="file-path-wrapper">
-                                <input placeholder="Search Guest" id="search" class="file-path validate myinput" type="text" required/>
+                                <input placeholder="Search Guest" id="search" class="file-path validate myinput" type="text"/>
                             </div>
                         </div>
                     </div>
@@ -63,9 +63,6 @@
     
     <footer>
         <?php require('pages/layout/footer.php') ?>
-        <!-- modals -->
-        <?php require('pages/modals/roomTypes/addRoomType.php') ?>
-        <?php require('pages/modals/roomTypes/deleteRoomType.php') ?>
     </footer>
 
 

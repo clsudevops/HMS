@@ -6,17 +6,16 @@
 
     // Create connection
     $conn = mysqli_connect($servername, $username, $password,$db);
-
-    if($_GET['roomNo'] == ""){
-        $select = "Select * from roomdetails";
+    
+    if($_GET['type'] == ""){
+        $select = "Select * from roomTypes";
     }
     else{
-        $roomNo = $_GET['roomNo'];
-        $select = "Select * from roomdetails where roomNo = '". $roomNo ."'";
+        $type = $_GET['type'];
+        $select = "Select * from roomTypes where type like '%". $type ."%'";
     }
 
-    // $select = "SELECT * from roomdetails order by createdDate desc";
-
+    // $select = "Select * from roomTypes";
     $result = mysqli_query($conn, $select);
 
     $rows = array();

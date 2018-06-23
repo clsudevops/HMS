@@ -4,7 +4,8 @@
 }
 body{
     /* background-image: url("../images/Background.jpg"); */
-    background-color: #f7f9fc;
+    /* background-color: #f7f9fc; */
+    background-color:  white;
     display: flex;
     min-height: 100vh;
     flex-direction: column;
@@ -64,8 +65,8 @@ h5{
 }
 .page-header2{
     /* background-color: #81c784; */
-    background-color: #1563b2;
-    opacity: 0.7;
+    background-color: #11afdb;
+    /* opacity: 0.7; */
     height: 40px;
     color: white;
     margin-bottom: 15px;
@@ -84,8 +85,14 @@ input[type="submit"]{
     /* background-color: #49d166; */
     background-color: #11afdb;
 }
+.btn-3{
+    /* background-color: #49d166; */
+    background-color: #11afdb  ;
+    color: white;
+}
 .btn-2{
     background-color:  #2b2929;
+    color:white;
     opacity: 0.8;
 }
 /* cards Container */
@@ -114,10 +121,18 @@ a.btn{
     padding-bottom: 5px;
 }
 
-.roomtable th, .guesttable th{
+.roomtable th, .guesttable th, .roomTypeTable th{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 600;
 }
+
+.roomTypeTable td{
+    padding: 8px 0px;
+}
+.roomTypeTable td, .roomTypeTable th{
+    padding-left: 25px;
+}
+
 .guesttable td, .roomtable td{
     font-family:  'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -136,8 +151,9 @@ footer {
 .sidenav .user-view{
     padding: 5px 32px;
     margin: 0;
-    background-color: gray;
-    color:white;
+    /* background-color: gray; */
+    background-color: #ebebeb;
+    /* color:white; */
 }
 .sidenav .user-divider{
     margin: 0;
@@ -241,6 +257,9 @@ input[type=time]:not(.browser-default) {
 .checkout{
     background-color: #eeff41;
 }
+.penalty{
+    background-color: #fb8c00;
+}
 
 h5.sum-heading{
     background-color: #2b2929;
@@ -259,7 +278,7 @@ h5.sum-heading{
 }
 .index-summaries{
     box-shadow: none;
-    margin: 5px 0px !important;
+    margin: 3px 0px !important;
 }
 .index-summaries .collapsible-header{
     padding: 8px 5px 8px 10px;
@@ -288,4 +307,8 @@ h5.sum-heading{
 }
 .checkInContainer input[type=text]:not(.browser-default):disabled{
     color:black;
+}
+.tests{
+    line-height: 36px;
+    height: 36px;
 }

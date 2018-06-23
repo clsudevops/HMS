@@ -3,24 +3,6 @@
 
 <head>
     <?php include('cssInclude.php') ?>
-    <?php
-        if(isset($_POST['submitModal'])) {
-            if(!empty($_POST["room_no"]) && !empty($_POST["room_type"]) && !empty($_POST["floor"])){
-                $room_no = $_POST['room_no'];
-                $room_type = $_POST['room_type'];
-                $floor = $_POST['floor'];
-                
-                $insert = "insert into rooms(roomNo,roomType,floor) values (". $room_no .", ". $room_type .", ". $floor .")";
-                $result = mysqli_query($conn, $insert);
-            }
-            else{
-                echo"
-                <script>
-                    alert('All fields are required for adding a new room!!!');
-                </script>";
-            }
-        }
-    ?>
 </head>
 
 <body>
@@ -43,21 +25,21 @@
                     </div>
                     <!-- Filterings -->
                     <div class="row"  style="margin-bottom:10px;">
-                        <div class="file-field input-field col m4 s12">
+                        <div class="file-field input-field col m6 s12">
                             <a class="waves-effect waves btn right btn-1" href="" style="margin-left:5px;">
                                 <i class="material-icons left">search</i>Search</a>
         
                             <div class="file-path-wrapper">
-                                <input placeholder="Search Room" class="file-path validate myinput" type="text" required />
+                                <input placeholder="Search Room No" id="search" class="file-path validate myinput" type="text" required />
                             </div>
                         </div>
                         <div class="input-field col m3 s12">
-                            <select>
+                            <select id="typeSelect">
                                 <option value="1" disabled selected>Room Type</option>
                                 <?php
                                     if (mysqli_num_rows($result) > 0) {
                                         while($row = mysqli_fetch_assoc($result)) {
-                                            echo "<option value=" . $row["id"] .">". $row["type"] . "</option>";
+                                            echo "<option value=" . $row["type"] .">". $row["type"] . "</option>";
                                         }
                                     }
                                 ?> 
@@ -73,58 +55,24 @@
                                 ?>
                             </select>
                         </div>
-                        <div class="file-field input-field col m2 s12">
-                            <a class="waves-effect waves-light btn btn-1 modal-trigger right" href="#addRoom">
-                                <i class="material-icons left">add</i>Add Room</a>
-                        </div>
                     </div>
                     <!-- Table -->
-                    <table class="z-depth-2 centered highlight responsive-table roomtable">
+                    <table class="z-depth-2 highlight responsive-table roomTypeTable">
                         <thead>
                             <tr>
                                 <th>Room No.</th>
                                 <th>Room Type</th>
-                                <th>No. of Beds</th>
                                 <th>Floor</th>
                                 <th>Rate</th>
-                                <th style="width:20%">Action</th>
+                                <th>Status</th>
+                                <th style="width:25%">Change Status</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <?php
-                                $sql = "SELECT A.roomNo,B.type,B.beds,A.floor,B.rate from rooms A inner Join roomtypes B on A.roomType = B.id order by A.roomNo";
-                                $result = mysqli_query($conn, $sql);
-                            ?>
-                            <?php
-                                if (mysqli_num_rows($result) > 0) {
-                                    while($row = mysqli_fetch_assoc($result)) {
-                                        echo "<tr>";
+                        <tbody id="roomManagementTable">
                             
-                                        echo "<td>" . $row['roomNo'] . "</td>";
-                                        echo "<td>" . $row['type'] . "</td>";
-                                        echo "<td>" . $row['beds'] . "</td>";
-                                        echo "<td>" . $row['floor'] . "</td>";
-                                        echo "<td>" . $row['rate'] . "</td>";
-                                        echo   "<td>  
-                                                    <a class='waves-effect btn btn-2 tooltipped Maintenance' style='color:black;' data-tooltip='For Maintenance' href='#'>
-                                                        <i class='material-icons left'>
-                                                            launch
-                                                        </i>
-                                                    </a>
-                                                    <a class='waves-effect btn btn-2 tooltipped Cleaning' style='color:black;' data-tooltip='Delete' href='#'>
-                                                        <i class='material-icons left'>
-                                                            delete
-                                                        </i>
-                                                    </a>
-                                                    
-                                                </td>";
-                                        echo "</tr>";
-                                    }
-                                }
-                            ?>
                         </tbody>
                     </table>
-                    <ul class="pagination right">
+                    <!-- <ul class="pagination right">
                         <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
                         <li class="active"><a href="#!">1</a></li>
                         <li class="waves-effect"><a href="#!">2</a></li>
@@ -132,7 +80,7 @@
                         <li class="waves-effect"><a href="#!">4</a></li>
                         <li class="waves-effect"><a href="#!">5</a></li>
                         <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-                    </ul>
+                    </ul> -->
                 </div>
             </div>
         </div>
@@ -143,10 +91,6 @@
     
     <footer>
         <?php require('pages/layout/footer.php') ?>
-        <!-- modals -->
-        <?php require('pages/modals/roomMasterlist/addRoom.php') ?>
-        <?php require('pages/modals/roomTypes/addRoomType.php') ?>
-        <?php require('pages/modals/roomTypes/deleteRoomType.php') ?>
     </footer>
 
 
@@ -154,6 +98,7 @@
 
 <section class="jsIncludes">
     <?php require('jsInclude.php') ?>
+    <script type="text/javascript" src="includes/js/roomManagement.js"></script>
 </section>
 
 </html>

@@ -5,12 +5,6 @@
     <?php include('cssInclude.php') ?>
     <?php
         if(isset($_POST['submitCheckIn'])) {
-            // check if it was a reservvation
-            if(!empty($_POST["reservation_id"])){
-                $reservation_id = $_POST['reservation_id'];
-            }else{
-                $reservation_id = 0;
-            }
 
             // insert into guests table
             $guestname = $_POST['name']; $address = $_POST['address']; $mobile = $_POST['mobile'];
@@ -31,12 +25,12 @@
             }
 
             // convert checkoutdate
+            // $checkOutTime = date("H:i", strtotime($checkOutTime));
             $checkOut = $checkOutDate . " " . $checkOutTime;
-            $checkOut = strtotime($checkOut);
-            $checkOut = date('Y-m-d h:i:s a',$checkOut);
-
+            $checkOut = date('Y-m-d H:i', strtotime($checkOut));
+            // echo $checkOut;
             // insert into checkin
-            $sql = "Insert into checkin(roomNo,guestId,checkOutDate,adultsCount,childrenCount,reservationId) values('". $room_no ."',". $guest_id .",'". $checkOut ."',". $adultsCount .",". $childCount .",". $reservation_id .")";
+            $sql = "Insert into checkin(roomNo,guestId,checkOutDate,adultsCount,childrenCount) values('". $room_no ."',". $guest_id .",'". $checkOut ."',". $adultsCount .",". $childCount .")";
             $result = mysqli_query($conn, $sql);
 
             $sql = "update rooms set status = 'Occupied' where roomNo='". $room_no ."'";
@@ -63,7 +57,7 @@
                     </div>
                     <form method="POST">
                         <div class="card card-2">
-                            <!-- reservation                -->
+                            <!-- reservation               
                             <div class="row">
                                 <div class="page-header2 valign-wrapper z-depth-1">
                                     <h5>With Reservation</h5>
@@ -72,7 +66,7 @@
                                     <label>Reservation ID</label>
                                     <input name="reservation_id" id="guest_id" type="text" class="validate">
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- room -->
                             <div class="row">
                                 <div class="page-header2 valign-wrapper z-depth-1">
@@ -91,17 +85,13 @@
                                     ?>
                                     
                                 </div>
-                                <div class="input-field col s12 m3">
+                                <div class="input-field col s12 m4">
                                     <label>Room Type</label>
                                     <input name="room_type" id="room_type" type="text" class="validate" disabled>
                                 </div>
                                 <div class="input-field col s6 m2">
                                     <label>Floor</label>
                                     <input name="floor" id="floor"type="text" class="validate" disabled>
-                                </div>
-                                <div class="input-field col s6 m2">
-                                    <label>Beds</label>
-                                    <input name="beds" id="beds" type="text" class="validate" disabled>
                                 </div>
                                 <div class="input-field col s12 m3">
                                     <label>Rate</label>
@@ -172,9 +162,6 @@
     
     <footer>
         <?php require('pages/layout/footer.php') ?>
-        <!-- modals -->
-        <?php require('pages/modals/roomTypes/addRoomType.php') ?>
-        <?php require('pages/modals/roomTypes/deleteRoomType.php') ?>
     </footer>
 
     <script>
@@ -182,7 +169,6 @@
              var roomNo = $('#room_no').val();
                 $('#room_type').val("");         
                 $('#floor').val("");  
-                $('#beds').val("");  
                 $('#rate').val("");    
                 
                 $.ajax({                                      
@@ -193,7 +179,6 @@
                     {
                         $('#room_type').val(data[0].type);         
                         $('#floor').val(data[0].floor);  
-                        $('#beds').val(data[0].beds);  
                         $('#rate').val(data[0].rate);      
                     } 
                 });

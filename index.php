@@ -13,7 +13,7 @@
     
     <main>
         <div class="row">
-            <div class="col s12 mycontainer">
+            <div class="col s12">
                 <div class="card-1">
                     <div class="page-header valign-wrapper z-depth-1">
                         <h5>Dashboard</h5>
@@ -24,14 +24,22 @@
                                     
                             </div>
                             <div class="col s12 m3 tabcontainer">
-                                <label style="font-size:18px;">Floor</label>
-                                <select name="floor" id="floor">
+                                <label style="font-size:16px;">Floor</label>
+                                <select name="floor" id="floor" style="height:36px; line-height:36px;">
                                     <?php
                                         for($i = 1 ; $i <= 11 ; $i++){
                                             echo "<option value=" . $i . ">" . $i . "</option>";
                                         }
                                     ?>
                                 </select>
+                                <div class="file-field input-field" style=" margin-bottom:8px;">
+                                    <a class="btn right btn-1" id="searchRoomNo" style="margin-left:5px; height:36px; line-height:36px;">
+                                        <i class="material-icons left" style="margin-right:0px;">search</i></a>
+                                    <div class="file-path-wrapper" style="padding-left:0px;">
+                                        <input placeholder="Room No" id="search" style="height:36px; line-height:36px;" class="validate myinput" type="text"/>
+                                    </div>
+                                </div>
+
                                 <div>
                                     <ul class="collapsible index-summaries ">
                                         <li class="active">
@@ -52,6 +60,7 @@
                                             <div class="collapsible-body">
                                                 <table class="highlight">
                                                     <tr id="checkingOut"><td style="width:196px">Today's Checkout</td><td id="todaysCheckoutCount"></td></tr>
+                                                    <tr id="penalty"><td style="width:196px">Penalty</td><td id="penaltyCount"></td></tr>
                                                 </table>
                                             </div>
                                         </li>
@@ -78,9 +87,6 @@
     
     <footer>
         <?php require('pages/layout/footer.php') ?>
-        <!-- modals -->
-        <?php require('pages/modals/roomTypes/addRoomType.php') ?>
-        <?php require('pages/modals/roomTypes/deleteRoomType.php') ?>
     </footer>
     
     
