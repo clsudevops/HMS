@@ -1,15 +1,23 @@
 $(document).ready(function () {
-    $(populateRooms(""));
+    $(populateRoomsRoomNo());
     $("#search").on("keyup", function () {
-        populateRooms();
+        populateRoomsRoomNo();
+    });
+    $('#typeSelect').on("change", function () {
+        var type = $('#typeSelect').val();
+        populateRoomsType(type);
+    });
+    $('#floorSelect').on("change", function () {
+        var floor = $('#floorSelect').val();
+        populateRoomsFloor(floor);
     });
 });
 
-function populateRooms(type) {
+function populateRoomsRoomNo() {
     var search = $('#search').val();
     $.ajax({
         url: 'pages/api/getRoomDetailsNotOccupied.php',
-        data: "roomNo=" + search + "&type=" + type,
+        data: "roomNo=" + search,
         dataType: 'json',
         success: function (data) {
             loopRoomDetails(data);
@@ -17,6 +25,29 @@ function populateRooms(type) {
         }
     });
 }
+function populateRoomsType(type) {
+    $.ajax({
+        url: 'pages/api/getRoomDetailsNotOccupied.php',
+        data: "type=" + type,
+        dataType: 'json',
+        success: function (data) {
+            loopRoomDetails(data);
+            M.AutoInit()
+        }
+    });
+}
+function populateRoomsFloor(floor) {
+    $.ajax({
+        url: 'pages/api/getRoomDetailsNotOccupied.php',
+        data: "floor=" + floor,
+        dataType: 'json',
+        success: function (data) {
+            loopRoomDetails(data);
+            M.AutoInit()
+        }
+    });
+}
+
 
 function loopRoomDetails(data) {
     $('#roomManagementTable').html("");
@@ -47,11 +78,7 @@ function createRoomTable(roomNo, type, floor, rate, status) {
     return myRoom;
 }
 
-// function changeStatus(roomNo, status, curstatus){
-    
-// }
+function changeStatus(roomNo, status, curstatus){
+    // alert(status + '----' + curstatus);   
+}
 
-$('#typeSelect').on("change",function () {
-    var type = $('#typeSelect').val();
-    populateRooms(type);
-})

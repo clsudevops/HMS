@@ -46,7 +46,7 @@
                             </select>
                         </div>
                         <div class="input-field col m3 s12">
-                            <select>
+                            <select id="floorSelect">
                                 <option value="" disabled selected>Floor</option>
                                 <?php
                                     for($i = 1 ; $i <= 11 ; $i++){
