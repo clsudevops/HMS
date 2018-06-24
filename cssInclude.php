@@ -3,7 +3,7 @@
     
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    
     <!-- <link type="text/css" rel="stylesheet" href="includes/fonts/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous"> -->
     <link type="text/css" rel="stylesheet" href="includes/css/jquery-confirm.css"  media="screen,projection"/> 
     <link type="text/css" rel="stylesheet" href="includes/css/materialize.css"  media="screen,projection"/>

@@ -3,7 +3,6 @@
 
 <head>
     <?php include('cssInclude.php') ?>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 </head>
 
 <body>
@@ -18,12 +17,15 @@
                 <div class="card-1">
                     <!-- query for roomtype -->
                     <div class="page-header valign-wrapper z-depth-1">
-                        <h5>Room Status</h5>
+                        <h5>Account Information</h5>
                     </div>
                     <div class="row">
                         <div class="col m8 s12">
-                            <div class="card" style="padding:10px;">
+                            <div class="card accountInformation" style="padding:10px 20px;">
                                 <h5 id="h5-roomNo"></h5>
+                                <p id="ratepernight"></p>
+                                <p id="checkin"></p>
+                                <p id="checkout"></p>
                             </div>
                             </div>
                             <div class="col m4 s12">
