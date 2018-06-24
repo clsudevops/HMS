@@ -53,7 +53,7 @@ function cardLoop(data) {
         }
 
         if (checkoutDate == myDateNow || status == 'Occupied'){
-            $("#bedCards_" + roomNo).wrap('<a class="roomLink" href="checkOut.php"></a>');
+            $("#bedCards_" + roomNo).wrap('<a class="roomLink" href="roomStatus.php?roomNo='+ roomNo + '"></a>');
         }
         else{
             $("#bedCards_" + roomNo).wrap('<a class="roomLink" href="checkIn.php?roomNo='+ roomNo +'"></a>');

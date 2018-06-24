@@ -312,3 +312,8 @@ h5.sum-heading{
     line-height: 36px;
     height: 36px;
 }
+#h5-roomNo{
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+}
