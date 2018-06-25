@@ -152,8 +152,8 @@ footer {
     padding: 5px 32px;
     margin: 0;
     /* background-color: gray; */
-    background-color: #ebebeb;
-    /* color:white; */
+    background-color: #11afdb;
+    color:white;
 }
 .sidenav .user-divider{
     margin: 0;
@@ -318,7 +318,7 @@ h5.sum-heading{
     font-size: 20px;
 }
 #ratepernight{
-    margin: 5px;
+    margin: 5px 0 20px 0;
     text-align: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 15px;
@@ -341,7 +341,7 @@ div.accountInformation p{
 }
 .roomcalendarGuestIcon{
     font-size:17px;    
-    font-weight:bold; 
+    font-weight:600; 
     position: relative;
     top: 3px;
     margin-right: 5px;
@@ -355,4 +355,15 @@ span.guestName{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 20px;
     margin: 25px 0 15px 0;
+}
+.extraDivContainer{
+    height: 250px;
+    overflow: auto;
+}
+#addExtra{
+    padding: 0 10px;
+}
+.spanCheckinRoomStatus{
+    font-weight:bold;
+    font-size:15px;
 }

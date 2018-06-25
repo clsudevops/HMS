@@ -37,11 +37,13 @@
                             <div style="margin-top:7.5px;">
                                 <ul class="collapsible index-summaries ">
                                     <li class="active">
-                                        <div class="collapsible-header"><i class="material-icons">filter_vintage</i>Extra's</div>
+                                        <div class="collapsible-header"><i class="material-icons">extension</i>Extra's</div>
                                         <div class="collapsible-body">
-                                            <table class="highlight extraListTable" style="max-height:200px; min-height:200px;">
+                                            <div class="extraDivContainer">
+                                                <table class="highlight" id="extraListTable">
                                                 <!-- used js to populate this -->
-                                            </table>
+                                                </table>
+                                            </div>
                                         </div>
                                     </li>
                                 </ul>
