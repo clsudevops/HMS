@@ -26,7 +26,7 @@ function cardLoop(data) {
         var status = data[i].status;
         var type = data[i].type;
         var rate = data[i].rate;
-        var checkoutDate = data[i].checkoutDate;
+        var checkoutDate = data[i].checkOutDate;
         var curdate = data[i].curdate;
 
         $('#roomsList').append(createCardRoom(roomNo, floor, status, type, rate, checkoutDate));
@@ -37,7 +37,7 @@ function cardLoop(data) {
         var date1 = new Date(curdate);
         var date2 = new Date(checkoutDate);
 
-        console.log(myDateNow + '---' + checkoutDate);
+        console.log(myCheckoutDate);
 
         if (myDateNow == myCheckoutDate) {
             $("#img_" + roomNo).addClass("checkout");
