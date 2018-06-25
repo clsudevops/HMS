@@ -23,22 +23,7 @@
     </ul>
     <li><a href="#"><i class="material-icons left">keyboard_tab</i>Next Checkout</a></li>
     <li><a href="#"><i class="material-icons left">restaurant_menu</i>Kitchen</a></li>
-    <!-- <li><a href="checkIn.php"><i class="material-icons">event_available</i>Check In</a></li> -->
     <li><a href="roomManagement.php"><i class="material-icons">hotel</i>Room Management</a></li>
-    <!-- <ul class="collapsible collapsible-accordion">
-        <li>
-            <a class="collapsible-header"><i class="material-icons">weekend</i>Room Types<i class="material-icons right">arrow_drop_down</i></a>
-            <div class="collapsible-body">
-                <ul>
-                    <li><a class="modal-trigger" href="#addRoomType"><i class="material-icons">add</i>Add Room Type</a></li>
-                    <li><a class="modal-trigger" href="#deleteRoomType"><i class="material-icons">delete</i>Delete Room Type</a></li>
-                </ul>
-            </div>
-        </li>
-    </ul> -->
-    <!-- <li><a href="#"><i class="material-icons left">payment</i>Payment</a></li> -->
-
-   <!-- reports -->
     <ul class="collapsible collapsible-accordion">
         <!-- settings -->
         <li>
@@ -47,6 +32,7 @@
                 <ul>  
                     <li><a href="manageRooms.php"><i class="material-icons left">hotel</i>Rooms</a></li>
                     <li><a href="manageRoomTypes.php"><i class="material-icons left">weekend</i>Room Types</a></li>
+                    <li><a href="extras.php"><i class="material-icons left">dns</i>Extras</a></li>
                     <li><a href="roomTypes.php"><i class="material-icons">supervisor_account</i>Accounts</a></li>
                 </ul>
             </div>

@@ -20,17 +20,20 @@
                         <h5>Account Information</h5>
                     </div>
                     <div class="row">
-                        <div class="col m8 s12">
-                            <div class="card accountInformation" style="padding:10px 20px;">
+                        <div class="card col m8 s12"  style="padding:10px 20px;">
+                            <div class="accountInformation">
                                 <h5 id="h5-roomNo"></h5>
                                 <p id="ratepernight"></p>
                                 <p id="checkin"></p>
                                 <p id="checkout"></p>
                             </div>
+                            <div class="extras">
+                                <h5 id="h5-extras">List of Extra's</h5>
                             </div>
-                            <div class="col m4 s12">
+                        </div>
+                        <div class="col m4 s12">
                             
-                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
