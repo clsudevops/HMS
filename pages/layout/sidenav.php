@@ -6,9 +6,21 @@
     </li>
     <li><div class="divider user-divider"></div></li>
     <li><a href="index.php"><i class="material-icons">dashboard</i>Dashboard</a></li>
-    <li><a href="index.php"><i class="material-icons">event</i>Reservations</a></li>
+    <!-- <li><a href="index.php"><i class="material-icons">event</i>Reservations</a></li> -->
     <ul class="collapsible collapsible-accordion">
-        <!-- settings -->
+        <li>
+            <a class="collapsible-header"><i class="material-icons">face</i>Reservations<i class="material-icons right">arrow_drop_down</i></a>
+            <div class="collapsible-body">
+                <ul>
+                    <li><a class="modal-trigger" href="bookReservation.php"><i class="material-icons">assignment</i>Book Reservation</a></li>
+                </ul>
+                <ul>
+                    <li><a class="modal-trigger" href=""><i class="material-icons">list</i>Reservation List</a></li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+    <ul class="collapsible collapsible-accordion">
         <li>
             <a class="collapsible-header"><i class="material-icons">face</i>Guests<i class="material-icons right">arrow_drop_down</i></a>
             <div class="collapsible-body">

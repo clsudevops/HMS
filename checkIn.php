@@ -93,9 +93,13 @@
                                     <label>Floor</label>
                                     <input name="floor" id="floor"type="text" class="validate" disabled>
                                 </div>
-                                <div class="input-field col s12 m3">
+                                <div class="input-field col s12 m2">
                                     <label>Rate</label>
                                     <input name="rate" id="rate" type="text" class="validate" disabled>
+                                </div>
+                                <div class="input-field col s12 m2">
+                                    <label>Rate/Hour</label>
+                                    <input name="rateperhour" id="rateperhour" type="text" class="validate" disabled>
                                 </div>
                             </div>
                             <!-- Guest -->
@@ -109,7 +113,7 @@
                                 </div>
                                 <div class="input-field col s12 m6">
                                     <label>Address</label>
-                                    <input name="address" id="address" type="text" class="validate" required>
+                                    <input name="address" id="address" type="text" class="validate">
                                 </div>
                                 <div class="input-field col s6 m3">
                                     <label>Mobile</label>
@@ -117,7 +121,7 @@
                                 </div>
                                 <div class="input-field col s6 m4">
                                     <label>Email</label>
-                                    <input name="email" id="email" type="email" class="validate" required>
+                                    <input name="email" id="email" type="email" class="validate">
                                 </div>
                             </div>
                             <!-- Check in Information -->
@@ -170,7 +174,8 @@
                 $('#room_type').val("");         
                 $('#floor').val("");  
                 $('#rate').val("");    
-                
+                $('#rateperhour').val("");
+
                 $.ajax({                                      
                     url: 'pages/api/getRoomDetails.php',                
                     data: "roomNo=" + roomNo,                                          
@@ -179,7 +184,8 @@
                     {
                         $('#room_type').val(data[0].type);         
                         $('#floor').val(data[0].floor);  
-                        $('#rate').val(data[0].rate);      
+                        $('#rate').val(data[0].rate);
+                        $('#rateperhour').val(data[0].rateperhour);       
                     } 
                 });
         }
