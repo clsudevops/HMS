@@ -37,7 +37,7 @@ function cardLoop(data) {
         var date1 = new Date(curdate);
         var date2 = new Date(checkoutDate);
 
-        console.log(myCheckoutDate);
+        // console.log(myCheckoutDate);
 
         if (myDateNow == myCheckoutDate) {
             $("#img_" + roomNo).addClass("checkout");

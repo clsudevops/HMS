@@ -354,10 +354,15 @@ span.guestName{
 #h5-extras{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 20px;
-    margin: 25px 0 15px 0;
+    margin: 25px 0 10px 0;
 }
 .extraDivContainer{
     height: 250px;
+    overflow: auto;
+}
+.listofExtraContainer{
+    min-height: 150px;
+    max-height: 250px;
     overflow: auto;
 }
 #addExtra{

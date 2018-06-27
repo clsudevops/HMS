@@ -1,5 +1,6 @@
-$(document).ready(function () {
-    var roomNo = getUrlParameter('roomNo');
+var roomNo = getUrlParameter('roomNo');
+
+$(document).ready(function () {    
     getRoomDatails(roomNo);
     populateExtras();
 });
@@ -16,6 +17,8 @@ function getRoomDatails(roomNo) {
             $('#checkout').html("<i class='material-icons roomcalendarGuestIcon'>event</i><span class='spanCheckinRoomStatus'>Check-out</span>" + " -- " + data[0].checkOutDate + "&nbsp;&nbsp;" + "<i class='material-icons roomcalendarGuestIcon'>access_time</i>" + data[0].checkOutTime);
             // loopRoomDetails(data);
             // M.AutoInit();
+            // var checkInId = data[0].checkInId;
+            // return checkInId;
         }
     });
 }
@@ -43,8 +46,23 @@ function createExtraTable(id, description, cost) {
         '<td>' + description + '</td>' +
         '<td>' + cost + '</td>' +
         '<td style="width:20%;">' +
-            '<a class="btn btn-1 tooltipped" id="addExtra" onclick="addExtra(\'' + id + '\')" data-tooltip="Add" style="margin-right:5px;"><i class="material-icons">add</i></a>' +
+        '<a class="btn btn-1 tooltipped" id="addExtra" onclick="addExtra(\'' + id + '\')" data-tooltip="Add" style="margin-right:5px;"><i class="material-icons">add</i></a>' +
         '</td>' +
         '</tr>'
     return extraList;
+}
+
+function addExtra(id){
+    $.ajax({
+        url: 'pages/api/insertCheckinExtras.php',
+        dataType: 'json',
+        data: "roomNo=" + roomNo + "&extrasId=" + id,
+        type: "POST",
+        success: function (data) {
+            // $('#extraListTable').html("");
+            // for (var i = 0; i < data.length; i++) {
+
+            // }
+        }
+    });
 }

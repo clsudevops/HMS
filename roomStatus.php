@@ -30,6 +30,19 @@
                                 </div>
                                 <div class="extras">
                                     <h5 id="h5-extras">List of Extra's</h5>
+                                    <div class="listofExtraContainer">
+                                        <table class="highlight" id="addedExtraTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Description</th>
+                                                    <th>Quantity</th>
+                                                    <th>Cost</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <!-- used js to populate this -->
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
