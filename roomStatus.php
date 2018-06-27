@@ -25,13 +25,13 @@
                                 <div class="accountInformation">
                                     <h5 id="h5-roomNo"></h5>
                                     <p id="ratepernight"></p>
-                                    <p id="checkin" style="margin:5px 0px;"></p>
+                                    <p id="checkin" style="margin:30px 0px 5px 0px;"></p>
                                     <p id="checkout" style="margin:5px 0px;"></p>
                                 </div>
                                 <div class="extras">
                                     <h5 id="h5-extras">List of Extra's</h5>
                                     <div class="listofExtraContainer">
-                                        <table class="highlight" id="addedExtraTable">
+                                        <table class="highlight">
                                             <thead>
                                                 <tr>
                                                     <th>Description</th>
@@ -40,9 +40,26 @@
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
-                                            <!-- used js to populate this -->
+                                            <tbody id="addedExtraTable">
+                                                 <!-- used js to populate this -->
+                                            </tbody>
+                                           
                                         </table>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="col m5 s12 billing" style="padding-left:0px;">
+                                <div class="card">
+                                    <h5 class="billingheader">
+                                        Bill
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="col m5 s12 billing" style="padding-right:0px;">
+                                <div class="card">
+                                    <h5 class="billingheader">
+                                        Miscellaneous
+                                    </h5>
                                 </div>
                             </div>
                         </div>
@@ -54,9 +71,19 @@
                                         <div class="collapsible-body">
                                             <div class="extraDivContainer">
                                                 <table class="highlight" id="extraListTable">
-                                                <!-- used js to populate this -->
+                                                    <!-- used js to populate this -->
                                                 </table>
                                             </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                               
+                                <ul class="collapsible index-summaries">
+                                    <li class="active">
+                                        <div class="collapsible-header"><i class="material-icons">restaurant_menu</i>Miscellaneous</div>
+                                        <div class="collapsible-body">
+                                            <!-- <table class="highlight" id="bedTypes"></table> -->
+                                            
                                         </div>
                                     </li>
                                 </ul>
@@ -64,18 +91,27 @@
                                     <li class="active">
                                         <div class="collapsible-header"><i class="material-icons">exit_to_app</i>Checkout Date</div>
                                         <div class="collapsible-body">
-                                            <table class="highlight">
-                                                <tr id="checkingOut"><td style="width:196px">Today's Checkout</td><td id="todaysCheckoutCount"></td></tr>
-                                                <tr id="penalty"><td style="width:196px">Penalty</td><td id="penaltyCount"></td></tr>
+                                            <table class="highlight updateCheckoutTable" style="margin-top:10px;">
+                                                <tr>
+                                                    <td>Date:</td>
+                                                    <td><input id="checkOutUpdate" placeholder="" type="text" class="datepicker" style="height:36px; line-height:36px;"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Time:</td>
+                                                    <td><input id="checkOutUpdate" placeholder="" type="text" class="datepicker" style="height:36px; line-height:36px;"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td>
+                                                        <a class="btn right btn-1" id="submitRoom" style="margin-left:5px; height:36px; line-height:36px;">
+                                                            <i class="material-icons left" style="margin-right:10px;">
+                                                                save
+                                                            </i>
+                                                            Save
+                                                        </a>
+                                                    </td>
+                                                </tr>
                                             </table>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <ul class="collapsible index-summaries ">
-                                    <li class="active">
-                                        <div class="collapsible-header"><i class="material-icons">event_available</i>Available</div>
-                                        <div class="collapsible-body">
-                                            <table class="highlight" id="bedTypes"></table>
                                         </div>
                                     </li>
                                 </ul>

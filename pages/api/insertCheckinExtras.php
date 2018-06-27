@@ -33,14 +33,16 @@
         $stmt = $conn->prepare("Insert Into addedextras(checkinId,extrasId,quantity) values(?,?,?)");
         $stmt->bind_param('iii', $checkInId,$extrasId,$quantity); 
         $stmt->execute();
+        $result = $stmt->get_result() or die($conn->error);
     }
     else{
         $quantity = $quantity + 1;
         $stmt = $conn->prepare("Update addedextras set quantity = ? where checkInId = ? and extrasId = ?");
         $stmt->bind_param('iii', $quantity,$checkInId,$extrasId); 
         $stmt->execute();
+        $result = $stmt->get_result() or die($conn->error);
     }
     
 
-    // $result = $stmt->get_result() or die($conn->error);
+    // 
 ?>

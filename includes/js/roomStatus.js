@@ -3,6 +3,7 @@ var roomNo = getUrlParameter('roomNo');
 $(document).ready(function () {    
     getRoomDatails(roomNo);
     populateExtras();
+    populateAddedExtraTable()
 });
 
 function getRoomDatails(roomNo) {
@@ -55,14 +56,53 @@ function createExtraTable(id, description, cost) {
 function addExtra(id){
     $.ajax({
         url: 'pages/api/insertCheckinExtras.php',
-        dataType: 'json',
         data: "roomNo=" + roomNo + "&extrasId=" + id,
         type: "POST",
-        success: function (data) {
-            // $('#extraListTable').html("");
-            // for (var i = 0; i < data.length; i++) {
+        success: function () {
+            populateAddedExtraTable();   
+        }
+    });
+}
 
-            // }
+function populateAddedExtraTable(){
+    $.ajax({
+        url: 'pages/api/getAddedExtras.php',
+        dataType: 'json',
+        data: "roomNo=" + roomNo,
+        type: "POST",
+        success: function (data) {
+            $('#addedExtraTable').html("");
+            for (var i = 0; i < data.length; i++) {
+                var id = data[i].id;
+                var checkinId = data[i].checkinId;
+                var quantity = data[i].quantity;
+                var description = data[i].description;
+                var cost = quantity * data[i].cost;
+                $('#addedExtraTable').append(createAddedExtraTable(id, checkinId, quantity, description, cost));
+                M.AutoInit();
+            }
+        }
+    });
+}
+function createAddedExtraTable(id, checkinId, quantity, description ,cost) {
+    var addedExtraList = '<tr>' +
+        '<td>' + description + '</td>' +
+        '<td>' + quantity + '</td>' +
+        '<td>' + cost + '</td>' +
+        '<td style="width:15%;">' +
+        '<a class="btn btn-1 tooltipped" id="Delete" onclick="deleteAddedExtra(\'' + id + '\')" data-tooltip="Delete" style="margin-right:5px;"><i class="material-icons">delete</i></a>' +
+        '</td>' +
+        '</tr>'
+    return addedExtraList;
+}
+function deleteAddedExtra(id) {
+    $.ajax({
+        url: 'pages/api/deleteAddedExtras.php',
+        type: "POST",
+        data: "id=" + id,
+        success: function () {
+            populateAddedExtraTable();
+            M.AutoInit();
         }
     });
 }
