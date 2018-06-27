@@ -343,6 +343,13 @@ div.accountInformation p{
 }
 .roomcalendarGuestIcon{
     font-size:17px;    
+    /* font-weight:600;  */
+    position: relative;
+    top: 3px;
+    margin-right: 5px;
+}
+.roomcalendarTimeIcon{
+     font-size:17px;    
     font-weight:600; 
     position: relative;
     top: 3px;
@@ -396,9 +403,9 @@ span.guestName{
 .billingheader{
     font-size: 18px;
     padding: 8px;
-    background-color: #2b2929;
+    /* background-color: #2b2929; */
     margin: 0;
-    color:white;
+    /* color:white; */
     opacity: 0.8;
 }
 .h5-adding{

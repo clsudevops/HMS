@@ -76,16 +76,13 @@
                         <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
                         <li class="active"><a href="#!">1</a></li>
                         <li class="waves-effect"><a href="#!">2</a></li>
-                        <li class="waves-effect"><a href="#!">3</a></li>
-                        <li class="waves-effect"><a href="#!">4</a></li>
-                        <li class="waves-effect"><a href="#!">5</a></li>
                         <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
                     </ul> -->
                 </div>
             </div>
         </div>
         
-    <!-- Modal Structure -->
+    
         
     </main>
     
@@ -95,7 +92,31 @@
 
 
 </body>
-
+    <!-- Modal Structure -->
+        <div id="addReservation" class="modal">
+            <div class="modal-content" style="">
+                <h4 id="h4-roomNo">Add Reservation to Room <span id="modalRoomNo"></span></h4>
+                <div class="row">
+                    <div class="input-field col s8 m7">
+                        <label>Item Description</label>
+                        <input style="height:36px; line-height:36px;" id="itemDescription" name="description" type="text" class="validate">                        
+                    </div>
+                    <div class="input-field col s4 m2">
+                        <label>Quantity</label>
+                        <input style="height:36px; line-height:36px;" id="itemQuantity" type="number" class="validate">
+                    </div>
+                    <div class="input-field col s4 m3">
+                        <a class="btn btn-1 waves-effect waves-green right" onclick="submitItemInventoryModal()"  style="margin-bottom:10px;">
+                            <i class="material-icons left" style="margin-right:10px;">
+                                send
+                            </i>
+                            Submit
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- modal up to here -->
 <section class="jsIncludes">
     <?php require('jsInclude.php') ?>
     <script type="text/javascript" src="includes/js/bookReservation.js"></script>

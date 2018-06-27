@@ -64,17 +64,24 @@ function loopRoomDetails(data) {
 }
 
 function createRoomTable(roomNo, type, floor, rate, rateperhour) {
-    var myRoom = '<tr>' +
+    var myRoom = '<tr onclick="checkInventory(' + roomNo + ')">' +
         '<td>' + roomNo + '</td>' +
         '<td>' + type + '</td>' +
         '<td>' + floor + '</td>' +
         '<td>' + rate + '</td>' +
         '<td>' + rateperhour + '</td>' +
         '<td>' +
-        '<a class="btn btn-1 tooltipped Vacant" id="Vacant" onclick="" data-tooltip="Reserve" style="margin-right:5px;"><i class="material-icons left">save</i>Reserve</a>' +
+        '<a class="btn btn-1 tooltipped modal-trigger" href="#addReservation" onclick="" data-tooltip="Reserve" style="margin-right:5px;"><i class="material-icons left">save</i>Reserve</a>' +
         '</td>' +
         '</tr>'
     return myRoom;
+}
+
+function checkInventory(roomNo) {
+    // alert(roomNo);
+    $('#addReservation #modalRoomNo').html(roomNo);
+    // $('#updateInventoryModal #modalRoomNo').html(roomNo);
+    // populateInventoryTable(roomNo);
 }
 
 // function changeStatus(roomNo, status, curstatus) {
