@@ -31,7 +31,6 @@
                             <table class="z-depth-2 highlight roomTypeTable">
                                 <thead>
                                     <tr>
-                                        <th>Type ID</th>
                                         <th>Type</th>
                                         <th>Adult</th>
                                         <th>Children</th>

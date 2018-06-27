@@ -54,7 +54,6 @@ function loopRoomTypes(data) {
 
 function createRoomTypeTable(id, type, maxAdult, maxChildren) {
     var myRoomType = '<tr>' +
-        '<td>' + id + '</td>' +
         '<td>' + type + '</td>' +
         '<td>' + maxAdult + '</td>' +
         '<td>' + maxChildren + '</td>' +

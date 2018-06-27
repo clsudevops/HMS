@@ -31,7 +31,7 @@
                                     <i class="material-icons left">search</i>Search</a>
             
                                 <div class="file-path-wrapper">
-                                    <input style="height:36px; line-height:36px;" placeholder="Search Room" id="search" class="file-path validate myinput" type="text"/>
+                                    <input style="height:36px; line-height:36px;" placeholder="Search Extra" id="search" class="file-path validate myinput" type="text"/>
                                 </div>
                             </div>
                             <table class="z-depth-2 highlight responsive-table roomTypeTable">

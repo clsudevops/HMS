@@ -110,17 +110,22 @@
                                 <h5 class="h5-adding z-depth-1" style="margin-bottom:5px;">Room Inventory</h5>
                                 <div class="row" style="padding:0 15px;">
                                     <div class="input-field col s6 m6">
-                                        <h5 id="roomtoDisplayInventory" style="height:36px; line-height:36px;">
-
+                                        <h5 id="roomtoDisplayInventory" style="height:36px; line-height:36px; margin-left:0;">
+                                            <!-- js used here to get details and dynamic header -->
                                         </h5>
                                     </div>
                                     <div class="input-field col s6 m6">
-                                        <a class="btn right btn-1 modal-trigger" id="submitRoom" href="#modal1" style="margin-left:5px; height:36px; line-height:36px;">
-                                            <i class="material-icons left" style="margin-right:10px;">
-                                                add
-                                            </i>
-                                            Add Item
-                                        </a>
+                                        <div id="addInventoryContainer">
+                                            <!-- js used here to get details and dynamic button -->
+                                        </div>
+                                    </div>
+                                    <div class="col s12 m12" style="margin-top:0">
+                                        <div class="roomInventoryDiv">
+                                            <table id="ItemInventoryTable">
+                                            
+                                            </table>
+                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -129,23 +134,6 @@
                 </div>
             </div>
         </div>
-        
-    <!-- Modal Structure -->
-    <div id="modal1" class="modal">
-        <div class="modal-content" style="">
-            <h4>Add Item Inventory</h4>
-            
-        </div>
-        <div class="modal-footer">
-            <a href="#!" class="btn btn-1 modal-close waves-effect waves-green">
-                <i class="material-icons left" style="margin-right:10px;">
-                    send
-                </i>
-                Submit
-            </a>
-        </div>
-    </div>
-
     </main>
     
     <footer>
@@ -159,6 +147,55 @@
     </section>
 </body>
 
+ <!-- Modal Structure -->
+    <div id="addInventory" class="modal">
+        <div class="modal-content" style="">
+            <h4 id="h4-roomNo">Add Item to Room <span id="modalRoomNo"></span></h4>
+            <div class="row">
+                <div class="input-field col s8 m7">
+                    <label>Item Description</label>
+                    <input style="height:36px; line-height:36px;" id="itemDescription" name="description" type="text" class="validate">                        
+                </div>
+                <div class="input-field col s4 m2">
+                    <label>Quantity</label>
+                    <input style="height:36px; line-height:36px;" id="itemQuantity" type="number" class="validate">
+                </div>
+                <div class="input-field col s4 m3">
+                    <a class="btn btn-1 waves-effect waves-green right" onclick="submitItemInventoryModal()"  style="margin-bottom:10px;">
+                        <i class="material-icons left" style="margin-right:10px;">
+                            send
+                        </i>
+                        Submit
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="updateInventoryModal" class="modal">
+        <div class="modal-content" style="">
+            <h4 id="h4-roomNo">Update Inventory <span id="modalRoomNo" style="display:none;"></span></h4>
+            <div class="row">
+                <div class="input-field col s8 m7">
+                    <label class="invetoryLabels">Item Description</label>
+                    <input style="height:36px; line-height:36px;" id="itemDescription" name="description" type="text" class="validate">                        
+                </div>
+                <div class="input-field col s4 m2">
+                    <label class="invetoryLabels">Quantity</label>
+                    <input style="height:36px; line-height:36px;" id="itemQuantity" type="number" class="validate">
+                </div>
+                <div class="input-field col s4 m3">
+                    <a class="btn btn-1 waves-effect waves-green right updateInventoryBtn" onclick="updateItemInventoryModal()" style="margin-bottom:10px;">
+                        <i class="material-icons left" style="margin-right:10px;">
+                            edit
+                        </i>
+                        Update
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal up to here -->
 
 
 </html>
