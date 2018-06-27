@@ -57,13 +57,14 @@ function loopRoomDetails(data) {
 }
 
 function createRoomTable(roomNo, type, floor, rate, rateperhour) {
-    var myRoom = '<tr>' +
+    var myRoom = '<tr class="tooltipped" data-tooltip="Check Inventory" onclick="checkInventory(' + roomNo + ')">' +
         '<td>' + roomNo + '</td>' +
         '<td>' + type + '</td>' +
         '<td>' + floor + '</td>' +
         '<td>' + rate + '</td>' +
         '<td>' + rateperhour + '</td>' +
-        '<td><a class="btn btn-2 tooltipped" data-tooltip="Delete" onclick="deleteRoom(' + roomNo + ')" "><i class="material-icons">delete</i></a></td>' +
+        '<td><a class="btn btn-2 tooltipped" style="margin-right:5px;" data-tooltip="Delete" onclick="deleteRoom(' + roomNo + ')" "><i class="material-icons">delete</i></a>' +
+            '<a class="btn btn-2 tooltipped" data-tooltip="Edit" onclick="EditRoom(' + roomNo + ')" "><i class="material-icons">edit</i></a></td>' +
         '</tr>'
     return myRoom;
 }
@@ -77,4 +78,8 @@ function deleteRoom(id) {
             populateRooms();
         }
     });
+}
+function checkInventory(roomNo){
+    // alert(roomNo);
+    $('#roomtoDisplayInventory').html('Room ' + roomNo);
 }

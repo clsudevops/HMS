@@ -37,7 +37,7 @@
                             <table class="z-depth-2 highlight roomTypeTable">
                                 <thead>
                                     <tr>
-                                        <th>Room No</th>
+                                        <th>Room #</th>
                                         <th>Type</th>
                                         <th>Floor</th>
                                         <th>Rate</th>
@@ -107,7 +107,22 @@
                                 </div>
                             </div>
                             <div class="card" style="margin-top:15px;">
-                                <h5 class="h5-adding z-depth-1">Room Inventory</h5>
+                                <h5 class="h5-adding z-depth-1" style="margin-bottom:5px;">Room Inventory</h5>
+                                <div class="row" style="padding:0 15px;">
+                                    <div class="input-field col s6 m6">
+                                        <h5 id="roomtoDisplayInventory" style="height:36px; line-height:36px;">
+
+                                        </h5>
+                                    </div>
+                                    <div class="input-field col s6 m6">
+                                        <a class="btn right btn-1 modal-trigger" id="submitRoom" href="#modal1" style="margin-left:5px; height:36px; line-height:36px;">
+                                            <i class="material-icons left" style="margin-right:10px;">
+                                                add
+                                            </i>
+                                            Add Item
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div> 
                     </div>  
@@ -116,6 +131,20 @@
         </div>
         
     <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+        <div class="modal-content" style="">
+            <h4>Add Item Inventory</h4>
+            
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="btn btn-1 modal-close waves-effect waves-green">
+                <i class="material-icons left" style="margin-right:10px;">
+                    send
+                </i>
+                Submit
+            </a>
+        </div>
+    </div>
 
     </main>
     
