@@ -28,13 +28,14 @@
                                     <input style="height:36px; line-height:36px;" placeholder="Search Room Type" id="search" class="file-path validate myinput" type="text"/>
                                 </div>
                             </div>
-                            <table class="z-depth-2 highlight responsive-table roomTypeTable">
+                            <table class="z-depth-2 highlight roomTypeTable">
                                 <thead>
                                     <tr>
                                         <th>Type ID</th>
                                         <th>Type</th>
-                                        <th>Rate</th>
-                                        <th>Action</th>
+                                        <th>Adult</th>
+                                        <th>Children</th>
+                                        <th style="width:23%;">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody id="roomTypeTable">
@@ -44,15 +45,19 @@
                         </div>
 
                         <div class="col s12 m6">
-                            <div class="input-field col s12 m8" style="margin-bottom:0px;">
+                            <div class="input-field col s12 m12" style="margin-bottom:0px;">
                                 <label>Name:</label>
                                 <input name="typeName" style="height:36px; line-height:36px;" id="typeName" type="text" class="validate" required>
                             </div>
                             <div class="input-field col s12 m4" style="margin-bottom:0px;">
-                                <label>Rate:</label>
-                                <input name="rate" id="rate" style="height:36px; line-height:36px;" type="text" class="validate" required>
+                                <label>Max Adult:</label>
+                                <input name="maxAdult" style="height:36px; line-height:36px;" id="maxAdult" type="number" class="validate" required>
                             </div>
-                            <div class="input-field col s12 m12">
+                            <div class="input-field col s12 m4" style="margin-bottom:0px;">
+                                <label>Max Children:</label>
+                                <input name="maxChildren" style="height:36px; line-height:36px;" id="maxChildren" type="number" class="validate" required>
+                            </div>
+                            <div class="input-field col s12 m4">
                                 <a class="btn right btn-1" id="submitRoomType" style="margin-left:5px; height:36px; line-height:36px;">
                                     <i class="material-icons left" style="margin-right:10px;">
                                         send

@@ -10,9 +10,11 @@
     $roomNo = $_POST['roomNo'];
     $roomType = $_POST['roomType'];
     $roomFloor = $_POST['roomFloor'];
+    $rate = $_POST['rate'];
+    $rateperhour = $_POST['rateperhour'];
     
-    $stmt = $conn->prepare("Insert Into rooms(roomNo,roomType,floor) values(?,?,?)");
-    $stmt->bind_param('sii', $roomNo,$roomType,$roomFloor); 
+    $stmt = $conn->prepare("Insert Into rooms(roomNo,roomType,floor,rate,rateperhour) values(?,?,?,?,?)");
+    $stmt->bind_param('siidd', $roomNo,$roomType,$roomFloor,$rate,$rateperhour); 
 
     $stmt->execute();
 

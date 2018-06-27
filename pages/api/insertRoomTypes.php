@@ -7,11 +7,13 @@
     // Create connection
     $conn = mysqli_connect($servername, $username, $password,$db);
 
-    $type = $_POST['type']; 
-    $rate = $_POST['rate'];
+    $type = $_POST['type'];
+    $maxAdult = $_POST['maxAdult']; 
+    $maxChildren = $_POST['maxChildren']; 
+    // $rate = $_POST['rate'];
     
-    $stmt = $conn->prepare("Insert Into roomTypes(type,rate) values(?,?)");
-    $stmt->bind_param('si', $type,$rate); 
+    $stmt = $conn->prepare("Insert Into roomTypes(type,maxAdult,maxChildren) values(?,?,?)");
+    $stmt->bind_param('sii', $type,$maxAdult,$maxChildren); 
 
     $stmt->execute();
 
