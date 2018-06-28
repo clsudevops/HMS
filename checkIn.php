@@ -7,12 +7,11 @@
         if(isset($_POST['submitCheckIn'])) {
 
             // insert into guests table
-            $guestname = $_POST['name']; $address = $_POST['address']; $mobile = $_POST['mobile'];
-            $email = $_POST['email']; $room_no = $_POST['room_no'];
+            $guestname = $_POST['name']; $mobile = $_POST['mobile']; $room_no = $_POST['room_no'];
             $checkOutDate = $_POST['checkOutDate']; $checkOutTime = $_POST['checkOutTime'];
             $adultsCount = $_POST['adultsCount']; $childCount = $_POST['childCount'];
 
-            $sql = "Insert into guests(name,address,mobile,email) values('". $guestname ."','". $address ."','". $mobile ."','". $email ."')";
+            $sql = "Insert into guests(name,mobile) values('". $guestname ."','". $mobile ."')";
             $result = mysqli_query($conn, $sql);
 
             // select guest id
@@ -107,22 +106,22 @@
                                 <div class="page-header2 valign-wrapper z-depth-1">
                                     <h5>Guest Information</h5>
                                 </div>
-                                <div class="input-field col s12 m5">
+                                <div class="input-field col s12 m7">
                                     <label>Name</label>
                                     <input name="name" id="name" type="text" class="validate" required>
                                 </div>
-                                <div class="input-field col s12 m6">
+                                <!-- <div class="input-field col s12 m6">
                                     <label>Address</label>
                                     <input name="address" id="address" type="text" class="validate">
-                                </div>
-                                <div class="input-field col s6 m3">
-                                    <label>Mobile</label>
+                                </div> -->
+                                <div class="input-field col s6 m5">
+                                    <label>Contact</label>
                                     <input name="mobile" id="mobile" type="text" class="validate" required>
                                 </div>
-                                <div class="input-field col s6 m4">
+                                <!-- <div class="input-field col s6 m4">
                                     <label>Email</label>
                                     <input name="email" id="email" type="email" class="validate">
-                                </div>
+                                </div> -->
                             </div>
                             <!-- Check in Information -->
                             <div class="row">

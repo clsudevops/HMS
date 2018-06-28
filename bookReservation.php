@@ -94,19 +94,35 @@
 </body>
     <!-- Modal Structure -->
         <div id="addReservation" class="modal">
-            <div class="modal-content" style="">
+            <div class="modal-content" style="min-height:70vh">
                 <h4 id="h4-roomNo">Add Reservation to Room <span id="modalRoomNo"></span></h4>
                 <div class="row">
-                    <div class="input-field col s8 m7">
-                        <label>Item Description</label>
-                        <input style="height:36px; line-height:36px;" id="itemDescription" name="description" type="text" class="validate">                        
+                    <div class="input-field col s8 m6">
+                        <label>Name</label>
+                        <input style="height:36px; line-height:36px;" id="name" name="name" type="text" class="validate">                        
                     </div>
-                    <div class="input-field col s4 m2">
-                        <label>Quantity</label>
-                        <input style="height:36px; line-height:36px;" id="itemQuantity" type="number" class="validate">
+                    <div class="input-field col s4 m6">
+                        <label>Contact</label>
+                        <input style="height:36px; line-height:36px;" id="contact" type="text" class="validate">
                     </div>
                     <div class="input-field col s4 m3">
-                        <a class="btn btn-1 waves-effect waves-green right" onclick="submitItemInventoryModal()"  style="margin-bottom:10px;">
+                        <label>Checkin Date</label>
+                        <input style="height:36px; line-height:36px;" id="contact" type="text" class="validate datepicker">
+                    </div>
+                    <div class="input-field col s4 m3">
+                        <label>Checkout Date</label>
+                        <input style="height:36px; line-height:36px;" id="contact" type="text" class="validate datepicker">
+                    </div>
+                    <div class="input-field col s4 m3">
+                        <label>Adults</label>
+                        <input style="height:36px; line-height:36px;" id="contact" type="number" class="validate">
+                    </div>
+                    <div class="input-field col s4 m3">
+                        <label>Childrens</label>
+                        <input style="height:36px; line-height:36px;" id="contact" type="number" class="validate">
+                    </div>
+                    <div class="input-field col s4 m12">
+                        <a class="btn btn-1 waves-effect waves-green right" onclick="submitReservationModal()"  style="margin-bottom:10px;">
                             <i class="material-icons left" style="margin-right:10px;">
                                 send
                             </i>
