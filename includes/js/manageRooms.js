@@ -95,7 +95,8 @@ function deleteRoom(id) {
         url: 'pages/api/deleteRoom.php',
         type: "POST",
         data: "id=" + id,
-        success: function () {
+        dataType: 'json',
+        success: function (data) {
             populateRooms();
         }
     });

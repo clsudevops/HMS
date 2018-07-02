@@ -9,9 +9,10 @@
             // insert into guests table
             $guestname = $_POST['name']; $mobile = $_POST['mobile']; $room_no = $_POST['room_no'];
             $checkOutDate = $_POST['checkOutDate']; $checkOutTime = $_POST['checkOutTime'];
-            $adultsCount = $_POST['adultsCount']; $childCount = $_POST['childCount'];
+            $adultsCount = $_POST['adultsCount']; $childCount = $_POST['childCount']; $compName = $_POST['compName'];
+            $compAddress = $_POST['compAddress'];   
 
-            $sql = "Insert into guests(name,mobile) values('". $guestname ."','". $mobile ."')";
+            $sql = "Insert into guests(name,mobile,companyName,companyAddress) values('". $guestname ."','". $mobile ."','". $compName ."','". $compAddress ."')";
             $result = mysqli_query($conn, $sql);
 
             // select guest id
@@ -106,22 +107,28 @@
                                 <div class="page-header2 valign-wrapper z-depth-1">
                                     <h5>Guest Information</h5>
                                 </div>
-                                <div class="input-field col s12 m7">
-                                    <label>Name</label>
+                                <div class="input-field col s12 m12">
+                                    <label><input class="with-gap" id="forPersonal" name="group1" type="radio" checked /><span>Personal Business</span></label>
+                                    <label><input class="with-gap" id="forCompany" name="group1" type="radio"/><span>Charge to Company</span></label>
+                                </div>
+                                <div class="input-field col s12 m5">
+                                    <label>Guest Name</label>
                                     <input name="name" id="name" type="text" class="validate" required>
                                 </div>
-                                <!-- <div class="input-field col s12 m6">
-                                    <label>Address</label>
-                                    <input name="address" id="address" type="text" class="validate">
-                                </div> -->
-                                <div class="input-field col s6 m5">
+                                <div class="input-field col s6 m4">
                                     <label>Contact</label>
                                     <input name="mobile" id="mobile" type="text" class="validate" required>
                                 </div>
-                                <!-- <div class="input-field col s6 m4">
-                                    <label>Email</label>
-                                    <input name="email" id="email" type="email" class="validate">
-                                </div> -->
+                                <div class="forCompanyDiv" style="display:none;">
+                                    <div class="input-field col s6 m5">
+                                        <label>Company Name</label>
+                                        <input name="compName" id="CompName" type="text" class="validate" >
+                                    </div>
+                                    <div class="input-field col s6 m4">
+                                        <label>Company Address</label>
+                                        <input name="compAddress" id="CompAddress" type="text" class="validate" >
+                                    </div>
+                                </div>
                             </div>
                             <!-- Check in Information -->
                             <div class="row">
@@ -166,39 +173,11 @@
     <footer>
         <?php require('pages/layout/footer.php') ?>
     </footer>
-
-    <script>
-        function populateRoomDetails(){
-             var roomNo = $('#room_no').val();
-                $('#room_type').val("");         
-                $('#floor').val("");  
-                $('#rate').val("");    
-                $('#rateperhour').val("");
-
-                $.ajax({                                      
-                    url: 'pages/api/getRoomDetails.php',                
-                    data: "roomNo=" + roomNo,                                          
-                    dataType: 'json',             
-                    success: function(data) 
-                    {
-                        $('#room_type').val(data[0].type);         
-                        $('#floor').val(data[0].floor);  
-                        $('#rate').val(data[0].rate);
-                        $('#rateperhour').val(data[0].rateperhour);       
-                    } 
-                });
-        }
-        $(document).ready(function(){
-            populateRoomDetails();
-            $('#room_no').blur(function(){
-                populateRoomDetails();
-            });
-        });
-    </script>
 </body>
 
 <section class="jsIncludes">
     <?php require('jsInclude.php') ?>
+    <script type="text/javascript" src="includes/js/checkIn.js"></script>
 </section>
 
 </html>
