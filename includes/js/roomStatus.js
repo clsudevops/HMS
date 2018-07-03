@@ -3,6 +3,7 @@ var roomNo = getUrlParameter('roomNo');
 $(document).ready(function () {    
     getRoomDatails(roomNo);
     populateExtras();
+    populateFoods();
     populateAddedExtraTable()
 });
 
@@ -16,10 +17,6 @@ function getRoomDatails(roomNo) {
             $('#ratepernight').html("<i class='material-icons roomRateGuestIcon'>hotel</i>Php"+ " " + data[0].rate + '/night');
             $('#checkin').html("<i class='material-icons roomcalendarGuestIcon'>event</i><span class='spanCheckinRoomStatus'>Check-in</span>" + ": " + data[0].checkInDate + "&nbsp;&nbsp;" + "<i class='material-icons roomcalendarTimeIcon'>access_time</i>" + data[0].checkInTime);
             $('#checkout').html("<i class='material-icons roomcalendarGuestIcon'>event</i><span class='spanCheckinRoomStatus'>Check-out</span>" + ": " + data[0].checkOutDate + "&nbsp;&nbsp;" + "<i class='material-icons roomcalendarTimeIcon'>access_time</i>" + data[0].checkOutTime);
-            // loopRoomDetails(data);
-            // M.AutoInit();
-            // var checkInId = data[0].checkInId;
-            // return checkInId;
         }
     });
 }
@@ -40,6 +37,34 @@ function populateExtras(){
             }
         }
     });
+}
+function populateFoods() {
+    $.ajax({
+        url: 'pages/api/getFoods.php',
+        dataType: 'json',
+        data: "menu=",
+        success: function (data) {
+            $('#foodListTable').html("");
+            for (var i = 0; i < data.length; i++) {
+                var id = data[i].id;
+                var menuName = data[i].menuName;
+                var price = data[i].sellingPrice;
+                $('#foodListTable').append(createFoodsTable(id, menuName, price));
+                M.AutoInit();
+            }
+        }
+    });
+}
+
+function createFoodsTable(id, menuName, price) {
+    var foodList = '<tr>' +
+        '<td>' + menuName + '</td>' +
+        '<td>' + price + '</td>' +
+        '<td style="width:20%;">' +
+        '<a class="btn btn-1 tooltipped" id="addExtra" onclick="addExtra(\'' + id + '\')" data-tooltip="Add" style="margin-right:5px;"><i class="material-icons">add</i></a>' +
+        '</td>' +
+        '</tr>'
+    return foodList;
 }
 
 function createExtraTable(id, description, cost) {

@@ -34,7 +34,7 @@
         </li>
     </ul>
     <li><a href="#"><i class="material-icons left">keyboard_tab</i>Next Checkout</a></li>
-    <li><a href="#"><i class="material-icons left">restaurant_menu</i>Kitchen</a></li>
+    
     <li><a href="roomManagement.php"><i class="material-icons">hotel</i>Room Management</a></li>
     <ul class="collapsible collapsible-accordion">
         <!-- settings -->
@@ -44,6 +44,7 @@
                 <ul>  
                     <li><a href="manageRooms.php"><i class="material-icons left">hotel</i>Rooms</a></li>
                     <li><a href="manageRoomTypes.php"><i class="material-icons left">weekend</i>Room Types</a></li>
+                    <li><a href="kitchen.php"><i class="material-icons left">restaurant_menu</i>Food Menus</a></li>
                     <li><a href="extras.php"><i class="material-icons left">dns</i>Extras</a></li>
                     <li><a href="roomTypes.php"><i class="material-icons">supervisor_account</i>Accounts</a></li>
                 </ul>

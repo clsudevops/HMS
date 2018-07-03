@@ -7,11 +7,10 @@
     // Create connection
     $conn = mysqli_connect($servername, $username, $password,$db);
 
-    $roomNo = $_POST['roomNo'];
-    $status = $_POST['status'];
+    $id = $_POST['id']; 
     
-    $stmt = $conn->prepare("Update rooms set status = ? where roomNo = ?");
-    $stmt->bind_param('ss', $status,$roomNo); 
+    $stmt = $conn->prepare("Delete from foods where id = ?");
+    $stmt->bind_param('i', $id); 
 
     $stmt->execute();
 

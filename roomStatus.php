@@ -80,9 +80,11 @@
                                
                                 <ul class="collapsible index-summaries">
                                     <li class="active">
-                                        <div class="collapsible-header"><i class="material-icons">restaurant_menu</i>Miscellaneous</div>
+                                        <div class="collapsible-header"><i class="material-icons">restaurant_menu</i>Food</div>
                                         <div class="collapsible-body">
-                                            <!-- <table class="highlight" id="bedTypes"></table> -->
+                                            <table class="highlight" id="foodListTable">
+                                                    <!-- used js to populate this -->
+                                                </table>
                                             
                                         </div>
                                     </li>
