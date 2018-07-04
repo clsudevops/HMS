@@ -8,8 +8,8 @@
 
             // insert into guests table
             $guestname = $_POST['name']; $mobile = $_POST['mobile']; $room_no = $_POST['room_no'];
-            $checkOutDate = $_POST['checkOutDate']; $checkOutTime = $_POST['checkOutTime'];
-            $adultsCount = $_POST['adultsCount']; $childCount = $_POST['childCount']; $compName = $_POST['compName'];
+            $checkOutDate = $_POST['checkOutDate']; $adultsCount = $_POST['adultsCount'];
+            $childCount = $_POST['childCount']; $compName = $_POST['compName'];
             $compAddress = $_POST['compAddress'];   
 
             $sql = "Insert into guests(name,mobile,companyName,companyAddress) values('". $guestname ."','". $mobile ."','". $compName ."','". $compAddress ."')";
@@ -25,11 +25,14 @@
             }
 
             // convert checkoutdate
-            // $checkOutTime = date("H:i", strtotime($checkOutTime));
+            date_default_timezone_set('Asia/Manila');
+            $checkOutTime = date("H:i:s");
             $checkOut = $checkOutDate . " " . $checkOutTime;
-            $checkOut = date('Y-m-d H:i', strtotime($checkOut));
+            $checkOut = date('Y-m-d H:i:s' , strtotime($checkOut));
+            // echo  $checkOut;
             // echo $checkOut;
             // insert into checkin
+
             $sql = "Insert into checkin(roomNo,guestId,checkOutDate,adultsCount,childrenCount) values('". $room_no ."',". $guest_id .",'". $checkOut ."',". $adultsCount .",". $childCount .")";
             $result = mysqli_query($conn, $sql);
 
@@ -138,10 +141,6 @@
                                 <div class="input-field col s6 m3">
                                     <label>Check Out Date</label>
                                     <input name="checkOutDate" type="text" class="datepicker" required>
-                                </div>
-                                <div class="input-field col s6 m3">
-                                    <label>Check Out Time</label>
-                                    <input name="checkOutTime" type="text" class="timepicker" required>
                                 </div>
                                 <div class="input-field col s6 m2">
                                     <label>No. of Adults</label>

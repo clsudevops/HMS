@@ -58,7 +58,7 @@
                             <div class="col m5 s12 billing" style="padding-right:0px;">
                                 <div class="card">
                                     <h5 class="billingheader">
-                                        Miscellaneous
+                                        Ordered Foods
                                     </h5>
                                 </div>
                             </div>
@@ -82,15 +82,16 @@
                                     <li class="active">
                                         <div class="collapsible-header"><i class="material-icons">restaurant_menu</i>Food</div>
                                         <div class="collapsible-body">
-                                            <table class="highlight" id="foodListTable">
+                                            <div class="extraDivContainer">
+                                                <table class="highlight" id="foodListTable">
                                                     <!-- used js to populate this -->
                                                 </table>
-                                            
+                                            </div>
                                         </div>
                                     </li>
                                 </ul>
                                 <ul class="collapsible index-summaries">
-                                    <li class="active">
+                                    <li class="">
                                         <div class="collapsible-header"><i class="material-icons">exit_to_app</i>Checkout Date</div>
                                         <div class="collapsible-body">
                                             <table class="highlight updateCheckoutTable" style="margin-top:10px;">

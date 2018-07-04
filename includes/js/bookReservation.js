@@ -11,6 +11,12 @@ $(document).ready(function () {
         var floor = $('#floorSelect').val();
         populateRoomsFloor(floor);
     });
+    $('#forPersonal').on('click', function () {
+        $('.forCompanyDiv').css("display", "none");
+    });
+    $('#forCompany').on('click', function () {
+        $('.forCompanyDiv').css("display", "block");
+    });
 });
 
 function populateRoomsRoomNo() {

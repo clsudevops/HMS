@@ -410,11 +410,13 @@ span.guestName{
 }
 .h5-adding{
     margin:0 0 30px 0;
-    text-align:center;
-    padding: 5px 0px;
+    /* text-align:center; */
+    text-indent: 15px;
+    padding: 10px 0px;
     color: white;
     background-color: #2b2929;
     opacity: 0.8;
+    font-size: 18px;
 }
 #roomTable{
    cursor: pointer;
@@ -424,4 +426,10 @@ span.guestName{
 }
 #modalRoomNo{
     font-size: 32px;
+}
+@media only screen and (max-width: 992px){
+    table.responsive-table th, table.responsive-table td{
+        padding: 8px 0px;
+        text-align: left;
+    }
 }

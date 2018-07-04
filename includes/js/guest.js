@@ -7,6 +7,10 @@ $("#searchGuest").on("click", function () {
     var search = $('#search').val();
     populateGuestsbySearch(search);
 });
+$("#search").on("keyup", function () {
+    var search = $('#search').val();
+    populateGuestsbySearch(search);
+});
 
 function createGuestTable(guestID, name, mobile, roomNo, floor, checkInDate, checkOutDate) {
     var myRoom = '<tr>' +

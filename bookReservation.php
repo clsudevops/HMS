@@ -97,31 +97,45 @@
             <div class="modal-content" style="min-height:70vh">
                 <h4 id="h4-roomNo">Add Reservation to Room <span id="modalRoomNo"></span></h4>
                 <div class="row">
-                    <div class="input-field col s8 m6">
+                    <div class="col s12 m12" style="margin:10px 0; padding-left:0;">
+                        <label><input class="with-gap" id="forPersonal" name="group1" type="radio" checked /><span>Personal Business</span></label>
+                        <label><input class="with-gap" id="forCompany" name="group1" type="radio"/><span>Charge to Company</span></label>
+                    </div>
+                    <div class="input-field col s12 m6">
                         <label>Name</label>
                         <input style="height:36px; line-height:36px;" id="name" name="name" type="text" class="validate">                        
                     </div>
-                    <div class="input-field col s4 m6">
+                    <div class="input-field col s12 m6">
                         <label>Contact</label>
-                        <input style="height:36px; line-height:36px;" id="contact" type="text" class="validate">
+                        <input style="height:36px; line-height:36px;" id="contact" name="mobile" type="text" class="validate">
                     </div>
-                    <div class="input-field col s4 m3">
+                    <div class="forCompanyDiv" style="display:none;">
+                        <div class="input-field col s12 m6">
+                            <label>Company Name</label>
+                            <input name="compName" id="CompName" type="text" class="validate" >
+                        </div>
+                        <div class="input-field col s12 m6">
+                            <label>Company Address</label>
+                            <input name="compAddress" id="CompAddress" type="text" class="validate" >
+                        </div>
+                    </div>
+                    <div class="input-field col s6 m3">
                         <label>Checkin Date</label>
                         <input style="height:36px; line-height:36px;" id="contact" type="text" class="validate datepicker">
                     </div>
-                    <div class="input-field col s4 m3">
+                    <div class="input-field col s6 m3">
                         <label>Checkout Date</label>
                         <input style="height:36px; line-height:36px;" id="contact" type="text" class="validate datepicker">
                     </div>
-                    <div class="input-field col s4 m3">
+                    <div class="input-field col s6 m3">
                         <label>Adults</label>
                         <input style="height:36px; line-height:36px;" id="contact" type="number" class="validate">
                     </div>
-                    <div class="input-field col s4 m3">
+                    <div class="input-field col s6 m3">
                         <label>Childrens</label>
                         <input style="height:36px; line-height:36px;" id="contact" type="number" class="validate">
                     </div>
-                    <div class="input-field col s4 m12">
+                    <div class="input-field col s12 m12">
                         <a class="btn btn-1 waves-effect waves-green right" onclick="submitReservationModal()"  style="margin-bottom:10px;">
                             <i class="material-icons left" style="margin-right:10px;">
                                 send

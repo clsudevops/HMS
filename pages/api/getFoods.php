@@ -12,7 +12,7 @@
     }
     else{
         $menu = $_GET['menu'];
-        $select = "Select * from foods where menuName like '%". $menu ."%'";
+        $select = "Select * from foods where menuName like '". $menu ."%'";
     }
 
     // $select = "Select * from roomTypes";

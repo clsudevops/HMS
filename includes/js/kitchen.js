@@ -21,10 +21,10 @@ $(document).ready(function () {
     });
 
     $("#searchFoods").on("click", function () {
-        populateRoomTypes();
+        populateFoods();
     });
     $("#search").on("keyup", function () {
-        populateRoomTypes();
+        populateFoods();
     });
 });
 
