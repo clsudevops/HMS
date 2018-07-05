@@ -49,6 +49,9 @@ main {
 .mycontainer i.left{
     margin-right: 4px !important;
 }
+.mycontainer1 i.left{
+    margin-right: 0px !important;
+}
 
 /* h's */
 

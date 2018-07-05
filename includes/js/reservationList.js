@@ -1,91 +1,55 @@
 $(document).ready(function () {
-    $(populateRoomsRoomNo());
+    // alert();
+    $(populateReservation());
     $("#search").on("keyup", function () {
-        populateRoomsRoomNo();
-    });
-    $('#typeSelect').on("change", function () {
-        var type = $('#typeSelect').val();
-        populateRoomsType(type);
-    });
-    $('#floorSelect').on("change", function () {
-        var floor = $('#floorSelect').val();
-        populateRoomsFloor(floor);
-    });
-    $('#forPersonal').on('click', function () {
-        $('.forCompanyDiv').css("display", "none");
-    });
-    $('#forCompany').on('click', function () {
-        $('.forCompanyDiv').css("display", "block");
+        populateReservation();
     });
 });
 
-function populateRoomsRoomNo() {
+function populateReservation() {
     var search = $('#search').val();
     $.ajax({
-        url: 'pages/api/getRoomDetailsNotOccupied.php',
-        data: "roomNo=" + search,
+        url: 'pages/api/getReservationList.php',
+        data: "search=" + search,
         dataType: 'json',
         success: function (data) {
-            loopRoomDetails(data);
-            M.AutoInit()
-        }
-    });
-}
-function populateRoomsType(type) {
-    $.ajax({
-        url: 'pages/api/getRoomDetailsNotOccupied.php',
-        data: "type=" + type,
-        dataType: 'json',
-        success: function (data) {
-            loopRoomDetails(data);
-            M.AutoInit()
-        }
-    });
-}
-function populateRoomsFloor(floor) {
-    $.ajax({
-        url: 'pages/api/getRoomDetailsNotOccupied.php',
-        data: "floor=" + floor,
-        dataType: 'json',
-        success: function (data) {
-            loopRoomDetails(data);
+            loopReservationList(data);
             M.AutoInit()
         }
     });
 }
 
 
-function loopRoomDetails(data) {
-    $('#roomManagementTable').html("");
+function loopReservationList(data) {
+    $('#reservationListTable').html("");
     for (var i = 0; i < data.length; i++) {
+        var name = data[i].name;
+        var contact = data[i].mobile;
         var roomNo = data[i].roomNo;
-        var type = data[i].type;
-        var floor = data[i].floor;
-        var rate = data[i].rate;
-        var rateperhour = data[i].rateperhour;
-        var status = data[i].status;
+        var checkindate = data[i].checkInDate;
+        var checkoutdate = data[i].checkOutDate;
 
-        $('#roomManagementTable').append(createRoomTable(roomNo, type, floor, rate, rateperhour));
+
+        $('#reservationListTable').append(createReservationTable(name, contact, roomNo, checkindate, checkoutdate));
     }
 }
 
-function createRoomTable(roomNo, type, floor, rate, rateperhour) {
-    var myRoom = '<tr onclick="setRoomNo(' + roomNo + ')">' +
+function createReservationTable(name, contact, roomNo, checkindate, checkoutdate) {
+    var myRoom = '<tr>' +
+        '<td>' + name + '</td>' +
+        '<td>' + contact + '</td>' +
         '<td>' + roomNo + '</td>' +
-        '<td>' + type + '</td>' +
-        '<td>' + floor + '</td>' +
-        '<td>' + rate + '</td>' +
-        '<td>' + rateperhour + '</td>' +
+        '<td>' + checkindate + '</td>' +
+        '<td>' + checkoutdate + '</td>' +
         '<td>' +
-        '<a class="btn btn-1 tooltipped modal-trigger" href="#addReservation" onclick="" data-tooltip="Reserve" style="margin-right:5px;"><i class="material-icons left">save</i>Reserve</a>' +
+        '<a class="btn btn-1 tooltipped modal-trigger Vacant" href="" onclick="" data-tooltip="Book Now" style="margin-right:5px;"><i class="material-icons left">exit_to_app</i></a>' +
+        '<a class="btn btn-1 tooltipped modal-trigger Cleaning" href="" onclick="" data-tooltip="Cancel Reservation" style="margin-right:5px;"><i class="material-icons left">clear</i></a>' +
+        '<a class="btn btn-1 tooltipped modal-trigger Maintenance" href="" onclick="" data-tooltip="View Details" style="margin-right:5px;"><i class="material-icons left">pageview</i></a>' +
         '</td>' +
         '</tr>'
     return myRoom;
 }
 
-function setRoomNo(roomNo) {
-    $('#addReservation #modalRoomNo').html(roomNo);
-}
 function submitReservationModal() {
     var roomNo = $('#modalRoomNo').html();
     var name = $('#name').val();
@@ -103,7 +67,7 @@ function submitReservationModal() {
         $.ajax({
             url: 'pages/api/insertReservation.php',
             type: "POST",
-            data:{
+            data: {
                 'roomNo': roomNo,
                 'name': name,
                 'mobile': contact,

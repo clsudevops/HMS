@@ -12,10 +12,10 @@
             <a class="collapsible-header"><i class="material-icons">face</i>Reservations<i class="material-icons right">arrow_drop_down</i></a>
             <div class="collapsible-body">
                 <ul>
-                    <li><a class="modal-trigger" href="bookReservation.php"><i class="material-icons">assignment</i>Book Reservation</a></li>
+                    <li><a class="" href="bookReservation.php"><i class="material-icons">assignment</i>Book Reservation</a></li>
                 </ul>
                 <ul>
-                    <li><a class="modal-trigger" href=""><i class="material-icons">list</i>Reservation List</a></li>
+                    <li><a class="" href="reservationList.php"><i class="material-icons">list</i>Reservation List</a></li>
                 </ul>
             </div>
         </li>

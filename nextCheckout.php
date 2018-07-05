@@ -35,7 +35,7 @@
                         </div>
                     </div>
                     <!-- Table -->
-                    <table class="z-depth-2 highlight responsive-table">
+                    <table class="z-depth-2 highlight centered responsive-table guesttable">
                         <thead>
                             <tr>
                                 <th>Guest ID</th>
