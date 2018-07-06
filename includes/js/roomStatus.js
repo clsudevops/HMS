@@ -4,7 +4,8 @@ $(document).ready(function () {
     getRoomDatails(roomNo);
     populateExtras();
     populateFoods();
-    populateAddedExtraTable()
+    populateAddedExtraTable();
+    populateOrders(roomNo);
 });
 
 function getRoomDatails(roomNo) {
@@ -56,6 +57,38 @@ function populateFoods() {
         }
     });
 }
+function populateOrders(roomNo) {
+    var totalofOrders = 0;
+    $.ajax({
+        url: 'pages/api/getAddedOrders.php',
+        dataType: 'json',
+        data: "roomNo=" + roomNo,
+        success: function (data) {
+            $('#ordersTable').html("");
+            for (var i = 0; i < data.length; i++) {
+                var id = data[i].id;
+                var menuName = data[i].menuName;
+                var quantity = data[i].quantity;
+                var totalPrice = data[i].totalPrice;
+                totalofOrders = totalofOrders + totalPrice;
+                $('#ordersTable').append(createOrdersTable(id, menuName, quantity, totalPrice));
+                $('#totalofOrders').html(convert(totalofOrders));
+                M.AutoInit();
+            }
+        }
+    });
+}
+function createOrdersTable(id, menuName, quantity, totalPrice) {
+    var foodList = '<tr>' +
+        '<td>' + menuName + '</td>' +
+        '<td>' + quantity + '</td>' +
+        '<td>' + totalPrice + '</td>' +
+        '<td style="width:20%;">' +
+        '<a class="btn btn-1 tooltipped" id="addExtra" onclick="editOrder(\'' + id + '\',\'' + menuName + '\',\'' + quantity + '\')" data-tooltip="Edit" style="margin-right:5px;"><i class="material-icons">edit</i></a>' +
+        '</td>' +
+        '</tr>'
+    return foodList;
+}
 
 function createFoodsTable(id, menuName, price, remaining) {
     var foodList = '<tr>' +
@@ -67,7 +100,9 @@ function createFoodsTable(id, menuName, price, remaining) {
         '</tr>'
     return foodList;
 }
-
+function editOrder(id, menuName, quantity){
+    alert();
+}
 function createExtraTable(id, description, cost) {
     var extraList = '<tr>' +
         '<td>' + description + '</td>' +
@@ -131,6 +166,7 @@ function addFoods(id, menuName,remaining){
                                 type: "POST",
                                 success: function () {
                                     populateFoods();
+                                    populateOrders(roomNo);
                                     displayMessage("", "Food Added Succesfully");
                                 }
                             });
@@ -180,7 +216,7 @@ function createAddedExtraTable(id, checkinId, quantity, description ,cost) {
         '<td>' + quantity + '</td>' +
         '<td>' + cost + '</td>' +
         '<td style="width:15%;">' +
-        '<a class="btn btn-1 tooltipped" id="Delete" onclick="deleteAddedExtra(\'' + id + '\')" data-tooltip="Delete" style="margin-right:5px;"><i class="material-icons">delete</i></a>' +
+        '<a class="btn btn-1 tooltipped" id="addExtra" id="Delete" onclick="deleteAddedExtra(\'' + id + '\')" data-tooltip="Delete" style="margin-right:5px;"><i class="material-icons">delete</i></a>' +
         '</td>' +
         '</tr>'
     return addedExtraList;

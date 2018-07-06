@@ -34,10 +34,10 @@
                                         <table class="highlight">
                                             <thead>
                                                 <tr>
-                                                    <th>Description</th>
-                                                    <th>Quantity</th>
-                                                    <th>Cost</th>
-                                                    <th>Action</th>
+                                                    <th style="width:50%;">Description</th>
+                                                    <th style="width:20%;">Quantity</th>
+                                                    <th style="width:25%;">Cost</th>
+                                                    <th style="width:5%;">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="addedExtraTable">
@@ -79,18 +79,27 @@
                                     <h5 class="billingheader">
                                         Ordered Foods
                                     </h5>
-                                    <table class="billing-table">
+                                    <table class="billing-table my-billingTable">
                                         <thead>
                                             <tr>
-                                                <th style="width:45%;">Menu</th>
-                                                <th style="width:15%;">Quantity</th>
-                                                <th style="width:20;">Price</th>
-                                                <th style="width:20%;">Action</th>
+                                                <th style="width:50%; padding: 8px 10px 8px 20px;">Menu</th>
+                                                <th style="width:10%; padding: 8px 5px 8px 5px;">Qty</th>
+                                                <th style="width:20%; padding: 8px 5px 8px 10px;">Price</th>
+                                                <th style="width:20%; padding: 8px 20px 8px 20px;">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody id="ordersTable">
+
                                         </tbody>
                                     </table>
+                                    <div class="totalOrders" style="height:60px; padding:10px 20px;">
+                                        <h5 class="left" style="padding-top:10px; margin:0; font-size:18px;">Total => &#8369 <span id="totalofOrders"></span></h5>
+                                        <a class="btn right btn-2  tooltipped" style="background-color:#cfd2d6; color:black;" id="addExtra" data-tooltip="Print Receipt" id="submitRoom" style="margin-left:5px; height:36px; line-height:36px;">
+                                            <i class="material-icons">
+                                                print
+                                            </i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -111,7 +120,7 @@
                                
                                 <ul class="collapsible index-summaries">
                                     <li class="active">
-                                        <div class="collapsible-header"><i class="material-icons">restaurant_menu</i>Food</div>
+                                        <div class="collapsible-header"><i class="material-icons">restaurant_menu</i>Available Foods</div>
                                         <div class="collapsible-body">
                                             <div class="extraDivContainer">
                                                 <table class="highlight" id="foodListTable">

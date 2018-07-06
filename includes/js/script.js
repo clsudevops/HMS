@@ -53,3 +53,7 @@ function displayMessage(title, content){
         useBootstrap: false,
     });
 }
+
+function convert(x){
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
