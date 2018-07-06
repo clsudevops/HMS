@@ -21,7 +21,7 @@
                     </div>
                     <div class="row">
                         <div class="col m8 s12">
-                            <div class="card" style="padding:20px 20px 10px 20px;">
+                            <div class="card" style="padding:20px;">
                                 <div class="accountInformation">
                                     <h5 id="h5-roomNo"></h5>
                                     <p id="ratepernight"></p>
@@ -53,13 +53,44 @@
                                     <h5 class="billingheader">
                                         Bill
                                     </h5>
+                                    <table class="billing-table">
+                                        <tr>
+                                            <td>No of Days</td>
+                                            <td id="days"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Room Charges</td>
+                                            <td id="roomCharges"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Extras Charges</td>
+                                            <td id="extrasCharges"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Foods Charges</td>
+                                            <td id="foodsCharges"></td>
+                                        </tr>
+
+                                    </table>
                                 </div>
                             </div>
-                            <div class="col m5 s12 billing" style="padding-right:0px;">
+                            <div class="col m7 s12 billing" style="padding-right:0px;">
                                 <div class="card">
                                     <h5 class="billingheader">
                                         Ordered Foods
                                     </h5>
+                                    <table class="billing-table">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:45%;">Menu</th>
+                                                <th style="width:15%;">Quantity</th>
+                                                <th style="width:20;">Price</th>
+                                                <th style="width:20%;">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="ordersTable">
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>

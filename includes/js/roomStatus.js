@@ -49,19 +49,20 @@ function populateFoods() {
                 var id = data[i].id;
                 var menuName = data[i].menuName;
                 var price = data[i].sellingPrice;
-                $('#foodListTable').append(createFoodsTable(id, menuName, price));
+                var remaining = data[i].remaining;
+                $('#foodListTable').append(createFoodsTable(id, menuName, price, remaining));
                 M.AutoInit();
             }
         }
     });
 }
 
-function createFoodsTable(id, menuName, price) {
+function createFoodsTable(id, menuName, price, remaining) {
     var foodList = '<tr>' +
         '<td>' + menuName + '</td>' +
         '<td>' + price + '</td>' +
         '<td style="width:20%;">' +
-        '<a class="btn btn-1 tooltipped" id="addExtra" onclick="addExtra(\'' + id + '\')" data-tooltip="Add" style="margin-right:5px;"><i class="material-icons">add</i></a>' +
+        '<a class="btn btn-1 tooltipped" id="addExtra" onclick="addFoods(\'' + id + '\',\'' + menuName + '\',\'' + remaining + '\')" data-tooltip="Add" style="margin-right:5px;"><i class="material-icons">add</i></a>' +
         '</td>' +
         '</tr>'
     return foodList;
@@ -85,6 +86,70 @@ function addExtra(id){
         type: "POST",
         success: function () {
             populateAddedExtraTable();   
+        }
+    });
+}
+
+function addFoods(id, menuName,remaining){
+    $.confirm({
+        title: 'Add Order of ' + menuName +'',
+        theme:'dark',
+        boxWidth: '30%',
+        useBootstrap: false,
+        content: '' +
+            '<form action="" class="formName">' +
+            '<label>Available Servings ' + remaining + '</label>'+
+            '<div class="form-group">' +
+            '<input type="number" style="color:white;" placeholder="Quantity" class="quantity form-control" required/>' +
+            '</div>' +
+            '</form>',
+        buttons: {
+            formSubmit: {
+                text: 'Add',
+                btnClass: 'btn-blue',
+                action: function () {
+                    var quantity = this.$content.find('.quantity').val();
+                    if (!quantity) {
+                        displayMessage("", "Please provide a valid input");
+                        return false;
+                    }
+                   else{
+                        if (parseInt(quantity) > parseInt(remaining)){
+                            displayMessage("", "Quantity inputted is greater than the remaining servings left!");
+                            return false;
+                       }
+                       else{
+                            var newCount = remaining - quantity;
+                            $.ajax({
+                                url: 'pages/api/insertCheckInOrder.php',
+                                data: {
+                                    roomNo: roomNo,
+                                    foodsId: id,
+                                    quantity: quantity,
+                                    newCount: newCount
+                                },
+                                type: "POST",
+                                success: function () {
+                                    populateFoods();
+                                    displayMessage("", "Food Added Succesfully");
+                                }
+                            });
+                       }
+                   }
+                }
+            },
+            cancel: function () {
+                //close
+            },
+        },
+        onContentReady: function () {
+            // bind to events
+            var jc = this;
+            this.$content.find('form').on('submit', function (e) {
+                // if the user submits the form by pressing enter in the field.
+                e.preventDefault();
+                jc.$$formSubmit.trigger('click'); // reference the button and click it
+            });
         }
     });
 }

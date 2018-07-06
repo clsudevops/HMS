@@ -43,3 +43,13 @@ var getUrlParameter = function getUrlParameter(sParam) {
         }
     }
 };
+
+function displayMessage(title, content){
+    $.alert({
+        title: title,
+        content: content,
+        theme: 'material',
+        boxWidth: '35%',
+        useBootstrap: false,
+    });
+}
