@@ -1,4 +1,5 @@
 var roomNo = getUrlParameter('roomNo');
+var TotalCharge = 0;
 
 $(document).ready(function () {    
     getRoomDatails(roomNo);
@@ -6,7 +7,11 @@ $(document).ready(function () {
     populateFoods();
     populateAddedExtraTable();
     populateOrders(roomNo);
+    
 });
+function populateBilling(){
+    $('#totalCharges').html(convert(TotalCharge));
+}
 
 function getRoomDatails(roomNo) {
     $.ajax({
@@ -14,10 +19,25 @@ function getRoomDatails(roomNo) {
         data: "roomNo=" + roomNo,
         dataType: 'json',
         success: function (data) {
+            var totaldays = data[0].noOfDays;
+            var rate = data[0].rate;
+            var daysCharge = totaldays * rate;
+            var penaltyHours = data[0].penaltyHours;
+            var rateperhour = data[0].rateperhour;
+            var penaltyCharge = penaltyHours * rateperhour;
+            var roomCharges = daysCharge + penaltyCharge;
             $('#h5-roomNo').html("<span class='guestName'># Room No " + roomNo + " " + data[0].type + "</span>" + "&nbsp;&nbsp;--> <i class='material-icons roomStatusGuestIcon'>person</i>" + "<span class='guestName'>" + data[0].name +"</span>");
-            $('#ratepernight').html("<i class='material-icons roomRateGuestIcon'>hotel</i>Php"+ " " + data[0].rate + '/night');
+            $('#ratepernight').html("<i class='material-icons roomRateGuestIcon'>hotel</i>Php" + " " + rate + '/night');
             $('#checkin').html("<i class='material-icons roomcalendarGuestIcon'>event</i><span class='spanCheckinRoomStatus'>Check-in</span>" + ": " + data[0].checkInDate + "&nbsp;&nbsp;" + "<i class='material-icons roomcalendarTimeIcon'>access_time</i>" + data[0].checkInTime);
             $('#checkout').html("<i class='material-icons roomcalendarGuestIcon'>event</i><span class='spanCheckinRoomStatus'>Check-out</span>" + ": " + data[0].checkOutDate + "&nbsp;&nbsp;" + "<i class='material-icons roomcalendarTimeIcon'>access_time</i>" + data[0].checkOutTime);
+
+            $('#days').html(data[0].noOfDays);
+
+            $('#daysCharge').html($('#daysCharge').html() + convert(daysCharge));
+            $('#penaltyHours').html(penaltyHours);
+            $('#penaltyCharge').html($('#penaltyCharge').html() + convert(penaltyCharge));
+            $('#roomCharges').html($('#roomCharges').html() + convert(roomCharges));
+            TotalCharge = TotalCharge + roomCharges;
         }
     });
 }
@@ -29,13 +49,17 @@ function populateExtras(){
         data: "description=",
         success: function (data) {
             $('#extraListTable').html("");
+  
             for (var i = 0; i < data.length; i++) {
                 var id = data[i].id;
                 var description = data[i].description;
                 var cost = data[i].cost;
+                // console.log(cost);
+                // console.log(totalCost + '-');
                 $('#extraListTable').append(createExtraTable(id, description, cost));
                 M.AutoInit();
             }
+
         }
     });
 }
@@ -75,6 +99,9 @@ function populateOrders(roomNo) {
                 $('#totalofOrders').html(convert(totalofOrders));
                 M.AutoInit();
             }
+            $('#foodsCharges').html($('#foodsCharges').html() + convert(totalofOrders));
+            TotalCharge = TotalCharge + totalofOrders;
+            populateBilling();
         }
     });
 }
@@ -198,15 +225,19 @@ function populateAddedExtraTable(){
         type: "POST",
         success: function (data) {
             $('#addedExtraTable').html("");
+            var totalCost = 0;
             for (var i = 0; i < data.length; i++) {
                 var id = data[i].id;
                 var checkinId = data[i].checkinId;
                 var quantity = data[i].quantity;
                 var description = data[i].description;
                 var cost = quantity * data[i].cost;
+                totalCost = totalCost + cost;
                 $('#addedExtraTable').append(createAddedExtraTable(id, checkinId, quantity, description, cost));
                 M.AutoInit();
             }
+            $('#extrasCharges').html($('#extrasCharges').html() + convert(totalCost));
+            TotalCharge = TotalCharge + totalCost;
         }
     });
 }
@@ -229,6 +260,34 @@ function deleteAddedExtra(id) {
         success: function () {
             populateAddedExtraTable();
             M.AutoInit();
+        }
+    });
+}
+// function printOrders(){
+//     $.ajax({
+//         url: 'pages/api/getAddedOrders.php',
+//         dataType: 'json',
+//         data: "roomNo=" + roomNo,
+//         success: function (data) {
+//             $.ajax({
+//                 url: 'orderReceipt.php',
+//                 type: "POST",
+//                 data: { 'mydata': "pagetopdf.html" },
+//                 success: function (data) {
+//                     window.open("orderReceipt.php");
+//                 }
+//             });
+            
+//         }
+//     });
+// }
+function printOrders() {
+    $.ajax({
+        type: "POST",
+        url: "orderReceipt.php",
+        data: { 'mydata': "pagetopdf.html" },
+        success: function (data) {
+            window.open("orderReceipt.php");
         }
     });
 }

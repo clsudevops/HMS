@@ -59,19 +59,39 @@
                                             <td id="days"></td>
                                         </tr>
                                         <tr>
+                                            <td>Penalty Hours</td>
+                                            <td id="penaltyHours"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Days Charge</td>
+                                            <td id="daysCharge">&#8369</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Penalty Charge</td>
+                                            <td id="penaltyCharge">&#8369</td>
+                                        </tr>
+                                        <tr>
                                             <td>Room Charges</td>
-                                            <td id="roomCharges"></td>
+                                            <td id="roomCharges" style="text-align:left;">&#8369</td>
                                         </tr>
                                         <tr>
                                             <td>Extras Charges</td>
-                                            <td id="extrasCharges"></td>
+                                            <td id="extrasCharges">&#8369</td>
                                         </tr>
                                         <tr>
                                             <td>Foods Charges</td>
-                                            <td id="foodsCharges"></td>
+                                            <td id="foodsCharges">&#8369</td>
                                         </tr>
-
                                     </table>
+                                    <div class="totalOrders" style="height:60px; padding:10px 20px;">
+                                        <h5 class="left" style="padding-top:10px; margin:0; font-size:18px;">Total => &#8369<span id="totalCharges"></span></h5>
+                                        <a class="btn right btn-2  tooltipped" style="background-color:#cfd2d6; color:black;" id="addExtra" data-tooltip="Print Receipt" id="submitRoom" style="margin-left:5px; height:36px; line-height:36px;">
+                                            <i class="material-icons">
+                                                print
+                                            </i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col m7 s12 billing" style="padding-right:0px;">
@@ -93,8 +113,8 @@
                                         </tbody>
                                     </table>
                                     <div class="totalOrders" style="height:60px; padding:10px 20px;">
-                                        <h5 class="left" style="padding-top:10px; margin:0; font-size:18px;">Total => &#8369 <span id="totalofOrders"></span></h5>
-                                        <a class="btn right btn-2  tooltipped" style="background-color:#cfd2d6; color:black;" id="addExtra" data-tooltip="Print Receipt" id="submitRoom" style="margin-left:5px; height:36px; line-height:36px;">
+                                        <h5 class="left" style="padding-top:10px; margin:0; font-size:18px;">Total => &#8369<span id="totalofOrders"></span></h5>
+                                        <a class="btn right btn-2 tooltipped" onclick="printOrders()" id="addExtra" style="background-color:#cfd2d6; color:black;" id="" data-tooltip="Print Receipt" id="submitRoom" style="margin-left:5px; height:36px; line-height:36px;">
                                             <i class="material-icons">
                                                 print
                                             </i>
