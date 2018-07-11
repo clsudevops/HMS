@@ -1,0 +1,31 @@
+.orderReceiptTable{
+    width:100%;
+    border-collapse: collapse;
+}
+.orderReceiptTable td {
+    padding: 5px;
+    border: 1px solid gray;
+}
+
+.orderReceiptTable tr.heading td{
+    padding: 8px;
+    font-weight: bold;
+    border: 1px solid gray;
+    border-collapse: collapse;
+}
+
+.header{
+    width: 100%;
+    /* height: 40px; */
+    /* background-color: red; */
+    /* margin-bottom: 20px; */
+}
+.header h2{
+    border-bottom: 1px solid gray;
+    padding-bottom: 10px;
+}
+
+.header h5{
+    margin: 8px 0;
+}
+

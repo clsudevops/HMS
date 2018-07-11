@@ -36,6 +36,17 @@
             $sql = "Insert into checkin(roomNo,guestId,checkOutDate,adultsCount,childrenCount) values('". $room_no ."',". $guest_id .",'". $checkOut ."',". $adultsCount .",". $childCount .")";
             $result = mysqli_query($conn, $sql);
 
+            $select = "Select id from checkin where roomNo = '". $room_no ."'";
+            $result = mysqli_query($conn, $select);
+
+            while($row = mysqli_fetch_assoc($result)) {
+                $checkInId = $row['id'];
+            }
+
+            $sql = "Insert into billing(checkInId) values(". $checkInId .")";
+            // echo $sql;
+            $result = mysqli_query($conn, $sql);
+
             $sql = "update rooms set status = 'Occupied' where roomNo='". $room_no ."'";
             $result = mysqli_query($conn, $sql);
             

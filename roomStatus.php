@@ -18,6 +18,7 @@
                     <!-- query for roomtype -->
                     <div class="page-header valign-wrapper z-depth-1">
                         <h5>Account Information</h5>
+                        <a class="btn btn-4" style="position:absolute; right:30px;"><i class="material-icons left">exit_to_app</i>Checkout</a>
                     </div>
                     <div class="row">
                         <div class="col m8 s12">
@@ -65,28 +66,28 @@
 
                                         <tr>
                                             <td>Days Charge</td>
-                                            <td id="daysCharge">&#8369</td>
+                                            <td id="daysCharge"></td>
                                         </tr>
                                         <tr>
                                             <td>Penalty Charge</td>
-                                            <td id="penaltyCharge">&#8369</td>
+                                            <td id="penaltyCharge"></td>
                                         </tr>
                                         <tr>
                                             <td>Room Charges</td>
-                                            <td id="roomCharges" style="text-align:left;">&#8369</td>
+                                            <td id="roomCharges" style="text-align:left;"></td>
                                         </tr>
                                         <tr>
                                             <td>Extras Charges</td>
-                                            <td id="extrasCharges">&#8369</td>
+                                            <td id="extrasCharges"></td>
                                         </tr>
                                         <tr>
                                             <td>Foods Charges</td>
-                                            <td id="foodsCharges">&#8369</td>
+                                            <td id="foodsCharges"></td>
                                         </tr>
                                     </table>
                                     <div class="totalOrders" style="height:60px; padding:10px 20px;">
                                         <h5 class="left" style="padding-top:10px; margin:0; font-size:18px;">Total => &#8369<span id="totalCharges"></span></h5>
-                                        <a class="btn right btn-2  tooltipped" style="background-color:#cfd2d6; color:black;" id="addExtra" data-tooltip="Print Receipt" id="submitRoom" style="margin-left:5px; height:36px; line-height:36px;">
+                                        <a class="btn right btn-2  tooltipped" style="background-color:#cfd2d6; color:black;" id="addExtra" onclick="printBilling()" data-tooltip="Print Receipt" id="submitRoom" style="margin-left:5px; height:36px; line-height:36px;">
                                             <i class="material-icons">
                                                 print
                                             </i>

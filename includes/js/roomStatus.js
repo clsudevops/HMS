@@ -10,6 +10,34 @@ $(document).ready(function () {
     
 });
 function populateBilling(){
+
+    TotalRoomCharges = $('#valofTotalRoomCharges').html();
+    TotalExtras = $('#valofTotalExtras').html();
+    TotalOrders = $('#valofTotalOrders').html();
+
+    if (TotalRoomCharges != null){
+        TotalRoomCharges = removeComma(TotalRoomCharges);
+        TotalRoomCharges = parseInt(TotalRoomCharges);
+    }
+    else{
+        TotalRoomCharges = 0;
+    }
+    if (TotalExtras != null) {
+        TotalExtras = removeComma(TotalExtras);
+        TotalExtras = parseInt(TotalExtras)
+    }
+    else {
+        TotalExtras = 0;
+    }
+    if (TotalOrders != null) {
+        TotalOrders = removeComma(TotalOrders);
+        TotalOrders = parseInt(TotalOrders)
+    }
+    else {
+        TotalOrders = 0;
+    }
+
+    TotalCharge = TotalRoomCharges + TotalExtras + TotalOrders;
     $('#totalCharges').html(convert(TotalCharge));
 }
 
@@ -19,13 +47,14 @@ function getRoomDatails(roomNo) {
         data: "roomNo=" + roomNo,
         dataType: 'json',
         success: function (data) {
+            var TotalRoomCharges = 0
             var totaldays = data[0].noOfDays;
             var rate = data[0].rate;
             var daysCharge = totaldays * rate;
             var penaltyHours = data[0].penaltyHours;
             var rateperhour = data[0].rateperhour;
             var penaltyCharge = penaltyHours * rateperhour;
-            var roomCharges = daysCharge + penaltyCharge;
+            TotalRoomCharges = daysCharge + penaltyCharge;
             $('#h5-roomNo').html("<span class='guestName'># Room No " + roomNo + " " + data[0].type + "</span>" + "&nbsp;&nbsp;--> <i class='material-icons roomStatusGuestIcon'>person</i>" + "<span class='guestName'>" + data[0].name +"</span>");
             $('#ratepernight').html("<i class='material-icons roomRateGuestIcon'>hotel</i>Php" + " " + rate + '/night');
             $('#checkin').html("<i class='material-icons roomcalendarGuestIcon'>event</i><span class='spanCheckinRoomStatus'>Check-in</span>" + ": " + data[0].checkInDate + "&nbsp;&nbsp;" + "<i class='material-icons roomcalendarTimeIcon'>access_time</i>" + data[0].checkInTime);
@@ -33,11 +62,11 @@ function getRoomDatails(roomNo) {
 
             $('#days').html(data[0].noOfDays);
 
-            $('#daysCharge').html($('#daysCharge').html() + convert(daysCharge));
+            $('#daysCharge').html('<span style="font-family: DejaVu Sans;">&#8369;</span>' + convert(daysCharge));
             $('#penaltyHours').html(penaltyHours);
-            $('#penaltyCharge').html($('#penaltyCharge').html() + convert(penaltyCharge));
-            $('#roomCharges').html($('#roomCharges').html() + convert(roomCharges));
-            TotalCharge = TotalCharge + roomCharges;
+            $('#penaltyCharge').html('<span style="font-family: DejaVu Sans;">&#8369;</span>' + convert(penaltyCharge));
+            $('#roomCharges').html('<span style="font-family: DejaVu Sans;">&#8369;</span>' + '<span id="valofTotalRoomCharges">' + convert(TotalRoomCharges)) + '</span >';
+            populateBilling();
         }
     });
 }
@@ -82,25 +111,24 @@ function populateFoods() {
     });
 }
 function populateOrders(roomNo) {
-    var totalofOrders = 0;
     $.ajax({
         url: 'pages/api/getAddedOrders.php',
         dataType: 'json',
         data: "roomNo=" + roomNo,
         success: function (data) {
+            var TotalOrders = 0;
             $('#ordersTable').html("");
             for (var i = 0; i < data.length; i++) {
                 var id = data[i].id;
                 var menuName = data[i].menuName;
                 var quantity = data[i].quantity;
                 var totalPrice = data[i].totalPrice;
-                totalofOrders = totalofOrders + totalPrice;
+                TotalOrders = TotalOrders + totalPrice;
                 $('#ordersTable').append(createOrdersTable(id, menuName, quantity, totalPrice));
-                $('#totalofOrders').html(convert(totalofOrders));
+                $('#totalofOrders').html(convert(TotalOrders));
                 M.AutoInit();
             }
-            $('#foodsCharges').html($('#foodsCharges').html() + convert(totalofOrders));
-            TotalCharge = TotalCharge + totalofOrders;
+            $('#foodsCharges').html('<span style="font-family: DejaVu Sans;">&#8369;</span>' + '<span id="valofTotalOrders">' + convert(TotalOrders)) + '</span >';
             populateBilling();
         }
     });
@@ -224,20 +252,20 @@ function populateAddedExtraTable(){
         data: "roomNo=" + roomNo,
         type: "POST",
         success: function (data) {
+            var TotalExtras = 0;
             $('#addedExtraTable').html("");
-            var totalCost = 0;
             for (var i = 0; i < data.length; i++) {
                 var id = data[i].id;
                 var checkinId = data[i].checkinId;
                 var quantity = data[i].quantity;
                 var description = data[i].description;
                 var cost = quantity * data[i].cost;
-                totalCost = totalCost + cost;
+                TotalExtras = TotalExtras + cost;
                 $('#addedExtraTable').append(createAddedExtraTable(id, checkinId, quantity, description, cost));
                 M.AutoInit();
             }
-            $('#extrasCharges').html($('#extrasCharges').html() + convert(totalCost));
-            TotalCharge = TotalCharge + totalCost;
+            $('#extrasCharges').html('<span style="font-family: DejaVu Sans;">&#8369;</span>' + '<span id="valofTotalExtras">' + convert(TotalExtras)) + '</span >';
+            populateBilling();
         }
     });
 }
@@ -263,31 +291,27 @@ function deleteAddedExtra(id) {
         }
     });
 }
-// function printOrders(){
-//     $.ajax({
-//         url: 'pages/api/getAddedOrders.php',
-//         dataType: 'json',
-//         data: "roomNo=" + roomNo,
-//         success: function (data) {
-//             $.ajax({
-//                 url: 'orderReceipt.php',
-//                 type: "POST",
-//                 data: { 'mydata': "pagetopdf.html" },
-//                 success: function (data) {
-//                     window.open("orderReceipt.php");
-//                 }
-//             });
-            
-//         }
-//     });
-// }
+
 function printOrders() {
     $.ajax({
-        type: "POST",
-        url: "orderReceipt.php",
-        data: { 'mydata': "pagetopdf.html" },
+        url: 'pages/api/getCheckInDetails.php',
+        data: "roomNo=" + roomNo,
+        dataType: 'json',
         success: function (data) {
-            window.open("orderReceipt.php");
+            var checkinId = data[0].checkInId;
+            window.open("pages/pdf/orderReceipt.php?checkInId=" + checkinId);
+        }
+    });
+}
+
+function printBilling() {
+    $.ajax({
+        url: 'pages/api/getCheckInDetails.php',
+        data: "roomNo=" + roomNo,
+        dataType: 'json',
+        success: function (data) {
+            var checkinId = data[0].checkInId;
+            window.open("pages/pdf/billingReceipt.php?checkInId=" + checkinId);
         }
     });
 }
