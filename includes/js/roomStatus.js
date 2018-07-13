@@ -55,6 +55,7 @@ function getRoomDatails(roomNo) {
             var rateperhour = data[0].rateperhour;
             var penaltyCharge = penaltyHours * rateperhour;
             TotalRoomCharges = daysCharge + penaltyCharge;
+            
             $('#h5-roomNo').html("<span class='guestName'># Room No " + roomNo + " " + data[0].type + "</span>" + "&nbsp;&nbsp;--> <i class='material-icons roomStatusGuestIcon'>person</i>" + "<span class='guestName'>" + data[0].name +"</span>");
             $('#ratepernight').html("<i class='material-icons roomRateGuestIcon'>hotel</i>Php" + " " + rate + '/night');
             $('#checkin').html("<i class='material-icons roomcalendarGuestIcon'>event</i><span class='spanCheckinRoomStatus'>Check-in</span>" + ": " + data[0].checkInDate + "&nbsp;&nbsp;" + "<i class='material-icons roomcalendarTimeIcon'>access_time</i>" + data[0].checkInTime);
