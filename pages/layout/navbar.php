@@ -15,7 +15,7 @@
         integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous">
     </script> -->
-    <script type="text/javascript" src="includes/js/jquery-3.3.1.min.js"></script>
+    <!-- <script type="text/javascript" src="includes/js/jquery-3.3.1.min.js"></script> -->
 </html>
 
 

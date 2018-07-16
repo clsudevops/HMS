@@ -9,7 +9,7 @@
 
     $checkInId = $_GET['checkInId'];
     
-    $stmt = $conn->prepare("SELECT A.id, sum(A.quantity) as quantity, B.menuName, (B.sellingPrice * sum(A.quantity)) as totalPrice from addedfoods A inner join foods B on A.foodsId = B.id where A.checkinId = ? GROUP by A.foodsId");
+    $stmt = $conn->prepare("SELECT A.id, sum(A.quantity) as quantity, B.menuName,sellingPrice, (B.sellingPrice * sum(A.quantity)) as totalPrice from addedfoods A inner join foods B on A.foodsId = B.id where A.checkinId = ? GROUP by A.foodsId");
     $stmt->bind_param('i', $checkInId); 
     $stmt->execute();
     
@@ -37,23 +37,25 @@
                 <tr class="heading">
                     <td style="padding-bottom:5px;">Menu</td>
                     <td style="padding-bottom:5px;">Quantity</td>
-                    <td style="padding-bottom:5px;" align="right">Price</td>
+                    <td style="padding-bottom:5px;">Price</td>
+                    <td style="padding-bottom:5px;" align="right">Total Price</td>
                 </tr>';
 
     $total = 0;
     while($row = mysqli_fetch_assoc($result)) {
         $menu = $row['menuName'];
         $quantity = $row['quantity'];
+        $sellingPrice = $row['sellingPrice'];
         $totalPrice = $row['totalPrice'];
         $total = $total + $totalPrice;
 
         $table .= '<tr>
-                    <td> ' . $menu . ' </td><td>' . $quantity . '</td><td align="right">' . $totalPrice . '</td>
+                    <td> ' . $menu . ' </td><td>' . $quantity . '</td><td align="right">' . $sellingPrice . '</td><td align="right">' . $totalPrice . '</td>
                 </tr>';
     }
 
     $table .= '<tr>
-                    <td colspan="2" align="right">Total:</td>
+                    <td colspan="3" align="right">Total:</td>
                     <td align="right"><span style="font-family: DejaVu Sans;">&#8369;</span>'. $total .'</td>
                </tr>
             </table>';

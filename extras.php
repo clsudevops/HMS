@@ -1,8 +1,23 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <?php include('cssInclude.php') ?>
+    <?php 
+        include('cssInclude.php');
+        if(!isset($_SESSION['username'])){
+            header("Location:login.php");  
+        }
+        else{
+            if($_SESSION["type"] != 'admin'){
+                header("Location:index.php"); 
+            }
+            else{
+                $username = $_SESSION["username"];
+                $type = $_SESSION["type"];
+            }
+        }
+    ?>
     <style>
         .select-wrapper input.select-dropdown{
             height:36px;

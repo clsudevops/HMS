@@ -1,8 +1,19 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <?php include('cssInclude.php') ?>
+    <?php 
+        include('cssInclude.php');
+        if(!isset($_SESSION['username'])){
+            header("Location:login.php");  
+        }
+        else{
+            $username = $_SESSION["username"];
+            $type = $_SESSION["type"];
+        }
+    ?>
 </head>
 
 <body>

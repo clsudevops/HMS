@@ -1,8 +1,18 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <?php include('cssInclude.php') ?>
+    <?php 
+        include('cssInclude.php');
+        if(!isset($_SESSION['username'])){
+            header("Location:login.php");  
+        }
+        else{
+            $username = $_SESSION["username"];
+            $type = $_SESSION["type"];
+        }
+    ?>
 </head>
 
 <body>
@@ -18,7 +28,7 @@
                     <!-- query for roomtype -->
                     <div class="page-header valign-wrapper z-depth-1">
                         <h5>Account Information</h5>
-                        <a class="btn btn-4" style="position:absolute; right:30px;"><i class="material-icons left">exit_to_app</i>Checkout</a>
+                        <a class="btn btn-4" onclick="checkOutNow()" style="position:absolute; right:30px;"><i class="material-icons left">exit_to_app</i>Checkout</a>
                     </div>
                     <div class="row">
                         <div class="col m8 s12">
@@ -87,11 +97,11 @@
                                     </table>
                                     <div class="totalOrders" style="height:60px; padding:10px 20px;">
                                         <h5 class="left" style="padding-top:10px; margin:0; font-size:18px;">Total => &#8369<span id="totalCharges"></span></h5>
-                                        <a class="btn right btn-2  tooltipped" style="background-color:#cfd2d6; color:black;" id="addExtra" onclick="printBilling()" data-tooltip="Print Receipt" id="submitRoom" style="margin-left:5px; height:36px; line-height:36px;">
+                                        <!-- <a class="btn right btn-2  tooltipped" style="background-color:#cfd2d6; color:black;" id="addExtra" onclick="printBilling()" data-tooltip="Print Receipt" id="submitRoom" style="margin-left:5px; height:36px; line-height:36px;">
                                             <i class="material-icons">
                                                 print
                                             </i>
-                                        </a>
+                                        </a> -->
                                     </div>
                                 </div>
                             </div>

@@ -15,7 +15,7 @@
         DATE_FORMAT(checkOutDate,'%h:%i:%s %p') As checkOutTime,
         (case when now() >= checkOutDate then DATEDIFF(now() , checkIn) else DATEDIFF(now() , checkIn) + 1 End) as noOfDays,
         (case when checkOutDate <= now() then Hour(TimeDiff((DATE_FORMAT(now(),'%H:%i:%s')), date_format(DATE_ADD(checkIn, INTERVAL DATEDIFF(now() , checkIn) DAY),'%H:%i:%s'))) else 0 END) as penaltyHours
-    from checkInDetails
+    from checkoutdetails
     where checkInId = ?");
 
     $stmt->bind_param('i', $checkInId); 
@@ -63,24 +63,25 @@
     $table =  '<h3>Room Charges</h3>
                 <table class="orderReceiptTable">
                     <tr class="heading">
-                        <td style="padding-bottom:5px; width:60%;">Item Name</td>
-                        <td style="padding-bottom:5px; width:20%;" align="right">Quantity</td>
+                        <td style="padding-bottom:5px; width:50%;">Item Name</td>
+                        <td style="padding-bottom:5px; width:10%;" align="right">Quantity</td>
                         <td style="padding-bottom:5px; width:20%;" align="right">Price</td>
+                        <td style="padding-bottom:5px; width:20%;" align="right">Total Price</td>
                     </tr>
                     <tr>
-                        <td>No of Days</td><td align="right">' . $noOfDays . '</td><td align="right">' . $daycharge . '</td>
+                        <td>No of Days</td><td align="right">' . $noOfDays . '</td><td align="right">' . $rate . '</td><td align="right">' . $daycharge . '</td>
                     </tr>
                     <tr>
-                        <td>Penalty Hours</td><td align="right">' . $penaltyHours . '</td><td align="right">' . $penaltycharge . '</td>
+                        <td>Penalty Hours</td><td align="right">' . $penaltyHours . '</td><td align="right">' . $rateperhour . '</td><td align="right">' . $penaltycharge . '</td>
                     </tr>
                     <tr>
-                        <td colspan="2" align="right">Total:</td>
+                        <td colspan="3" align="right">Total:</td>
                         <td align="right"><span style="font-family: DejaVu Sans;">&#8369;</span>'. $roomCharge .'</td>
                     </tr>
                 </table>';
 
     // Food Charges
-    $stmt = $conn->prepare("SELECT A.id, sum(A.quantity) as quantity, B.menuName, (B.sellingPrice * sum(A.quantity)) as totalPrice from addedfoods A inner join foods B on A.foodsId = B.id where A.checkinId = ? GROUP by A.foodsId");
+    $stmt = $conn->prepare("SELECT A.id, sum(A.quantity) as quantity, B.menuName,sellingPrice, (B.sellingPrice * sum(A.quantity)) as totalPrice from addedfoods A inner join foods B on A.foodsId = B.id where A.checkinId = ? GROUP by A.foodsId");
     $stmt->bind_param('i', $checkInId); 
     $stmt->execute();
     
@@ -89,29 +90,31 @@
     $table2 = '<h3>Foods Charges</h3><table class="orderReceiptTable">
                 
                 <tr class="heading">
-                    <td style="padding-bottom:5px; width:60%;">Item Name</td>
-                    <td style="padding-bottom:5px; width:20%;" align="right">Quantity</td>
-                    <td style="padding-bottom:5px; width:20%;" align="right">Price</td>
+                    <td style="padding-bottom:5px; width:50%;">Item Name</td>
+                    <td style="padding-bottom:5px; width:10%;" align="right">Quantity</td>
+                     <td style="padding-bottom:5px; width:20%;" align="right">Price</td>
+                    <td style="padding-bottom:5px; width:20%;" align="right">Total Price</td>
                 </tr>';
 
     $totalFoods = 0;
     while($row = mysqli_fetch_assoc($foodList)) {
         $menu = $row['menuName'];
         $quantity = $row['quantity'];
+        $sellingPrice = $row['sellingPrice'];
         $totalPrice = $row['totalPrice'];
         $totalFoods = $totalFoods + $totalPrice;
 
-        $table2 .= '<tr><td> ' . $menu . ' </td><td align="right">' . $quantity . '</td><td align="right">' . $totalPrice . '</td></tr>';
+        $table2 .= '<tr><td> ' . $menu . ' </td><td align="right">' . $quantity . '</td><td align="right">' . $sellingPrice . '</td><td align="right">' . $totalPrice . '</td></tr>';
     }
 
     $table2 .= '<tr>
-                <td colspan="2" align="right">Total:</td>
+                <td colspan="3" align="right">Total:</td>
                 <td align="right"><span style="font-family: DejaVu Sans;">&#8369;</span>'. $totalFoods .'</td>
             </tr>
         </table>';
     
     // Extras Charges
-    $stmt = $conn->prepare("select description,quantity,(cost * quantity) as totalprice from addedextras A inner join extras B on A.extrasId = B.id where A.checkinId = ?");
+    $stmt = $conn->prepare("select description,quantity,cost,(cost * quantity) as totalprice from addedextras A inner join extras B on A.extrasId = B.id where A.checkinId = ?");
     $stmt->bind_param('i', $checkInId); 
     $stmt->execute();
     
@@ -120,9 +123,10 @@
     $table3 = '<h3><Extra>Extras Charges</h3><table class="orderReceiptTable">
                 
                 <tr class="heading">
-                    <td style="padding-bottom:5px; width:60%;">Item Name</td>
-                    <td style="padding-bottom:5px; width:20%;" align="right">Quantity</td>
-                    <td style="padding-bottom:5px; width:20%;" align="right">Price</td>
+                    <td style="padding-bottom:5px; width:50%;">Item Name</td>
+                    <td style="padding-bottom:5px; width:10%;" align="right">Quantity</td>
+                     <td style="padding-bottom:5px; width:20%;" align="right">Price</td>
+                    <td style="padding-bottom:5px; width:20%;" align="right">Total Price</td>
                 </tr>';
 
 
@@ -130,14 +134,15 @@
     while($row = mysqli_fetch_assoc($extrasList)) {
         $menu = $row['description'];
         $quantity = $row['quantity'];
+        $sellingPrice = $row['cost'];
         $totalPrice = $row['totalprice'];
         $totalExtras = $totalExtras + $totalPrice;
 
-        $table3 .= '<tr><td> ' . $menu . ' </td><td align="right">' . $quantity . '</td><td align="right">' . $totalPrice . '</td></tr>';
+        $table3 .= '<tr><td> ' . $menu . ' </td><td align="right">' . $quantity . '</td><td align="right">' . $sellingPrice . '</td><td align="right">' . $totalPrice . '</td></tr>';
     }
 
     $table3 .= '<tr>
-                <td colspan="2" align="right">Total:</td>
+                <td colspan="3" align="right">Total:</td>
                 <td align="right"><span style="font-family: DejaVu Sans;">&#8369;</span>'. $totalExtras .'</td>
             </tr>
         </table>';

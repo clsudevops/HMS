@@ -457,3 +457,28 @@ span.guestName{
     font-size: 17px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+.login-card{
+    width:50%;
+    margin:auto;
+    margin-top: 50px;
+    min-width: 320px;
+}
+@media only screen and (max-width: 600px) {
+    .login-card{
+    width:100%;
+    margin:auto;
+    margin-top: 50px;
+    }
+}
+.login-card .card-title{
+    margin-left: 0;
+}
+.login-card .card-action{
+    min-height: 70px;
+}
+.input-field .prefix ~ input{
+    margin-left: 2.5rem;
+}
+.input-field.col .prefix ~ label, .input-field.col .prefix ~ .validate ~ label{
+    margin-left: 2.7rem;
+}
