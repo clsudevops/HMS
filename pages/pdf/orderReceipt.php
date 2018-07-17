@@ -35,10 +35,10 @@
     $table =  '<table class="orderReceiptTable">
                 
                 <tr class="heading">
-                    <td style="padding-bottom:5px;">Menu</td>
-                    <td style="padding-bottom:5px;">Quantity</td>
-                    <td style="padding-bottom:5px;">Price</td>
-                    <td style="padding-bottom:5px;" align="right">Total Price</td>
+                    <td style="padding-bottom:5px; width:50%;">Menu</td>
+                    <td style="padding-bottom:5px; width:10%;">Quantity</td>
+                    <td style="padding-bottom:5px; width:20%;">Price</td>
+                    <td style="padding-bottom:5px; width:20%;" align="right">Total</td>
                 </tr>';
 
     $total = 0;

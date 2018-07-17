@@ -28,7 +28,7 @@
                     <li><a class="modal-trigger" href="guest.php"><i class="material-icons">group</i>Guest List</a></li>
                 </ul>
                 <ul>
-                    <li><a class="modal-trigger" href=""><i class="material-icons">storage</i>Archived Guest</a></li>
+                    <li><a class="modal-trigger" href="guestArchived.php"><i class="material-icons">storage</i>Archived Guest</a></li>
                 </ul>
             </div>
         </li>

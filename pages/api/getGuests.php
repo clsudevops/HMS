@@ -7,7 +7,7 @@
     // Create connection
     $conn = mysqli_connect($servername, $username, $password,$db);
     
-    $select = "Select id,name,mobile,companyName,companyAddress,roomNo,floor,DATE_FORMAT(checkin, '%M %d, %Y') as checkin,DATE_FORMAT(CheckOutDate, '%M %d, %Y') as checkOutDate from guestdetails";
+    $select = "Select id,name,mobile,companyName,companyAddress,roomNo,floor,DATE_FORMAT(checkin, '%M %d, %Y') as checkin,DATE_FORMAT(CheckOutDate, '%M %d, %Y') as checkOutDate from guestdetails where isCheckIn = 1";
     $result = mysqli_query($conn, $select);
 
     $rows = array();

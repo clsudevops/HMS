@@ -9,7 +9,12 @@
 
     $search = $_GET['search'];
 
-    $select = "Select id,name,mobile,companyName,companyAddress,roomNo,floor,DATE_FORMAT(checkin, '%M %d, %Y') as checkin,DATE_FORMAT(CheckOutDate, '%M %d, %Y') as checkOutDate from guestdetails where id = '". $search ."' and isCheckin = 1 or name like '%". $search ."%' and isCheckin = 1";
+    $select = "Select A.id,name,mobile,companyName,companyAddress,B.roomNo,floor,
+    DATE_FORMAT(checkin, '%M %d, %Y') as checkin,
+    DATE_FORMAT(CheckOutDate, '%M %d, %Y') as checkOutDate from guests
+    A inner join checkout B on A.id = B.guestId Inner Join rooms C on B.roomNo = C.roomNo
+    where A.id = '". $search ."' and isCheckin = 0 or name like '%". $search ."%' and isCheckin = 0";
+
     $result = mysqli_query($conn, $select);
 
     $rows = array();

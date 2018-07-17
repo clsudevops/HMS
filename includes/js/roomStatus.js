@@ -157,7 +157,68 @@ function createFoodsTable(id, menuName, price, remaining) {
     return foodList;
 }
 function editOrder(id, menuName, quantity){
-    alert();
+    // $.confirm({
+    //     title: 'Update Order of ' + menuName + '',
+    //     theme: 'dark',
+    //     boxWidth: '30%',
+    //     useBootstrap: false,
+    //     content: '' +
+    //         '<form action="" class="formName">' +
+    //         '<label>Available Servings ' + remaining + '</label>' +
+    //         '<div class="form-group">' +
+    //         '<input type="number" style="color:white;" placeholder="Quantity" class="quantity form-control" required/>' +
+    //         '</div>' +
+    //         '</form>',
+    //     buttons: {
+    //         formSubmit: {
+    //             text: 'Add',
+    //             btnClass: 'btn-blue',
+    //             action: function () {
+    //                 var quantity = this.$content.find('.quantity').val();
+    //                 if (!quantity) {
+    //                     displayMessage("", "Please provide a valid input");
+    //                     return false;
+    //                 }
+    //                 else {
+    //                     if (parseInt(quantity) > parseInt(remaining)) {
+    //                         displayMessage("", "Quantity inputted is greater than the remaining servings left!");
+    //                         return false;
+    //                     }
+    //                     else {
+    //                         var newCount = remaining - quantity;
+    //                         $.ajax({
+    //                             url: 'pages/api/insertCheckInOrder.php',
+    //                             data: {
+    //                                 roomNo: roomNo,
+    //                                 foodsId: id,
+    //                                 quantity: quantity,
+    //                                 newCount: newCount
+    //                             },
+    //                             type: "POST",
+    //                             success: function () {
+    //                                 populateFoods();
+    //                                 populateOrders(roomNo);
+    //                                 displayMessage("", "Food Added Succesfully");
+    //                             }
+    //                         });
+    //                     }
+    //                 }
+    //             }
+    //         },
+    //         cancel: function () {
+    //             //close
+    //         },
+    //     },
+    //     onContentReady: function () {
+    //         // bind to events
+    //         var jc = this;
+    //         this.$content.find('form').on('submit', function (e) {
+    //             // if the user submits the form by pressing enter in the field.
+    //             e.preventDefault();
+    //             jc.$$formSubmit.trigger('click'); // reference the button and click it
+    //         });
+    //     }
+    // });
 }
 function createExtraTable(id, description, cost) {
     var extraList = '<tr>' +

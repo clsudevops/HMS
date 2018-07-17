@@ -66,7 +66,7 @@
                         <td style="padding-bottom:5px; width:50%;">Item Name</td>
                         <td style="padding-bottom:5px; width:10%;" align="right">Quantity</td>
                         <td style="padding-bottom:5px; width:20%;" align="right">Price</td>
-                        <td style="padding-bottom:5px; width:20%;" align="right">Total Price</td>
+                        <td style="padding-bottom:5px; width:20%;" align="right">Total</td>
                     </tr>
                     <tr>
                         <td>No of Days</td><td align="right">' . $noOfDays . '</td><td align="right">' . $rate . '</td><td align="right">' . $daycharge . '</td>
@@ -93,7 +93,7 @@
                     <td style="padding-bottom:5px; width:50%;">Item Name</td>
                     <td style="padding-bottom:5px; width:10%;" align="right">Quantity</td>
                      <td style="padding-bottom:5px; width:20%;" align="right">Price</td>
-                    <td style="padding-bottom:5px; width:20%;" align="right">Total Price</td>
+                    <td style="padding-bottom:5px; width:20%;" align="right">Total</td>
                 </tr>';
 
     $totalFoods = 0;
@@ -126,7 +126,7 @@
                     <td style="padding-bottom:5px; width:50%;">Item Name</td>
                     <td style="padding-bottom:5px; width:10%;" align="right">Quantity</td>
                      <td style="padding-bottom:5px; width:20%;" align="right">Price</td>
-                    <td style="padding-bottom:5px; width:20%;" align="right">Total Price</td>
+                    <td style="padding-bottom:5px; width:20%;" align="right">Total</td>
                 </tr>';
 
 

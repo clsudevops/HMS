@@ -26,7 +26,7 @@
             <div class="col s12 mycontainer">
                 <div class="card-1">
                     <div class="page-header valign-wrapper z-depth-1">
-                        <h5>Checked in Guest Masterlist</h5>
+                        <h5>Guest Masterlist</h5>
                     </div>
                     <div class="row" style="margin-bottom:10px;">
                         <div class="file-field input-field col m6 s12">
@@ -80,7 +80,7 @@
 
 <section class="jsIncludes">
     <?php require('jsInclude.php') ?>
-    <script type="text/javascript" src="includes/js/guest.js"></script>
+    <script type="text/javascript" src="includes/js/guestArchived.js"></script>
 </section>
 
 </html>

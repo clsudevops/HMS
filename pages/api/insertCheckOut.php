@@ -21,6 +21,11 @@
     $stmt->bind_param('i', $checkInId); 
     $stmt->execute();
 
+    // update guest status
+    $stmt3 = $conn->prepare("update guests set isCheckin = 0 where id = (select guestId from checkin where roomNo = ?)");
+    $stmt3->bind_param('s', $roomNo); 
+    $stmt3->execute();
+
     // delete from checkin
     $stmt1 = $conn->prepare("delete from checkin where id = ?");
     $stmt1->bind_param('i', $checkInId); 
@@ -30,4 +35,6 @@
     $stmt2 = $conn->prepare("update rooms set status = 'Cleaning' where roomNo = ?");
     $stmt2->bind_param('s', $roomNo); 
     $stmt2->execute();
+
+    
 ?>
