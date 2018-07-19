@@ -28,7 +28,7 @@
                     <!-- query for roomtype -->
                     <div class="page-header valign-wrapper z-depth-1">
                         <h5>Account Information</h5>
-                        <a class="btn btn-4" onclick="checkOutNow()" style="position:absolute; right:30px;"><i class="material-icons left">exit_to_app</i>Checkout</a>
+                        <a class="btn btn-flat white-text" onclick="checkOutNow()" style="position:absolute; right:30px;"><i class="material-icons left">exit_to_app</i>Checkout</a>
                     </div>
                     <div class="row">
                         <div class="col m8 s12">

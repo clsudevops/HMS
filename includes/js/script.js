@@ -4,9 +4,23 @@ function getCurrentDate(){
     var month = d.getMonth() + 1;
     var day = d.getDate();
 
-    var currentDate = d.getFullYear() + '-' +
+    var currentDate =
+         d.getFullYear() + '-' +
         (('' + month).length < 2 ? '0' : '') + month + '-' +
         (('' + day).length < 2 ? '0' : '') + day;
+
+    return currentDate;
+}
+function getCurdate1(){
+    var d = new Date();
+
+    var month = d.getMonth() + 1;
+    var day = d.getDate();
+
+    var currentDate =
+        (('' + month).length < 2 ? '0' : '') + month + '-' +
+        (('' + day).length < 2 ? '0' : '') + day + '-' +
+        d.getFullYear();
 
     return currentDate;
 }

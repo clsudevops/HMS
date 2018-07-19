@@ -51,42 +51,46 @@ function createReservationTable(name, contact, roomNo, checkindate, checkoutdate
 }
 
 function submitReservationModal() {
-    var roomNo = $('#modalRoomNo').html();
-    var name = $('#name').val();
-    var contact = $('#contact').val();
-    var compName = $('#compName').val();
-    var compAddress = $('#compAddress').val();
-    var checkindate = $('#checkindate').val();
-    var checkoutdate = $('#checkoutdate').val();
-    var adultsCount = $('#adultsCount').val();
-    var childrenCount = $('#childrenCount').val();
-    var idTypeSelect = $('#idTypeSelect').val();
-    var personal_id = $('#personal_id').val();
-    // console.log(checkindate);
-    if (roomNo != "" && name != "" && contact != "" && checkindate != "" && checkoutdate != "" && adultsCount != "" && idTypeSelect != "" && childrenCount != "" && personal_id != "") {
-        $.ajax({
-            url: 'pages/api/insertReservation.php',
-            type: "POST",
-            data: {
-                'roomNo': roomNo,
-                'name': name,
-                'mobile': contact,
-                'compName': compName,
-                'compAddress': compAddress,
-                'checkInDate': checkindate,
-                'checkOutDate': checkoutdate,
-                'adultsCount': adultsCount,
-                'childrensCount': childrenCount,
-                'personal_id_type': idTypeSelect,
-                'personal_id': personal_id
-            },
-            success: function () {
-                // $('#description').val("");
-                // $('#cost').val("");
-                // populateExtras();
-            }
-        });
-    }
+    // var roomNo = $('#modalRoomNo').html();
+    // var name = $('#name').val();
+    // var contact = $('#contact').val();
+    // var compName = $('#compName').val();
+    // var compAddress = $('#compAddress').val();
+    // var checkindate = $('#checkindate').val();
+    // var checkoutdate = $('#checkoutdate').val();
+    // var adultsCount = $('#adultsCount').val();
+    // var childrenCount = $('#childrenCount').val();
+    // var idTypeSelect = $('#idTypeSelect').val();
+    // var personal_id = $('#personal_id').val();
+    // // console.log(checkindate);
+    // if (roomNo != "" && name != "" && contact != "" && checkindate != "" && checkoutdate != "" && adultsCount != "" && idTypeSelect != "" && childrenCount != "" && personal_id != "") {
+    //     alert();
+    //     $.ajax({
+    //         url: 'pages/api/insertReservation.php',
+    //         type: "POST",
+    //         data: {
+    //             'roomNo': roomNo,
+    //             'name': name,
+    //             'mobile': contact,
+    //             'compName': compName,
+    //             'compAddress': compAddress,
+    //             'checkInDate': checkindate,
+    //             'checkOutDate': checkoutdate,
+    //             'adultsCount': adultsCount,
+    //             'childrensCount': childrenCount,
+    //             'personal_id_type': idTypeSelect,
+    //             'personal_id': personal_id
+    //         },
+    //         success: function (data) {
+                
+    //             window.location = "bookReservation.php";
+    //         },
+    //         error: function (aaa, aas, aad) {
+    //             alert();
+    //             console.log(aaa);
+    //         }
+    //     });
+    // }
 }
 
 // function changeStatus(roomNo, status, curstatus) {

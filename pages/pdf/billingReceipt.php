@@ -9,13 +9,13 @@
 
     $checkInId = $_GET['checkInId'];
     
-    $stmt = $conn->prepare("Select roomNo, type, floor, rate, rateperhour,
-        guestId, name, mobile, companyName, companyAddress , DATE_FORMAT(checkIn,'%M %d, %Y %h:%i:%s %p') as checkInDate,
-        DATE_FORMAT(checkIn,'%h:%i:%s %p') As checkInTime, DATE_FORMAT(checkOutDate,'%M %d, %Y') as checkOutDate,
-        DATE_FORMAT(checkOutDate,'%h:%i:%s %p') As checkOutTime,
-        (case when now() >= checkOutDate then DATEDIFF(now() , checkIn) else DATEDIFF(now() , checkIn) + 1 End) as noOfDays,
-        (case when checkOutDate <= now() then Hour(TimeDiff((DATE_FORMAT(now(),'%H:%i:%s')), date_format(DATE_ADD(checkIn, INTERVAL DATEDIFF(now() , checkIn) DAY),'%H:%i:%s'))) else 0 END) as penaltyHours
-    from checkoutdetails
+    $stmt = $conn->prepare("Select roomNo, type, floor, rate, rateperhour, guestId, name, mobile, companyName, companyAddress , DATE_FORMAT(checkIn,'%M %d, %Y %h:%i:%s %p') as checkInDate,
+     DATE_FORMAT(checkIn,'%h:%i:%s %p') As checkInTime,
+     DATE_FORMAT(checkOutDate,'%M %d, %Y') as checkOutDate,
+      DATE_FORMAT(checkOutDate,'%h:%i:%s %p') As checkOutTime,
+    (case when ((case when now() >= checkOutDate then DATEDIFF(now() , checkIn) else DATEDIFF(now() , checkIn) + 1 End)) = 0 then 1 else (case when now() >= checkOutDate then DATEDIFF(now() , checkIn) else DATEDIFF(now() , checkIn) + 1 End) End) as noOfDays,
+    (case when checkOutDate <= now() then Hour(TimeDiff((DATE_FORMAT(now(),'%H:%i:%s')),
+    date_format(DATE_ADD(checkIn, INTERVAL DATEDIFF(now() , checkIn) DAY),'%H:%i:%s'))) else 0 END) as penaltyHours from checkoutdetails
     where checkInId = ?");
 
     $stmt->bind_param('i', $checkInId); 
@@ -27,24 +27,37 @@
         $rate = $row['rate']; $rateperhour = $row['rateperhour']; $guestId = $row['guestId'];
         $name = $row['name']; $mobile = $row['mobile']; $companyName = $row['companyName'];
         $companyAddress = $row['companyAddress']; $checkInDate = $row['checkInDate'];
+        $checkOutDate = $row['checkOutDate'];
         $noOfDays = $row['noOfDays']; $penaltyHours = $row['penaltyHours'];
     }
-    $daycharge = $noOfDays * $rate;
-    $penaltycharge = $penaltyHours * $rateperhour;
-    $roomCharge = $daycharge + $penaltycharge;
-
-
+ 
     // get ornumber and datenow
     $stmt = $conn->prepare("SELECT ORNumber,DATE_FORMAT(now(), '%M %d, %Y %h:%i:%s %p') as dateNow from billing where checkInId = ?");
     $stmt->bind_param('i', $checkInId); 
     $stmt->execute();
-    
+
+
     $result1 = $stmt->get_result() or die($conn->error);
 
     while($row = mysqli_fetch_assoc($result1)) {
         $ORNumber = $row['ORNumber'];
         $now = $row['dateNow'];
     }
+    
+    $mydate1 = strtotime($checkOutDate);
+    $mydate2 = strtotime($now);
+    if($mydate2 <= $mydate1){
+        $penaltyHours = 0;
+    }
+
+    $daycharge = $noOfDays * $rate;
+    $penaltycharge = $penaltyHours * $rateperhour;
+    $roomCharge = $daycharge + $penaltycharge;
+
+    // update checkoutdate in checkout
+    $stmt4 = $conn->prepare("update checkout set checkOutDate = now() where id = ?");
+    $stmt4->bind_param('i', $checkInId); 
+    $stmt4->execute();
 
     // header details 
     $header='<div class="header">
@@ -164,9 +177,13 @@
         </body>
     </html>";
 
+    $stmt1 = $conn->prepare("update billing set collection = ?, date_collected = now() where checkinId = ?");
+    $stmt1->bind_param('di', $total,$checkInId); 
+    $stmt1->execute();
 
     $dompdf->loadHtml($html);
 
+    // Food Charges
     
 
     // (Optional) Setup the paper size and orientation

@@ -143,7 +143,7 @@
                     </div>
                     
                     <div class="input-field col s6 m6">
-                        <a class="btn btn-1 waves-effect waves-green right" onclick="submitReservationModal()"  style="margin-bottom:10px;">
+                        <a class="btn btn-1 waves-effect waves-green right modal-close" onclick="submitReservationModal()"  style="margin-bottom:10px;">
                             <i class="material-icons left" style="margin-right:10px;">
                                 send
                             </i>

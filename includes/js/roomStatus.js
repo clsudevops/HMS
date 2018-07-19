@@ -123,9 +123,10 @@ function populateOrders(roomNo) {
                 var id = data[i].id;
                 var menuName = data[i].menuName;
                 var quantity = data[i].quantity;
+                var remaining = data[i].remaining;
                 var totalPrice = data[i].totalPrice;
                 TotalOrders = TotalOrders + totalPrice;
-                $('#ordersTable').append(createOrdersTable(id, menuName, quantity, totalPrice));
+                $('#ordersTable').append(createOrdersTable(id, menuName, quantity, totalPrice, remaining));
                 $('#totalofOrders').html(convert(TotalOrders));
                 M.AutoInit();
             }
@@ -134,13 +135,13 @@ function populateOrders(roomNo) {
         }
     });
 }
-function createOrdersTable(id, menuName, quantity, totalPrice) {
+function createOrdersTable(id, menuName, quantity, totalPrice, remaining) {
     var foodList = '<tr>' +
         '<td>' + menuName + '</td>' +
         '<td>' + quantity + '</td>' +
         '<td>' + totalPrice + '</td>' +
         '<td style="width:20%;">' +
-        '<a class="btn btn-1 tooltipped" id="addExtra" onclick="editOrder(\'' + id + '\',\'' + menuName + '\',\'' + quantity + '\')" data-tooltip="Edit" style="margin-right:5px;"><i class="material-icons">edit</i></a>' +
+        '<a class="btn btn-1 tooltipped" id="addExtra" onclick="editOrder(\'' + id + '\',\'' + menuName + '\',\'' + quantity + '\' ,\'' + remaining + '\')" data-tooltip="Edit" style="margin-right:5px;"><i class="material-icons">edit</i></a>' +
         '</td>' +
         '</tr>'
     return foodList;
@@ -156,69 +157,70 @@ function createFoodsTable(id, menuName, price, remaining) {
         '</tr>'
     return foodList;
 }
-function editOrder(id, menuName, quantity){
-    // $.confirm({
-    //     title: 'Update Order of ' + menuName + '',
-    //     theme: 'dark',
-    //     boxWidth: '30%',
-    //     useBootstrap: false,
-    //     content: '' +
-    //         '<form action="" class="formName">' +
-    //         '<label>Available Servings ' + remaining + '</label>' +
-    //         '<div class="form-group">' +
-    //         '<input type="number" style="color:white;" placeholder="Quantity" class="quantity form-control" required/>' +
-    //         '</div>' +
-    //         '</form>',
-    //     buttons: {
-    //         formSubmit: {
-    //             text: 'Add',
-    //             btnClass: 'btn-blue',
-    //             action: function () {
-    //                 var quantity = this.$content.find('.quantity').val();
-    //                 if (!quantity) {
-    //                     displayMessage("", "Please provide a valid input");
-    //                     return false;
-    //                 }
-    //                 else {
-    //                     if (parseInt(quantity) > parseInt(remaining)) {
-    //                         displayMessage("", "Quantity inputted is greater than the remaining servings left!");
-    //                         return false;
-    //                     }
-    //                     else {
-    //                         var newCount = remaining - quantity;
-    //                         $.ajax({
-    //                             url: 'pages/api/insertCheckInOrder.php',
-    //                             data: {
-    //                                 roomNo: roomNo,
-    //                                 foodsId: id,
-    //                                 quantity: quantity,
-    //                                 newCount: newCount
-    //                             },
-    //                             type: "POST",
-    //                             success: function () {
-    //                                 populateFoods();
-    //                                 populateOrders(roomNo);
-    //                                 displayMessage("", "Food Added Succesfully");
-    //                             }
-    //                         });
-    //                     }
-    //                 }
-    //             }
-    //         },
-    //         cancel: function () {
-    //             //close
-    //         },
-    //     },
-    //     onContentReady: function () {
-    //         // bind to events
-    //         var jc = this;
-    //         this.$content.find('form').on('submit', function (e) {
-    //             // if the user submits the form by pressing enter in the field.
-    //             e.preventDefault();
-    //             jc.$$formSubmit.trigger('click'); // reference the button and click it
-    //         });
-    //     }
-    // });
+function editOrder(id, menuName, quantity, remaining){
+    var maxquantity = parseInt(quantity) + parseInt(remaining);
+    $.confirm({
+        title: 'Update Order of ' + menuName + '',
+        theme: 'dark',
+        boxWidth: '30%',
+        useBootstrap: false,
+        content: '' +
+            '<form action="" class="formName">' +
+            '<label>Max Available value ' + maxquantity + '</label>' +
+            '<div class="form-group">' +
+            '<input type="number" style="color:white;" placeholder="Quantity" class="quantity form-control" required/>' +
+            '</div>' +
+            '</form>',
+        buttons: {
+            formSubmit: {
+                text: 'Update',
+                btnClass: 'btn-blue',
+                action: function () {
+                    var inputtedQuantity = this.$content.find('.quantity').val();
+                    if (!quantity) {
+                        displayMessage("", "Please provide a valid input");
+                        return false;
+                    }
+                    else {
+                        if (parseInt(inputtedQuantity) > parseInt(maxquantity)) {
+                            displayMessage("", "Quantity inputted is greater than the remaining servings left!");
+                            return false;
+                        }
+                        else {
+                            var newCount = maxquantity - inputtedQuantity;
+                            $.ajax({
+                                url: 'pages/api/updateCheckInOrder.php',
+                                data: {
+                                    roomNo: roomNo,
+                                    foodsId: id,
+                                    quantity: inputtedQuantity,
+                                    newCount: newCount
+                                },
+                                type: "POST",
+                                success: function () {
+                                    populateFoods();
+                                    populateOrders(roomNo);
+                                    displayMessage("", "Order Updated Succesfully");
+                                }
+                            });
+                        }
+                    }
+                }
+            },
+            cancel: function () {
+                //close
+            },
+        },
+        onContentReady: function () {
+            // bind to events
+            var jc = this;
+            this.$content.find('form').on('submit', function (e) {
+                // if the user submits the form by pressing enter in the field.
+                e.preventDefault();
+                jc.$$formSubmit.trigger('click'); // reference the button and click it
+            });
+        }
+    });
 }
 function createExtraTable(id, description, cost) {
     var extraList = '<tr>' +

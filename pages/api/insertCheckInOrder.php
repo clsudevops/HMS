@@ -19,9 +19,27 @@
         $checkInId = $row['checkInId'];
     }
 
-    $stmt = $conn->prepare("Insert Into addedfoods(checkinId,foodsId,quantity) values(?,?,?)");
-    $stmt->bind_param('iii', $checkInId,$foodsId,$quantity); 
-    $stmt->execute();
+    $stmt1 = $conn->prepare("Select count(*) as total from addedfoods where checkinId = ? and foodsId = ?");
+    $stmt1->bind_param('ii', $checkInId,$foodsId); 
+    $stmt1->execute();
+
+    $result = $stmt1->get_result() or die($conn->error);
+
+    while($row = mysqli_fetch_assoc($result)) {
+        $checking = $row['total'];
+    }
+
+    if($checking > 0){
+        $stmt2 = $conn->prepare("Update addedfoods set quantity = ? where checkinId = ? and foodsId = ?");
+        $stmt2->bind_param('iii', $quantity,$checkInId,$foodsId); 
+        $stmt2->execute();
+    }
+    else{
+        $stmt = $conn->prepare("Insert Into addedfoods(checkinId,foodsId,quantity) values(?,?,?)");
+        $stmt->bind_param('iii', $checkInId,$foodsId,$quantity); 
+        $stmt->execute();
+    }
+    
 
     $stmt = $conn->prepare("update foods set remaining = ? where id = ?");
     $stmt->bind_param('ii', $newCount,$foodsId); 

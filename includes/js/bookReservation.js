@@ -117,9 +117,7 @@ function submitReservationModal() {
                 'personal_id': personal_id
             },
             success: function () {
-                // $('#description').val("");
-                // $('#cost').val("");
-                // populateExtras();
+                window.location = "reservationList.php";
             }
         });
     }
