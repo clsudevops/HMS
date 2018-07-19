@@ -177,7 +177,7 @@
         </body>
     </html>";
 
-    $stmt1 = $conn->prepare("update billing set collection = ?, date_collected = now() where checkinId = ?");
+    $stmt1 = $conn->prepare("update billing set collection = ?, date_collected = DATE_FORMAT(now(),'%Y-%m-%d %H:%i:%s') where checkinId = ?");
     $stmt1->bind_param('di', $total,$checkInId); 
     $stmt1->execute();
 

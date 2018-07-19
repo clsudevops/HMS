@@ -29,23 +29,29 @@
                         <h5>Collections</h5>
                     </div>
                     <div class="row">
-                        <div class="input-field col s6 m3" style="margin:5px 0px;">
-                            <input placeholder="From" name="from" id="from" type="text" class="datepicker" required>
+                        <div class="input-field col s12 m4" style="margin:5px 0px;">
+                            <label>Search:</label>
+                            <input placeholder="Search for OR#" name="search" id="search" type="text">
                         </div>
-                        <div class="input-field col s6 m3" style="margin:5px 0px;">
-                            <input placeholder="To" name="to" id="to" type="text" class="datepicker" required>
+                        <div class="input-field col s6 m2" style="margin:5px 0px;">
+                            <label>Date Filter:</label>
+                            <input placeholder="From" name="from" id="from" type="text" class="datepicker">
                         </div>
-                        <div class="input-field col s6 m3" style="margin:5px 0px;">
-                            <a class="btn btn-1" id="submitExtra" style="margin-top:1px;">
+                        <div class="input-field col s6 m2" style="margin:5px 0px;">
+                            <label></label>
+                            <input placeholder="To" name="to" id="to" type="text" class="datepicker">
+                        </div>
+                        <div class="input-field col s12 m2" style="margin:5px 0px;">
+                            <a class="btn btn-1" onclick="changeQuery()" style="margin-top:23px;">
                                 <i class="material-icons left">
                                     send
                                 </i>
-                                Submit
+                                Filter
                             </a>
                         </div>
                         <div class="col s12 m12 valign-wrapper" style="margin:15px 0;">
                             <h5 id="collectionTitle" style="margin:0;">Today's Collections</h5>
-                            <a class="btn btn-1" onclick="" style="position:absolute; right:20px;"><i class="material-icons left">print</i>Print</a>
+                            <a class="btn btn-1" onclick="printCollection()" style="position:absolute; right:20px;"><i class="material-icons left">print</i>Print</a>
                         </div>
                     </div>
                     <div class="row">
