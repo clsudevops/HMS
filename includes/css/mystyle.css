@@ -473,7 +473,7 @@ span.guestName{
         text-align: left;
     }
 }
-.reservation_modal .select-wrapper input.select-dropdown{
+.reservation_modal .select-wrapper input.select-dropdown, .test1 .select-wrapper input.select-dropdown{
     height: 36px;
     line-height: 36px;
 }

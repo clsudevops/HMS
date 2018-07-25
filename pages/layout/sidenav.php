@@ -52,7 +52,7 @@
                         <li><a href="manageRoomTypes.php"><i class="material-icons left">weekend</i>Room Types</a></li>
                         <li><a href="kitchen.php"><i class="material-icons left">restaurant_menu</i>Food Menus</a></li>
                         <li><a href="extras.php"><i class="material-icons left">dns</i>Extras</a></li>
-                        <li><a href="roomTypes.php"><i class="material-icons">supervisor_account</i>Accounts</a></li>
+                        <li><a href="accounts.php"><i class="material-icons">supervisor_account</i>Accounts</a></li>
                     </ul>
                 </div>
             </li>

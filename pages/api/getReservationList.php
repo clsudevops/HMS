@@ -9,11 +9,11 @@
 
     if($_GET['search'] == ""){
         $select = "Select reservationId,personal_id, personal_id_type, roomNo, name, mobile,compName,compAddress, DATE_FORMAT(checkInDate, '%M %d, %Y') as checkInDate,
-        DATE_FORMAT(checkOutDate, '%M %d, %Y') as checkOutDate, adultsCount, childrensCount, reservationDate from reservations order by checkIndate";
+        DATE_FORMAT(checkOutDate, '%M %d, %Y') as checkOutDate, adultsCount, childrensCount, reservationDate from reservations where status = 'Pending' order by checkIndate";
     }
     else{
         $search = $_GET['search'];
-        $select = "Select * from reservations where roomNo like '". $search ."%' or name like '". $search ."%' order by checkIndate";
+        $select = "Select * from reservations where roomNo like '". $search ."%' and status = 'Pending' or name like '". $search ."%' and status = 'Pending' order by checkIndate";
     }
 
     $result = mysqli_query($conn, $select);

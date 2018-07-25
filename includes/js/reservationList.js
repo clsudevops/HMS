@@ -23,6 +23,7 @@ function populateReservation() {
 function loopReservationList(data) {
     $('#reservationListTable').html("");
     for (var i = 0; i < data.length; i++) {
+        var id = data[i].reservationId;
         var name = data[i].name;
         var contact = data[i].mobile;
         var roomNo = data[i].roomNo;
@@ -30,11 +31,11 @@ function loopReservationList(data) {
         var checkoutdate = data[i].checkOutDate;
 
 
-        $('#reservationListTable').append(createReservationTable(name, contact, roomNo, checkindate, checkoutdate));
+        $('#reservationListTable').append(createReservationTable(id,name, contact, roomNo, checkindate, checkoutdate));
     }
 }
 
-function createReservationTable(name, contact, roomNo, checkindate, checkoutdate) {
+function createReservationTable(id,name, contact, roomNo, checkindate, checkoutdate) {
     var myRoom = '<tr>' +
         '<td>' + name + '</td>' +
         '<td>' + contact + '</td>' +
@@ -42,7 +43,7 @@ function createReservationTable(name, contact, roomNo, checkindate, checkoutdate
         '<td>' + checkindate + '</td>' +
         '<td>' + checkoutdate + '</td>' +
         '<td>' +
-        '<a class="btn btn-1 tooltipped modal-trigger Vacant" href="" onclick="" data-tooltip="Book Now" style="margin-right:5px;"><i class="material-icons left">exit_to_app</i></a>' +
+        '<a class="btn btn-1 tooltipped modal-trigger Vacant" href="" onclick="bookNow('+ id +')" data-tooltip="Book Now" style="margin-right:5px;"><i class="material-icons left">exit_to_app</i></a>' +
         '<a class="btn btn-1 tooltipped modal-trigger Cleaning" href="" onclick="" data-tooltip="Cancel Reservation" style="margin-right:5px;"><i class="material-icons left">clear</i></a>' +
         '<a class="btn btn-1 tooltipped modal-trigger Maintenance" href="" onclick="" data-tooltip="View Details" style="margin-right:5px;"><i class="material-icons left">pageview</i></a>' +
         '</td>' +
@@ -50,47 +51,8 @@ function createReservationTable(name, contact, roomNo, checkindate, checkoutdate
     return myRoom;
 }
 
-function submitReservationModal() {
-    // var roomNo = $('#modalRoomNo').html();
-    // var name = $('#name').val();
-    // var contact = $('#contact').val();
-    // var compName = $('#compName').val();
-    // var compAddress = $('#compAddress').val();
-    // var checkindate = $('#checkindate').val();
-    // var checkoutdate = $('#checkoutdate').val();
-    // var adultsCount = $('#adultsCount').val();
-    // var childrenCount = $('#childrenCount').val();
-    // var idTypeSelect = $('#idTypeSelect').val();
-    // var personal_id = $('#personal_id').val();
-    // // console.log(checkindate);
-    // if (roomNo != "" && name != "" && contact != "" && checkindate != "" && checkoutdate != "" && adultsCount != "" && idTypeSelect != "" && childrenCount != "" && personal_id != "") {
-    //     alert();
-    //     $.ajax({
-    //         url: 'pages/api/insertReservation.php',
-    //         type: "POST",
-    //         data: {
-    //             'roomNo': roomNo,
-    //             'name': name,
-    //             'mobile': contact,
-    //             'compName': compName,
-    //             'compAddress': compAddress,
-    //             'checkInDate': checkindate,
-    //             'checkOutDate': checkoutdate,
-    //             'adultsCount': adultsCount,
-    //             'childrensCount': childrenCount,
-    //             'personal_id_type': idTypeSelect,
-    //             'personal_id': personal_id
-    //         },
-    //         success: function (data) {
-                
-    //             window.location = "bookReservation.php";
-    //         },
-    //         error: function (aaa, aas, aad) {
-    //             alert();
-    //             console.log(aaa);
-    //         }
-    //     });
-    // }
+function bookNow(id) {
+  alert(id);
 }
 
 // function changeStatus(roomNo, status, curstatus) {
