@@ -66,7 +66,7 @@
                                         <th style="width:10%;">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody id="extraTable">
+                                <tbody id="collectionTable">
                                     
                                 </tbody>
                             </table>

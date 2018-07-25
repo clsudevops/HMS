@@ -370,7 +370,7 @@ function printOrders() {
 
 function printBilling() {
     $.ajax({
-        url: 'pages/api/getCheckInDetails.php',
+        url: 'pages/api/getCheckoutDetails.php',
         data: "roomNo=" + roomNo,
         dataType: 'json',
         success: function (data) {
@@ -385,14 +385,12 @@ function checkOutNow(){
         content: 'Are you sure you want to Checkout Room ' + roomNo,
         buttons: {
             confirm: function () {
-                window.location = "index.php";
-                printBilling();
+                //window.location = "index.php";
                 $.ajax({
                     url: 'pages/api/insertCheckOut.php',
                     data: "roomNo=" + roomNo,
-                    dataType: 'json',
                     success: function (data) {
-                        
+                        printBilling();
                     }
                 });
             },

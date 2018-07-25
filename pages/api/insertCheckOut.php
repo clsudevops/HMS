@@ -17,7 +17,7 @@
     }
 
     // insert into checkout
-    $stmt = $conn->prepare("insert into checkout Select * from checkin where id = ?");
+    $stmt = $conn->prepare("insert into checkout(id,roomNo,guestId,checkin,checkOutDate,adultsCount,childrenCount) Select id,roomNo,guestId,checkin,now(),adultsCount,childrenCount from checkin where id = ?");
     $stmt->bind_param('i', $checkInId); 
     $stmt->execute();
 
