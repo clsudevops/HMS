@@ -21,6 +21,7 @@ function createCardRoom(roomNo,floor, status, type, rate, checkoutDate){
 // loop the rooms cards
 function cardLoop(data) {
     for (var i = 0; i < data.length; i++) {
+        var checkInId = data[i].checkInId;
         var roomNo = data[i].roomNo;
         var floor = data[i].floor;
         var status = data[i].status;
@@ -53,10 +54,10 @@ function cardLoop(data) {
         }
 
         if (checkoutDate == myDateNow || status == 'Occupied'){
-            $("#bedCards_" + roomNo).wrap('<a class="roomLink" href="roomStatus.php?roomNo='+ roomNo + '"></a>');
+            $("#bedCards_" + roomNo).wrap('<a class="roomLink" href="roomStatus.php?checkInId=' + checkInId + '"></a>');
         }
         else if (status == 'Vacant'){
-            $("#bedCards_" + roomNo).wrap('<a class="roomLink" href="checkIn.php?roomNo='+ roomNo +'"></a>');
+            $("#bedCards_" + roomNo).wrap('<a class="roomLink" href="checkIn.php?roomNo=' + roomNo +'"></a>');
         }
 
     }

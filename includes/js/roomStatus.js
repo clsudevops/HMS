@@ -1,12 +1,12 @@
-var roomNo = getUrlParameter('roomNo');
+var checkInId = getUrlParameter('checkInId');
 var TotalCharge = 0;
 
 $(document).ready(function () {    
-    getRoomDatails(roomNo);
+    getRoomDatails(checkInId);
     populateExtras();
     populateFoods();
     populateAddedExtraTable();
-    populateOrders(roomNo);
+    populateOrders(checkInId);
     
 });
 function populateBilling(){
@@ -41,12 +41,13 @@ function populateBilling(){
     $('#totalCharges').html(convert(TotalCharge));
 }
 
-function getRoomDatails(roomNo) {
+function getRoomDatails(checkInId) {
     $.ajax({
         url: 'pages/api/getCheckInDetails.php',
-        data: "roomNo=" + roomNo,
+        data: "checkInId=" + checkInId,
         dataType: 'json',
         success: function (data) {
+            var roomNo = data[0].roomNo;
             var TotalRoomCharges = 0
             var totaldays = data[0].noOfDays;
             var rate = data[0].rate;
@@ -111,11 +112,11 @@ function populateFoods() {
         }
     });
 }
-function populateOrders(roomNo) {
+function populateOrders(checkInId) {
     $.ajax({
         url: 'pages/api/getAddedOrders.php',
         dataType: 'json',
-        data: "roomNo=" + roomNo,
+        data: "checkInId=" + checkInId,
         success: function (data) {
             var TotalOrders = 0;
             $('#ordersTable').html("");
@@ -191,7 +192,7 @@ function editOrder(id, menuName, quantity, remaining){
                             $.ajax({
                                 url: 'pages/api/updateCheckInOrder.php',
                                 data: {
-                                    roomNo: roomNo,
+                                    checkInId: checkInId,
                                     foodsId: id,
                                     quantity: inputtedQuantity,
                                     newCount: newCount
@@ -199,7 +200,7 @@ function editOrder(id, menuName, quantity, remaining){
                                 type: "POST",
                                 success: function () {
                                     populateFoods();
-                                    populateOrders(roomNo);
+                                    populateOrders(checkInId);
                                     displayMessage("", "Order Updated Succesfully");
                                 }
                             });
@@ -236,7 +237,7 @@ function createExtraTable(id, description, cost) {
 function addExtra(id){
     $.ajax({
         url: 'pages/api/insertCheckinExtras.php',
-        data: "roomNo=" + roomNo + "&extrasId=" + id,
+        data: "checkInId=" + checkInId + "&extrasId=" + id,
         type: "POST",
         success: function () {
             populateAddedExtraTable();   
@@ -277,7 +278,7 @@ function addFoods(id, menuName,remaining){
                             $.ajax({
                                 url: 'pages/api/insertCheckInOrder.php',
                                 data: {
-                                    roomNo: roomNo,
+                                    checkInId: checkInId,
                                     foodsId: id,
                                     quantity: quantity,
                                     newCount: newCount
@@ -285,7 +286,7 @@ function addFoods(id, menuName,remaining){
                                 type: "POST",
                                 success: function () {
                                     populateFoods();
-                                    populateOrders(roomNo);
+                                    populateOrders(checkInId);
                                     displayMessage("", "Food Added Succesfully");
                                 }
                             });
@@ -313,7 +314,7 @@ function populateAddedExtraTable(){
     $.ajax({
         url: 'pages/api/getAddedExtras.php',
         dataType: 'json',
-        data: "roomNo=" + roomNo,
+        data: "checkInId=" + checkInId,
         type: "POST",
         success: function (data) {
             var TotalExtras = 0;
@@ -359,11 +360,11 @@ function deleteAddedExtra(id) {
 function printOrders() {
     $.ajax({
         url: 'pages/api/getCheckInDetails.php',
-        data: "roomNo=" + roomNo,
+        data: "checkInId=" + checkInId,
         dataType: 'json',
         success: function (data) {
             var checkinId = data[0].checkInId;
-            window.open("pages/pdf/orderReceipt.php?checkInId=" + checkinId);
+            window.open("pages/pdf/orderReceipt.php?checkInId=" + checkInId);
         }
     });
 }
@@ -371,26 +372,26 @@ function printOrders() {
 function printBilling() {
     $.ajax({
         url: 'pages/api/getCheckoutDetails.php',
-        data: "roomNo=" + roomNo,
+        data: "checkInId=" + checkInId,
         dataType: 'json',
         success: function (data) {
-            var checkinId = data[0].checkInId;
-            window.open("pages/pdf/billingReceipt.php?checkInId=" + checkinId);
+           // var checkinId = data[0].checkInId;
+            window.open("pages/pdf/billingReceipt.php?checkInId=" + checkInId);
         }
     });
 }
 function checkOutNow(){
     $.confirm({
         title: 'Checkout Confirmation',
-        content: 'Are you sure you want to Checkout Room ' + roomNo,
+        content: 'Are you sure you want to Checkout',
         buttons: {
             confirm: function () {
-                //window.location = "index.php";
                 $.ajax({
                     url: 'pages/api/insertCheckOut.php',
-                    data: "roomNo=" + roomNo,
+                    data: "checkInId=" + checkInId,
                     success: function (data) {
                         printBilling();
+                        // window.location = "index.php";
                     }
                 });
             },

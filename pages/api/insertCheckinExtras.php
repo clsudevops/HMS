@@ -7,16 +7,9 @@
     // Create connection
     $conn = mysqli_connect($servername, $username, $password,$db);
 
-    $roomNo = $_POST['roomNo']; 
+    $checkInId = $_POST['checkInId']; 
     $extrasId = $_POST['extrasId'];
     $quantity = 0;
-
-    $select = "Select checkInId from checkindetails where roomNo = '". $roomNo ."'";
-    $result = mysqli_query($conn, $select);
-
-    while($row = mysqli_fetch_assoc($result)) {
-        $checkInId = $row['checkInId'];
-    }
 
     $stmt = $conn->prepare("Select quantity from addedextras where checkInId = ? and extrasId = ?");
     $stmt->bind_param('ii', $checkInId, $extrasId); 

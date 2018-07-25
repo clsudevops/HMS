@@ -7,14 +7,7 @@
     // Create connection
     $conn = mysqli_connect($servername, $username, $password,$db);
     
-    $roomNo = $_POST['roomNo']; 
-
-    $select = "Select checkInId from checkindetails where roomNo = '". $roomNo ."'";
-    $result = mysqli_query($conn, $select);
-
-    while($row = mysqli_fetch_assoc($result)) {
-        $checkInId = $row['checkInId'];
-    }
+    $checkInId = $_POST['checkInId']; 
 
     $stmt = $conn->prepare("Select A.id, A.checkinId , A.extrasId, A.quantity, B.description, B.cost from addedextras A inner join extras B on A.extrasId = B.id where checkInId = ?");
     $stmt->bind_param('i', $checkInId); 

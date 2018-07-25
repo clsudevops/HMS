@@ -17,7 +17,8 @@
       DATE_FORMAT(checkOutDate,'%h:%i:%s %p') As checkOutTime,
     (case when ((case when now() >= checkOutDate then DATEDIFF(now() , checkIn) else DATEDIFF(now() , checkIn) + 1 End)) = 0 then 1 else (case when now() >= checkOutDate then DATEDIFF(now() , checkIn) else DATEDIFF(now() , checkIn) + 1 End) End) as noOfDays,
     (case when checkOutDate <= now() then Hour(TimeDiff((DATE_FORMAT(now(),'%H:%i:%s')),
-    date_format(DATE_ADD(checkIn, INTERVAL DATEDIFF(now() , checkIn) DAY),'%H:%i:%s'))) else 0 END) as penaltyHours from checkoutdetails
+    date_format(DATE_ADD(checkIn, INTERVAL DATEDIFF(now() , checkIn) DAY),'%H:%i:%s'))) else 0 END) as penaltyHours
+    from checkoutdetails
     where checkInId = ?");
 
     $stmt->bind_param('i', $checkInId); 
@@ -45,8 +46,6 @@
         $ORNumber = $row['ORNumber'];
         $now = $row['dateNow'];
     }
-
-
 
     $mydate1 = strtotime($checkOutDate);
     $mydate2 = strtotime($now);

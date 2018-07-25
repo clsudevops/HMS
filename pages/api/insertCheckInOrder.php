@@ -7,17 +7,10 @@
     // Create connection
     $conn = mysqli_connect($servername, $username, $password,$db);
 
-    $roomNo = $_POST['roomNo']; 
+    $checkInId = $_POST['checkInId']; 
     $foodsId = $_POST['foodsId'];
     $quantity = $_POST['quantity'];
     $newCount = $_POST['newCount'];
-
-    $select = "Select checkInId from checkindetails where roomNo = '". $roomNo ."'";
-    $result = mysqli_query($conn, $select);
-
-    while($row = mysqli_fetch_assoc($result)) {
-        $checkInId = $row['checkInId'];
-    }
 
     $stmt1 = $conn->prepare("Select count(*) as total from addedfoods where checkinId = ? and foodsId = ?");
     $stmt1->bind_param('ii', $checkInId,$foodsId); 
