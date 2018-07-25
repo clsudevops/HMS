@@ -1,7 +1,10 @@
 <ul id="slide-out" class="sidenav sidenav-fixed">
     <li>
         <div class="user-view">
-            <span class="name" style="margin:15px 0;"><?php echo $_SESSION["username"]; ?></span>
+        <span class="name" style="position:absolute; left:110px;"><?php echo strtoupper($_SESSION["username"]) ?></span>
+        <span class="name" style="position:absolute; left:110px; top:35px;"><?php echo strtoupper($_SESSION["type"]) ?></span>
+            <a><img class="circle" src="includes/images/account.png"></a>
+            
         </div>
     </li>
     <li><div class="divider user-divider"></div></li>

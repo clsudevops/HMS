@@ -86,10 +86,12 @@ h5{
 }
 
 .page-header{
-    background-color: #2b2929;
-    opacity: 0.8;
+    /* background-color: #2b2929; */
+    background-color: #616161;
+    /* opacity: 0.8; */
     height: 50px;
     color: white;
+    /* box-shadow: none !important; */
 }
 .page-header2{
     /* background-color: #81c784; */
@@ -182,11 +184,11 @@ footer {
 }
 
 .sidenav .user-view{
-    padding: 5px 32px;
+    padding: 12px 32px;
     margin: 0;
     /* background-color: gray; */
-    background-color: #11afdb;
-    color:white;
+    /* background-color: #11afdb; */
+    /* color:white; */
 }
 .sidenav .user-divider{
     margin: 0;

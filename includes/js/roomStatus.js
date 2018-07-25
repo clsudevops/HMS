@@ -391,7 +391,7 @@ function checkOutNow(){
                     data: "checkInId=" + checkInId,
                     success: function (data) {
                         printBilling();
-                        // window.location = "index.php";
+                        window.location = "index.php";
                     }
                 });
             },

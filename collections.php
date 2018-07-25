@@ -50,7 +50,7 @@
                             </a>
                         </div>
                         <div class="col s12 m12 valign-wrapper" style="margin:15px 0;">
-                            <h5 id="collectionTitle" style="margin:0;">Today's Collections</h5>
+                            <h5 id="collectionTitle" style="margin:0;">Collections Report</h5>
                             <a class="btn btn-1" onclick="printCollection()" style="position:absolute; right:20px;"><i class="material-icons left">print</i>Print</a>
                         </div>
                     </div>

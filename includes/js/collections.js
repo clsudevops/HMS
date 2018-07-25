@@ -1,5 +1,6 @@
 var query = "select checkInId,roomNo,ORNumber,collection,date_format(date_collected, '%M %d, %Y') as date_collected from billing A inner join checkout B on A.checkInId = B.id where date_format(date_collected, '%Y-%m-%d') = curdate()";
-
+var from = getCurrentDate();
+var to = getCurrentDate();
 $(document).ready(function () { 
     populateCollection();
 });
@@ -11,11 +12,11 @@ function populateCollection(){
         type: 'POST',
         data: {
             'query' : query
-            // 'description' : search
         },
         dataType: 'json',
         success: function (data) {
             loopRoomCollections(data);
+            M.AutoInit();
         }
     });
 }
@@ -39,24 +40,22 @@ function createCollectionsTable(checkInId, roomNo, ORNumber, collection, date_co
         '<td>' + ORNumber + '</td>' +
         '<td>' + collection + '</td>' +
         '<td>' + date_collected + '</td>' +
-        '<td><a class="btn btn-flat btn-2 tooltipped" data-tooltip="View" onclick="viewReceipt(' + checkInId +')" "><i class="material-icons">pageview</i></a></td>' +
+        '<td><a class="btn btn-flat btn-2 tooltipped" data-tooltip="View" onclick="viewReceipt(' + checkInId +')" "><i class="material-icons">open_in_new</i></a></td>' +
         '</tr>'
     return myCollections;
 }
+
 function viewReceipt(checkInId){
-    // $.ajax({
-    //     url: 'pages/api/getCheckoutDetails.php',
-    //     data: "roomNo=" + roomNo,
-    //     dataType: 'json',
-    //     success: function (data) {
-            window.open("pages/pdf/billingReceiptCollection.php?checkInId=" + checkInId);
-    //     }
-    // });
+    window.open("pages/pdf/billingReceiptCollection.php?checkInId=" + checkInId);
 }
+function printCollection(){
+    window.open("pages/pdf/Collections.php?from=" + from + "&to=" + to);
+}
+
 function changeQuery(){
     if ($('#from').val() != "" || $('#from').val() != ""){
-        var from = $('#from').val();
-        var to = $('#to').val();
+        from = $('#from').val();
+        to = $('#to').val();
         from = getMyDate(from);
         to = getMyDate(to);
         query = "select checkInId,roomNo,ORNumber,collection,date_format(date_collected, '%M %d, %Y') as date_collected from billing A inner join checkout B on A.checkInId = B.id where date_format(date_collected, '%Y-%m-%d') >= '"+ from +"' and date_format(date_collected, '%Y-%m-%d') <= '"+ to +"'";
