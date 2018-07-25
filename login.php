@@ -1,8 +1,15 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <?php include('cssInclude.php') ?>
+    <?php 
+        include('cssInclude.php');
+        if(isset($_SESSION['username'])){
+            header("Location:index.php");  
+        }
+    ?>
 </head>
 
 <body>
