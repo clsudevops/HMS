@@ -12,8 +12,11 @@ $(document).ready(function () {
                 type: "POST",
                 data: "type=" + type + "&maxAdult=" + maxAdult + "&maxChildren=" + maxChildren,
                 success: function () {
-                    $('#typeName').val(""); $('#maxAdult').val(""); $('#maxChildren').val("");
+                    $('#typeName').val("");
+                    $('#maxAdult').val("");
+                    $('#maxChildren').val("");
                     populateRoomTypes();
+                   
                 }
             });
         }
@@ -69,6 +72,14 @@ function deleteRoomType(id){
         data: "id=" + id,
         success: function () {
             populateRoomTypes();
+            $.alert({
+                title: 'Status',
+                content: 'Room Type Deleted Succesfully!!!',
+                boxWidth: '40%',
+                theme: 'dark',
+                useBootstrap: false
+            });
+            M.AutoInit();
         }
     });
 }

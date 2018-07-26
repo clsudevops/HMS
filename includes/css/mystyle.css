@@ -95,7 +95,8 @@ h5{
 }
 .page-header2{
     /* background-color: #81c784; */
-    background-color: #11afdb;
+    /* background-color: #11afdb; */
+    background-color: #2196f3;
     /* opacity: 0.7; */
     height: 40px;
     color: white;
@@ -113,7 +114,8 @@ input[type="submit"]{
 
 .btn-1{
     /* background-color: #49d166; */
-    background-color: #11afdb;
+    /* background-color: #11afdb; */
+    background-color: #2196f3;
 }
 .btn-3{
     /* background-color: #49d166; */
@@ -126,9 +128,11 @@ input[type="submit"]{
     color: white;
 }
 .btn-2{
-    background-color:  #2b2929;
-    color:white;
-    opacity: 0.8;
+    /* background-color:  #2b2929; */
+    /* background-color: #2196f3; */
+    background-color: whitesmoke;
+    color:#1e1e1e;
+    /* border-radius: 180px !important; */
 }
 /* cards Container */
 
@@ -280,19 +284,23 @@ input[type=time]:not(.browser-default) {
 /* room status backgrounds */
 
 .Vacant{
-    background-color: #81c784;
+    /* background-color: #81c784; */
+     background-color: #4caf50;
 }
 .Cleaning{
-    background-color: #4fc3f7;
+    /* background-color: #4fc3f7; */
+    background-color: #2196f3;
 }
 .Occupied{
-    background-color: #e57373;
+    /* background-color: #e57373;*/
+     background-color: #f44336;
 }
 .Maintenance{
-    background-color: #ffb74d;
+    /* background-color: #ffb74d; */
+    background-color: #ff9800;
 }
 .checkout{
-    background-color: #eeff41;
+    background-color: #ffeb3b;
 }
 .penalty{
     background-color: #fb8c00;

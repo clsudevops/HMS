@@ -73,6 +73,13 @@ function deleteFoods(id) {
         data: "id=" + id,
         success: function () {
             populateFoods();
+            $.alert({
+                title: 'Status',
+                content: 'Menu Deleted Succesfully!!!',
+                boxWidth: '40%',
+                theme: 'dark',
+                useBootstrap: false
+            });
             M.AutoInit();
         }
     });
