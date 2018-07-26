@@ -10,15 +10,17 @@
     $username = $_GET['username']; 
     
     if($username != ""){
-        $stmt = $conn->prepare("Select * from loginnames where username like ?");
-        $stmt->bind_param('i', $username); 
-        $stmt->execute();
+        $select = "Select * from loginnames where username like  '%". $username ."%'";
+        // $result = mysqli_query($conn, $select);
+        // $stmt->bind_param('s', $username); 
+        // $stmt->execute();
     }
     else{
-        $stmt = $conn->prepare("Select * from loginnames");
-        $stmt->execute();
+        $select = "Select * from loginnames where username like  '%". $username ."%'";
+        
     }
-    $result = $stmt->get_result() or die($conn->error);
+    $result = mysqli_query($conn, $select);
+    // $result = $stmt->get_result() or die($conn->error);
 
     $rows = array();
     while($row = mysqli_fetch_assoc($result)) {

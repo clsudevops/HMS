@@ -1,7 +1,10 @@
 $('#sign_in').on("click",function(){
+    login();
+});
+function login(){
     var username = $('#username').val();
     var password = $('#password').val();
-    if(username != "" && password != ""){
+    if (username != "" && password != "") {
         $.ajax({
             url: 'pages/api/getLogin.php',
             data: {
@@ -31,8 +34,13 @@ $('#sign_in').on("click",function(){
             }
         });
     }
-    else{
+    else {
         displayMessage("", "Please provide input for username or password");
     }
-    
-});
+}
+
+window.addEventListener('keyup', function (e) {
+    if (e.keyCode === 13) {
+        login();
+    }
+}, false);

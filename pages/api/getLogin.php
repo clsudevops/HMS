@@ -10,7 +10,7 @@
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $stmt = $conn->prepare("select * from loginNames where username = ? and password = ? and onhold != 1");
+    $stmt = $conn->prepare("select * from loginNames where username = ? and password = ?");
     $stmt->bind_param('ss', $username, $password); 
     $stmt->execute();
     

@@ -48,7 +48,7 @@
                                     <tr>
                                         <th>User Name</th>
                                         <th>Account Type</th>
-                                        <th style="width:23%;">Action</th>
+                                        <th style="width:30%;">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody id="accountsTable">

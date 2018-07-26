@@ -1,64 +1,59 @@
 $(document).ready(function () {
-    populateRooms();
+    populateAccounts();
 
     $("#submitAccount").on("click", function () {
         var userName = $('#userName').val();
         var passWord = $('#passWord').val();
         var accountType = $('#accountType').val();
         var confirmPassWord = $('#confirmPassWord').val();
-        // displayMessage("",accountType);
-
-        // if (userName != "" && passWord != "" && accountType != "" && confirmPassWord != "") {
-        //     if(passWord == confirmPassWord){
-        //        displayMessage("","tama");
-        //     }
-        //     else{
-        //         displayMessage("", "Password does not match");
-        //     }
-        //     // $.ajax({
-        //     //     url: 'pages/api/insertAccount.php',
-        //     //     type: "POST",
-        //     //     data: "username=" + userName + "&password=" + passWord + "&accountType=" + accountType,
-        //     //     success: function () {
-        //     //         $('#userName').val("");
-        //     //         $('#passWord').val("");
-        //     //         $('#accountType').val("");
-        //     //         $('#confirmPassWord').val("");
-        //     //         populateRooms();
-        //     //         clearRoom();
-        //     //         $.alert({
-        //     //             title: 'Status',
-        //     //             content: 'Saved Succesfully!!!',
-        //     //             boxWidth: '40%',
-        //     //             theme: 'dark',
-        //     //             useBootstrap: false
-        //     //         });
-        //     //     }
-        //     // });
-        // }
-        // else{
-        //     displayMessage("","Pleas Fill up all textfields");
-        // }
+        
+        if (userName != "" && passWord != "" && accountType != "" && confirmPassWord != "") {
+            if (accountType != null) {
+                if (passWord == confirmPassWord) {
+                    $.ajax({
+                        url: 'pages/api/insertAccount.php',
+                        type: "POST",
+                        data:{
+                            userName: userName,
+                            passWord: passWord,
+                            accountType : accountType
+                        },
+                        success: function () {
+                            $('#userName').val("");
+                            $('#passWord').val("");
+                            $('#accountType').val("");
+                            $('#confirmPassWord').val("");
+                            populateAccounts();
+                            $.alert({
+                                title: 'Status',
+                                content: 'Account Created Succesfully!!!',
+                                boxWidth: '40%',
+                                theme: 'dark',
+                                useBootstrap: false
+                            });
+                        }
+                    });
+                }
+                else{
+                    displayMessage("", "Password does not match");
+                }
+            }
+            else{
+                displayMessage("", "Please Select Account Type");
+            }
+        }
+        else {
+            displayMessage("", "Please Fill up all textfields");
+        }
     });
 
     $("#search").on("keyup", function () {
-        populateRooms();
+        populateAccounts();
     });
 
 });
-// function clearRoom() {
-//     $('#roomNo').val("");
-//     $('#rate').val("");
-//     $('#rateperhour').val("");
-//     $('#roomType').val("1");
-//     $('#roomFloor').val("1");
-//     $('#roomNo').prop("disabled", false);
-//     $('#roomType').prop("disabled", false);
-//     $('#roomFloor').prop("disabled", false);
 
-//     M.AutoInit();
-// }
-function populateRooms() {
+function populateAccounts() {
     var search = $('#search').val();
     $.ajax({
         url: 'pages/api/getAccountsList.php',
@@ -72,7 +67,7 @@ function populateRooms() {
 }
 
 function loopAccountsList(data) {
-    $('#roomTable').html("");
+    $('#accountsTable').html("");
     for (var i = 0; i < data.length; i++) {
         var username = data[i].username;
         var password = data[i].password;
@@ -87,7 +82,10 @@ function createAccountsTable(username, password, accountType, onhold) {
     var myAccounts = '<tr>' +
         '<td>' + username + '</td>' +
         '<td>' + accountType + '</td>' +
-        '<td><a class="btn btn-flat btn-2 tooltipped" style="margin-right:5px;" onclick="viewPass(\'' + password + '\')" data-tooltip="View Password"><i class="material-icons">visibility</i></a>' +
+        '<td>' +
+            '<a class="btn btn-flat btn-2 tooltipped" style="margin-right:5px;" onclick="viewPass(\'' + password + '\')" data-tooltip="View Password"><i class="material-icons">visibility</i></a>' +
+            '<a class="btn btn-flat btn-2 tooltipped" style="margin-right:5px;" onclick="deleteAccount(\'' + username + '\')" data-tooltip="Delete Account"><i class="material-icons">delete</i></a>' +
+        '</td>' +
         '</tr>'
     return myAccounts;
 }
@@ -98,19 +96,19 @@ function viewPass(password){
 
 function deleteAccount(id) {
     $.ajax({
-        url: 'pages/api/deleteRoom.php',
+        url: 'pages/api/deleteAccount.php',
         type: "POST",
         data: "id=" + id,
         success: function () {
-            populateRooms();
-            clearRoom();
+            populateAccounts();
             $.alert({
                 title: 'Status',
-                content: 'Room ' + id + 'Deleted Succesfully!!!',
+                content: 'Account ' + id + ' Deleted Succesfully!!!',
                 boxWidth: '40%',
                 theme: 'dark',
                 useBootstrap: false
             });
+            M.AutoInit();
         }
     });
 }

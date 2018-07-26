@@ -1,5 +1,13 @@
+<?php session_start(); ?>
 <?php
-
+    if(!isset($_SESSION['username'])){
+        header("Location: ../../login.php");  
+    }
+    else{
+        $username = $_SESSION["username"];
+        $type = $_SESSION["type"];
+    }
+    
     require '../../connection.php';
     require '../../vendor/autoload.php';
     use Dompdf\Dompdf;
