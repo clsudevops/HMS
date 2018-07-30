@@ -171,13 +171,9 @@
                                                     <td><input id="checkOutUpdate" placeholder="" type="text" class="datepicker" style="height:36px; line-height:36px;"></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Time:</td>
-                                                    <td><input id="checkOutUpdate" placeholder="" type="text" class="datepicker" style="height:36px; line-height:36px;"></td>
-                                                </tr>
-                                                <tr>
                                                     <td></td>
                                                     <td>
-                                                        <a class="btn right btn-1" id="submitRoom" style="margin-left:5px; height:36px; line-height:36px;">
+                                                        <a class="btn right btn-1" id="updateCheckOut" style="margin-left:5px; height:36px; line-height:36px;">
                                                             <i class="material-icons left" style="margin-right:10px;">
                                                                 save
                                                             </i>

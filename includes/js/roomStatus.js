@@ -380,6 +380,7 @@ function printBilling() {
         }
     });
 }
+
 function checkOutNow(){
     $.confirm({
         title: 'Checkout Confirmation',
@@ -404,3 +405,33 @@ function checkOutNow(){
         useBootstrap: false
     });
 }
+$('#updateCheckOut').on("click", function() {
+    newCheckOutDate = $('#checkOutUpdate').val();
+    newCheckOutDate = getMyDateTime(newCheckOutDate);
+
+    $.confirm({
+        title: 'Checkout Date Confirmation',
+        content: 'Are you sure you want to update Checkout Date',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url: 'pages/api/updateCheckoutDate.php',
+                    type: "POST",
+                    data: {
+                        checkInId : checkInId,
+                        newCheckOutDate : newCheckOutDate
+                    },
+                    success: function (data) {
+                        window.location = window.location.href;
+                    }
+                });
+            },
+            cancel: function () {
+
+            },
+        },
+        theme: 'dark',
+        boxWidth: '35%',
+        useBootstrap: false
+    });
+})

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 26, 2018 at 11:36 AM
+-- Generation Time: Jul 27, 2018 at 11:45 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.4
 
@@ -81,7 +81,8 @@ CREATE TABLE `billing` (
 
 INSERT INTO `billing` (`ORNumber`, `checkInId`, `collection`, `date_collected`) VALUES
 (2, 2, 0, '0000-00-00 00:00:00'),
-(3, 3, 8800, '2018-07-26 17:32:38');
+(3, 3, 8800, '2018-07-26 17:32:38'),
+(100001, 4, 0, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -104,7 +105,8 @@ CREATE TABLE `checkin` (
 --
 
 INSERT INTO `checkin` (`id`, `roomNo`, `guestId`, `checkIn`, `checkOutDate`, `adultsCount`, `childrenCount`) VALUES
-(2, '1', 1, '2018-07-26 09:30:44', '2018-07-27 17:30:44', 2, 2);
+(2, '1', 1, '2018-07-26 09:30:44', '2018-07-27 17:30:44', 2, 2),
+(4, '4', 3, '2018-07-27 06:23:44', '2018-07-31 14:23:44', 2, 2);
 
 -- --------------------------------------------------------
 
@@ -201,8 +203,7 @@ INSERT INTO `extras` (`id`, `description`, `cost`) VALUES
 (1, 'ToothBrush', 50),
 (2, 'Pillow', 200),
 (3, 'Bed', 500),
-(4, 'Blanket', 100),
-(5, 'Soap', 50);
+(4, 'Blanket', 100);
 
 -- --------------------------------------------------------
 
@@ -271,7 +272,8 @@ CREATE TABLE `guests` (
 
 INSERT INTO `guests` (`id`, `name`, `mobile`, `companyName`, `companyAddress`, `isCheckIn`) VALUES
 (1, 'Mark Joseph Castelo', '0975296102', '', '', b'1'),
-(2, 'Abigail Mariano', '09153960030', 'Ewaan', 'Robinson', b'0');
+(2, 'Abigail Mariano', '09153960030', 'Ewaan', 'Robinson', b'0'),
+(3, 'Electric Fan', '131231', '', '', b'1');
 
 -- --------------------------------------------------------
 
@@ -390,9 +392,9 @@ INSERT INTO `rooms` (`roomNo`, `roomType`, `floor`, `rate`, `rateperhour`, `stat
 (1, 1, '1', 5000, 200, 'Occupied', '2018-07-26 08:00:02'),
 (2, 6, '1', 15000, 500, 'Maintenance', '2018-07-26 08:00:18'),
 (3, 1, '1', 3000, 200, 'Maintenance', '2018-07-26 08:00:29'),
-(4, 1, '1', 2500, 100, 'Vacant', '2018-07-26 08:00:38'),
+(4, 1, '1', 2500, 100, 'Occupied', '2018-07-26 08:00:38'),
 (5, 2, '1', 7000, 300, 'Cleaning', '2018-07-26 08:00:52'),
-(6, 7, '1', 8000, 100, 'Cleaning', '2018-07-26 08:01:07'),
+(6, 7, '1', 8000, 100, 'Vacant', '2018-07-26 08:01:07'),
 (7, 6, '1', 5000, 300, 'Vacant', '2018-07-26 09:35:48');
 
 -- --------------------------------------------------------
@@ -556,13 +558,13 @@ ALTER TABLE `addedfoods`
 -- AUTO_INCREMENT for table `billing`
 --
 ALTER TABLE `billing`
-  MODIFY `ORNumber` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100001;
+  MODIFY `ORNumber` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100002;
 
 --
 -- AUTO_INCREMENT for table `checkin`
 --
 ALTER TABLE `checkin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `checkout`
@@ -586,7 +588,7 @@ ALTER TABLE `foods`
 -- AUTO_INCREMENT for table `guests`
 --
 ALTER TABLE `guests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `reservations`

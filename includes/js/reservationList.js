@@ -43,16 +43,63 @@ function createReservationTable(id,name, contact, roomNo, checkindate, checkoutd
         '<td>' + checkindate + '</td>' +
         '<td>' + checkoutdate + '</td>' +
         '<td>' +
-        '<a class="btn btn-1 tooltipped modal-trigger Vacant" href="" onclick="bookNow('+ id +')" data-tooltip="Book Now" style="margin-right:5px;"><i class="material-icons left">exit_to_app</i></a>' +
-        '<a class="btn btn-1 tooltipped modal-trigger Cleaning" href="" onclick="" data-tooltip="Cancel Reservation" style="margin-right:5px;"><i class="material-icons left">clear</i></a>' +
-        '<a class="btn btn-1 tooltipped modal-trigger Maintenance" href="" onclick="" data-tooltip="View Details" style="margin-right:5px;"><i class="material-icons left">pageview</i></a>' +
+        '<a class="btn btn-1 tooltipped Vacant" onclick="bookNow(\'' + id + '\')" data-tooltip="Book Now" style="margin-right:5px;"><i class="material-icons left">exit_to_app</i></a>' +
+        '<a class="btn btn-1 tooltipped Cleaning" onclick="" data-tooltip="Cancel Reservation" style="margin-right:5px;"><i class="material-icons left">clear</i></a>' +
+        '<a class="btn btn-1 tooltipped Maintenance" onclick="" data-tooltip="View Details" style="margin-right:5px;"><i class="material-icons left">pageview</i></a>' +
         '</td>' +
         '</tr>'
     return myRoom;
 }
 
 function bookNow(id) {
-  alert(id);
+    $.ajax({
+            url: 'pages/api/getReservationDetails.php',
+            data: "id=" + id,
+            dataType: 'json',
+            success: function (data) {
+                roomNo = data[0].roomNo;
+                name = data[0].name;
+                mobile = data[0].mobile;
+                compName = data[0].compName;
+                compAddress = data[0].compAddress;
+                checkOutDate = data[0].checkOutDate;
+                adultsCount = data[0].adultsCount;
+                childrensCount = data[0].childrensCount;
+
+                $.confirm({
+                    title: '',
+                    content: 'Book Now?',
+                    buttons: {
+                        confirm: function () {
+                            $.ajax({
+                                url: 'pages/api/insertBooking.php',
+                                type:"POST",
+                                data: {
+                                    reservationId: id,
+                                    roomNo: roomNo,
+                                    name: name,
+                                    mobile: mobile,
+                                    compName: compName,
+                                    compAddress: compAddress,
+                                    checkOutDate: checkOutDate,
+                                    adultsCount: adultsCount,
+                                    childrensCount: childrensCount
+                                },
+                                success: function (data) {
+                                    window.location = "index.php";
+                                }
+                            });
+                        },
+                        cancel: function () {
+
+                        },
+                    },
+                    theme: 'dark',
+                    boxWidth: '35%',
+                    useBootstrap: false
+                });
+            }
+    });
 }
 
 // function changeStatus(roomNo, status, curstatus) {

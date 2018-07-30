@@ -11,9 +11,6 @@
     
     if($username != ""){
         $select = "Select * from loginnames where username like  '%". $username ."%'";
-        // $result = mysqli_query($conn, $select);
-        // $stmt->bind_param('s', $username); 
-        // $stmt->execute();
     }
     else{
         $select = "Select * from loginnames where username like  '%". $username ."%'";

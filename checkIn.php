@@ -37,7 +37,7 @@
 
             // convert checkoutdate
             date_default_timezone_set('Asia/Manila');
-            $checkOutTime = date("H:i:s");
+            $checkOutTime = "23:59:59";
             $checkOut = $checkOutDate . " " . $checkOutTime;
             $checkOut = date('Y-m-d H:i:s' , strtotime($checkOut));
             // echo  $checkOut;

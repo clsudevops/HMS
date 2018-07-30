@@ -22,7 +22,7 @@ $(document).ready(function () {
 function populateRoomsRoomNo() {
     var search = $('#search').val();
     $.ajax({
-        url: 'pages/api/getRoomDetailsNotOccupied.php',
+        url: 'pages/api/getRoomDetailsNotMaintenance.php.php',
         data: "roomNo=" + search,
         dataType: 'json',
         success: function (data) {
@@ -33,7 +33,7 @@ function populateRoomsRoomNo() {
 }
 function populateRoomsType(type) {
     $.ajax({
-        url: 'pages/api/getRoomDetailsNotOccupied.php',
+        url: 'pages/api/getRoomDetailsNotMaintenance.php.php',
         data: "type=" + type,
         dataType: 'json',
         success: function (data) {
@@ -44,7 +44,7 @@ function populateRoomsType(type) {
 }
 function populateRoomsFloor(floor) {
     $.ajax({
-        url: 'pages/api/getRoomDetailsNotOccupied.php',
+        url: 'pages/api/getRoomDetailsNotMaintenance.php.php',
         data: "floor=" + floor,
         dataType: 'json',
         success: function (data) {
@@ -94,6 +94,7 @@ function submitReservationModal() {
     var compAddress = $('#compAddress').val();
     var checkindate = $('#checkindate').val();
     var checkoutdate = $('#checkoutdate').val();
+    checkoutdate = getMyDate1(checkoutdate);
     var adultsCount = $('#adultsCount').val();
     var childrenCount = $('#childrenCount').val();
     var idTypeSelect = $('#idTypeSelect').val();

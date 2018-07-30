@@ -24,7 +24,9 @@
 
     $stmt = $conn->prepare("Insert Into reservations(personal_id,personal_id_type,roomNo,name,mobile,compName,compAddress,checkInDate,checkOutDate,adultsCount,childrensCount) values(?,?,?,?,?,?,?,?,?,?,?)");
     $stmt->bind_param('sssssssssii', $personal_id,$personal_id_type,$roomNo,$name,$mobile,$compName,$compAddress,$checkInDate,$checkOutDate,$adultsCount,$childrensCount); 
+    $stmt->execute();
 
+    $stmt = $conn->prepare("Insert into billing(checkInId) values(select max(id) from checkin");
     $stmt->execute();
 
     $result = $stmt->get_result() or die($conn->error);

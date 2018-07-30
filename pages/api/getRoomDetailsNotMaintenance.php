@@ -10,10 +10,10 @@
     if(isset($_GET['roomNo'])){
         if($_GET['roomNo'] != ""){
             $roomNo = $_GET['roomNo'];
-            $select = "Select * from roomdetails where roomNo = '". $roomNo ."' and status not in('Occupied')";
+            $select = "Select * from roomdetails where roomNo = '". $roomNo ."' and status not in('Occupied','Maintenance')";
         }
         else{
-            $select = "Select * from roomdetails where status not in('Occupied')";
+            $select = "Select * from roomdetails where status not in('Occupied','Maintenance')";
         }
     }
 
