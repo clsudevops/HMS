@@ -44,11 +44,37 @@ function createReservationTable(id,name, contact, roomNo, checkindate, checkoutd
         '<td>' + checkoutdate + '</td>' +
         '<td>' +
         '<a class="btn btn-1 tooltipped Vacant" onclick="bookNow(\'' + id + '\')" data-tooltip="Book Now" style="margin-right:5px;"><i class="material-icons left">exit_to_app</i></a>' +
-        '<a class="btn btn-1 tooltipped Cleaning" onclick="" data-tooltip="Cancel Reservation" style="margin-right:5px;"><i class="material-icons left">clear</i></a>' +
+        '<a class="btn btn-1 tooltipped Cleaning" onclick="cancelReservation(\'' + id + '\')" data-tooltip="Cancel Reservation" style="margin-right:5px;"><i class="material-icons left">clear</i></a>' +
         '<a class="btn btn-1 tooltipped Maintenance" onclick="" data-tooltip="View Details" style="margin-right:5px;"><i class="material-icons left">pageview</i></a>' +
         '</td>' +
         '</tr>'
     return myRoom;
+}
+
+function cancelReservation(id){
+    $.confirm({
+        title: '',
+        content: 'Are you sure you want to cancel Reservation?',
+        buttons: {
+            confirm: function () {
+                $.ajax({
+                    url: 'pages/api/deleteReservation.php',
+                    type: "POST",
+                    data: "id=" + id,
+                    success: function () {
+                        populateReservation();
+                        // M.AutoInit();
+                    }
+                });
+            },
+            cancel: function () {
+
+            },
+        },
+        theme: 'dark',
+        boxWidth: '35%',
+        useBootstrap: false
+    });
 }
 
 function bookNow(id) {

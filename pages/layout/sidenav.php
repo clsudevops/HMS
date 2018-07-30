@@ -12,7 +12,7 @@
     <!-- <li><a href="index.php"><i class="material-icons">event</i>Reservations</a></li> -->
     <ul class="collapsible collapsible-accordion">
         <li>
-            <a class="collapsible-header"><i class="material-icons">face</i>Reservations<i class="material-icons right">arrow_drop_down</i></a>
+            <a class="collapsible-header"><i class="material-icons">event_note</i>Reservations<i class="material-icons right">arrow_drop_down</i></a>
             <div class="collapsible-body">
                 <ul>
                     <li><a class="" href="bookReservation.php"><i class="material-icons">assignment</i>Book Reservation</a></li>
