@@ -1,12 +1,7 @@
 <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $db = "hms";
+    require("index.php");
 
-    // Create connection
-    $conn = mysqli_connect($servername, $username, $password,$db);
-
+    $pagination = "LIMIT ". $limit ." OFFSET ". $offset ."";
     if(isset($_GET['roomNo'])){
         if($_GET['roomNo'] != ""){
             $roomNo = $_GET['roomNo'];
@@ -27,9 +22,7 @@
         $select = "Select * from roomdetails where status != 'Occupied' and floor='". $floor ."'";
     }
 
-
-    // $select = "SELECT * from roomdetails order by createdDate desc";
-
+    $select .= $pagination; 
     $result = mysqli_query($conn, $select);
 
     $rows = array();

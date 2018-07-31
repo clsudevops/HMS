@@ -1,7 +1,10 @@
+var page = 1;
+var curpage = 1;
+
 $(document).ready(function () {
-    $(populateRoomsRoomNo());
+    $(populateRoomsRoomNo(page));
     $("#search").on("keyup", function () {
-        populateRoomsRoomNo();
+        populateRoomsRoomNo(pageNo);
     });
     $('#typeSelect').on("change", function () {
         var type = $('#typeSelect').val();
@@ -13,22 +16,34 @@ $(document).ready(function () {
     });
 });
 
-function populateRoomsRoomNo() {
+function populateRoomsRoomNo(pageNo) {
     var search = $('#search').val();
     $.ajax({
         url: 'pages/api/getRoomDetailsNotOccupied.php',
-        data: "roomNo=" + search,
+        data: {
+            roomNo : search,
+            page: pageNo
+        },
         dataType: 'json',
         success: function (data) {
-            loopRoomDetails(data);
-            M.AutoInit()
+        loopRoomDetails(data);
+            
+        $.getScript("includes/js/pagination.js", function () {
+            getPaginationData("roomdetails", 1, "populateRoomsRoomNo");
+            
+        });
+            // populateRoomsRoomNo(pageNo);
+            // M.AutoInit()
         }
     });
 }
 function populateRoomsType(type) {
     $.ajax({
         url: 'pages/api/getRoomDetailsNotOccupied.php',
-        data: "type=" + type,
+        data: {
+            type: type,
+            page: page
+        },
         dataType: 'json',
         success: function (data) {
             loopRoomDetails(data);
@@ -39,7 +54,10 @@ function populateRoomsType(type) {
 function populateRoomsFloor(floor) {
     $.ajax({
         url: 'pages/api/getRoomDetailsNotOccupied.php',
-        data: "floor=" + floor,
+        data: {
+            floor: floor,
+            page: page
+        },
         dataType: 'json',
         success: function (data) {
             loopRoomDetails(data);
@@ -51,6 +69,7 @@ function populateRoomsFloor(floor) {
 
 function loopRoomDetails(data) {
     $('#roomManagementTable').html("");
+    // $(".material-tooltip").html("");
     for (var i = 0; i < data.length; i++) {
         var roomNo = data[i].roomNo;
         var type = data[i].type;
@@ -85,7 +104,7 @@ function changeStatus(roomNo, status, curstatus){
             data: "roomNo=" + roomNo + "&status=" + curstatus,
             type: "POST",
             success: function () {
-                populateRoomsRoomNo();
+                populateRoomsRoomNo(curpage);
                 M.AutoInit()
                 $.alert({ title: 'Change status', content: 'Room Status Updated Succesfully', boxWidth: '40%', theme: 'dark', useBootstrap: false});
             },
@@ -105,4 +124,5 @@ function changeStatus(roomNo, status, curstatus){
     }
    
 }
+
 
