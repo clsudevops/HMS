@@ -2,6 +2,7 @@
     require("index.php");
 
     $pagination = "LIMIT ". $limit ." OFFSET ". $offset ."";
+    
     if(isset($_GET['roomNo'])){
         if($_GET['roomNo'] != ""){
             $roomNo = $_GET['roomNo'];

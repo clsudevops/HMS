@@ -1,9 +1,24 @@
-
 function changePage(i, returnfunction){
     curpage = i
-    // alert(returnfunction);
+    console.log(curpage);
     window[returnfunction](i);
 }
+
+function changeRight(returnfunction, noOfPage){
+    if (curpage < Math.floor(noOfPage)){
+        curpage = parseInt(curpage) + 1;
+        window[returnfunction](curpage);  
+    }
+}
+
+function changeLeft(returnfunction) {
+    console.log(curpage);
+    if (curpage > 1) {
+        curpage = parseInt(curpage) - 1;
+        window[returnfunction](curpage);
+    }
+}
+
 function createMyPagination(noOfPage, returnfunction) {
     $('#pagination').html("");
     $('#pagination').append(createPagination(noOfPage, returnfunction));
@@ -11,13 +26,13 @@ function createMyPagination(noOfPage, returnfunction) {
 }
 
 function createPagination(noOfPage, returnfunction) {
-    var myPagination = '<li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>';
+    var myPagination = '<li class="" id="move-left" onclick="changeLeft( \'' + returnfunction + '\')"><a href="#!"><i class="material-icons">chevron_left</i></a></li>';
 
     for (var i = 1; i <= noOfPage; i++) {
         myPagination = myPagination + '<li class="waves-effect" onclick="changePage(\'' + i + '\', \'' + returnfunction + '\')" id="page_' + i + '"><a>' + i + '</a></li>'
     }
 
-    myPagination = myPagination + '<li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>'
+    myPagination = myPagination + '<li id="move-right" class="waves-effect" onclick="changeRight( \'' + returnfunction + '\',\'' + noOfPage + '\')"><a href="#!"><i class="material-icons">chevron_right</i></a></li>'
     return myPagination;
 }
 

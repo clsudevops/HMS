@@ -49,7 +49,7 @@
                                 <?php
                                     if (mysqli_num_rows($result) > 0) {
                                         while($row = mysqli_fetch_assoc($result)) {
-                                            echo "<option value=" . $row["type"] .">". $row["type"] . "</option>";
+                                            echo "<option value='" . $row["type"] ."'>". $row["type"] . "</option>";
                                         }
                                     }
                                 ?> 

@@ -4,15 +4,13 @@ var curpage = 1;
 $(document).ready(function () {
     $(populateRoomsRoomNo(page));
     $("#search").on("keyup", function () {
-        populateRoomsRoomNo(pageNo);
+        populateRoomsRoomNo(page);
     });
     $('#typeSelect').on("change", function () {
-        var type = $('#typeSelect').val();
-        populateRoomsType(type);
+        populateRoomsType(page);
     });
     $('#floorSelect').on("change", function () {
-        var floor = $('#floorSelect').val();
-        populateRoomsFloor(floor);
+        populateRoomsFloor(page);
     });
 });
 
@@ -27,41 +25,45 @@ function populateRoomsRoomNo(pageNo) {
         dataType: 'json',
         success: function (data) {
         loopRoomDetails(data);
-            
-        $.getScript("includes/js/pagination.js", function () {
-            getPaginationData("roomdetails", 1, "populateRoomsRoomNo");
-            
-        });
-            // populateRoomsRoomNo(pageNo);
-            // M.AutoInit()
+            //calls function for pagination 
+            if(search != ""){forPagination("roomdetails", "roomNo = '" + search + "' and status not in('Occupied')", "populateRoomsRoomNo");}
+            else{forPagination("roomdetails", "status not in('Occupied')", "populateRoomsRoomNo");}
+            // M.AutoInit();
         }
     });
 }
-function populateRoomsType(type) {
+function populateRoomsType(pageNo) {
+    var type = $('#typeSelect').val();
     $.ajax({
         url: 'pages/api/getRoomDetailsNotOccupied.php',
         data: {
             type: type,
-            page: page
+            page: pageNo
         },
         dataType: 'json',
         success: function (data) {
             loopRoomDetails(data);
-            M.AutoInit()
+            // for pagination
+            forPagination("roomdetails", "status != 'Occupied' and type='" + type + "'", "populateRoomsType");
+            // M.AutoInit();
         }
     });
 }
-function populateRoomsFloor(floor) {
+
+function populateRoomsFloor(pageNo) {
+    var floor = $('#floorSelect').val();
     $.ajax({
         url: 'pages/api/getRoomDetailsNotOccupied.php',
         data: {
             floor: floor,
-            page: page
+            page: pageNo
         },
         dataType: 'json',
         success: function (data) {
             loopRoomDetails(data);
-            M.AutoInit()
+            // for pagination
+            forPagination("roomdetails", "status != 'Occupied' and floor='" + floor + "'", "populateRoomsFloor");
+            // M.AutoInit();
         }
     });
 }
@@ -69,14 +71,13 @@ function populateRoomsFloor(floor) {
 
 function loopRoomDetails(data) {
     $('#roomManagementTable').html("");
-    // $(".material-tooltip").html("");
     for (var i = 0; i < data.length; i++) {
         var roomNo = data[i].roomNo;
         var type = data[i].type;
         var floor = data[i].floor;
         var rate = data[i].rate;
         var status = data[i].status;
-
+        
         $('#roomManagementTable').append(createRoomTable(roomNo, type, floor, rate, status));
     }
 }
@@ -105,7 +106,7 @@ function changeStatus(roomNo, status, curstatus){
             type: "POST",
             success: function () {
                 populateRoomsRoomNo(curpage);
-                M.AutoInit()
+                // M.AutoInit()
                 $.alert({ title: 'Change status', content: 'Room Status Updated Succesfully', boxWidth: '40%', theme: 'dark', useBootstrap: false});
             },
             error: function (asd, asf, ass) {
@@ -122,7 +123,10 @@ function changeStatus(roomNo, status, curstatus){
             useBootstrap: false
         });
     }
-   
+}
+
+function forPagination(table, filter, returnFunction){
+    $.getScript("includes/js/pagination.js", function () { getPaginationData(table, filter, returnFunction); });
 }
 
 
