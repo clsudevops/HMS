@@ -32,13 +32,13 @@ function createMyPagination(noOfPage, returnfunction) {
 }
 
 function createPagination(noOfPage, returnfunction) {
-    var myPagination = '<li class="" id="move-left" onclick="changeLeft( \'' + returnfunction + '\')"><a href="#!"><i class="material-icons">chevron_left</i></a></li>';
+    var myPagination = '<li class="" id="move-left" onclick="changeLeft( \'' + returnfunction + '\')"><a><i class="material-icons">chevron_left</i></a></li>';
 
     for (var i = 1; i <= noOfPage; i++) {
         myPagination = myPagination + '<li class="waves-effect" onclick="changePage(\'' + i + '\', \'' + returnfunction + '\')" id="page_' + i + '"><a>' + i + '</a></li>'
     }
 
-    myPagination = myPagination + '<li id="move-right" class="waves-effect" onclick="changeRight( \'' + returnfunction + '\',\'' + noOfPage + '\')"><a href="#!"><i class="material-icons">chevron_right</i></a></li>'
+    myPagination = myPagination + '<li id="move-right" class="waves-effect" onclick="changeRight( \'' + returnfunction + '\',\'' + noOfPage + '\')"><a><i class="material-icons">chevron_right</i></a></li>'
     return myPagination;
 }
 

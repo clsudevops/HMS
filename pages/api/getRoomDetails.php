@@ -1,8 +1,6 @@
 <?php
     require("index.php");
 
-    $pagination = "LIMIT ". $limit ." OFFSET ". $offset ."";
-
     if($_GET['roomNo'] == ""){
         $select = "Select * from roomdetails order by createdDate asc ";
     }

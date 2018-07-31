@@ -23,7 +23,7 @@ $(document).ready(function () {
                     $('#roomFloor').val("");
                     $('#rate').val("");
                     $('#rateperhour').val("");
-                    populateRooms();
+                    populateRooms(curpage);
                     clearRoom();
                     $.alert({
                         title: 'Status',

@@ -495,12 +495,8 @@ span.guestName{
     margin-left: 2.7rem;
 }
 
-#pagination li.active{
-    /* background-color:  #2196f3; */
-     background-color:  white;
-    border: 1px solid #2196f3;
+#pagination li a{
+    cursor: pointer;
 }
-#pagination li.active a{
-    color:black;
-}
+
 
