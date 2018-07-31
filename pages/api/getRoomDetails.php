@@ -1,22 +1,18 @@
 <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $db = "hms";
+    require("index.php");
 
-    // Create connection
-    $conn = mysqli_connect($servername, $username, $password,$db);
+    $pagination = "LIMIT ". $limit ." OFFSET ". $offset ."";
 
     if($_GET['roomNo'] == ""){
-        $select = "Select * from roomdetails order by createdDate asc";
+        $select = "Select * from roomdetails order by createdDate asc ";
     }
     else{
         $roomNo = $_GET['roomNo'];
-        $select = "Select * from roomdetails where roomNo = '". $roomNo ."' order by createdDate desc";
+        $select = "Select * from roomdetails where roomNo = '". $roomNo ."' order by createdDate desc ";
     }
 
     // $select = "SELECT * from roomdetails order by createdDate desc";
-
+    $select .= $pagination; 
     $result = mysqli_query($conn, $select);
 
     $rows = array();

@@ -1,5 +1,8 @@
+var page = 1;
+var curpage = 1;
+
 $(document).ready(function () {
-    $(populateRoomTypes());
+    $(populateRoomTypes(page));
 
     $("#submitRoomType").on("click", function () {
         var type = $('#typeName').val();
@@ -15,30 +18,34 @@ $(document).ready(function () {
                     $('#typeName').val("");
                     $('#maxAdult').val("");
                     $('#maxChildren').val("");
-                    populateRoomTypes();
-                   
+                    populateRoomTypes(curpage);
                 }
             });
         }
     });
 
     $("#searchRoomType").on("click", function () {
-        populateRoomTypes();
+        populateRoomTypes(page);
     });
     $("#search").on("keyup", function () {
-        populateRoomTypes();
+        populateRoomTypes(page);
     });
 });
 
-function populateRoomTypes() {
+function populateRoomTypes(pageNo) {
     var search = $('#search').val();
     $.ajax({
         url: 'pages/api/getRoomTypes.php',
-        data: "type=" + search,
+        data: {
+            type: search,
+            page: pageNo
+        },
         dataType: 'json',
         success: function (data) {
             loopRoomTypes(data);
-            M.AutoInit();
+            if (search != "") { forPagination("roomTypes", "type like '%"+ type +"%'", "populateRoomTypes"); }
+            else { forPagination("roomTypes", 1, "populateRoomTypes"); }
+            // M.AutoInit();
         }
     });
 }
@@ -71,7 +78,7 @@ function deleteRoomType(id){
         type: "POST",
         data: "id=" + id,
         success: function () {
-            populateRoomTypes();
+            populateRoomTypes(curpage);
             $.alert({
                 title: 'Status',
                 content: 'Room Type Deleted Succesfully!!!',

@@ -1,5 +1,8 @@
+var page = 1;
+var curpage = 1;
+
 $(document).ready(function () {
-    populateRooms();
+    populateRooms(page);
 
     $("#submitRoom").on("click", function () {
         var roomNo = $('#roomNo').val();
@@ -35,7 +38,7 @@ $(document).ready(function () {
     });
 
     $("#search").on("keyup", function () {
-        populateRooms();
+        populateRooms(page);
     });
 
 });
@@ -51,15 +54,20 @@ function clearRoom(){
 
     M.AutoInit();
 }
-function populateRooms() {
+function populateRooms(pageNo) {
     var search = $('#search').val();
     $.ajax({
         url: 'pages/api/getRoomDetails.php',
-        data: "roomNo=" + search,
+        data: {
+            roomNo: search,
+            page: pageNo
+        },
         dataType: 'json',
         success: function (data) {
             loopRoomDetails(data);
-            M.AutoInit();
+            if (search != "") { forPagination("roomdetails", "roomNo = '" + search + "'", "populateRooms"); }
+            else { forPagination("roomdetails", 1, "populateRooms"); }
+            // M.AutoInit();
         }
     });
 }
@@ -135,7 +143,7 @@ function deleteRoom(id) {
         type: "POST",
         data: "id=" + id,
         success: function () {
-            populateRooms();
+            populateRooms(page);
             clearRoom();
             $.alert({
                 title: 'Status',

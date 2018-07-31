@@ -1,21 +1,17 @@
 <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $db = "hms";
+    require("index.php");
 
-    // Create connection
-    $conn = mysqli_connect($servername, $username, $password,$db);
+    $pagination = "LIMIT ". $limit ." OFFSET ". $offset ."";
     
     if($_GET['type'] == ""){
-        $select = "Select * from roomTypes";
+        $select = "Select * from roomTypes order by dateCreated desc ";
     }
     else{
         $type = $_GET['type'];
-        $select = "Select * from roomTypes where type like '%". $type ."%'";
+        $select = "Select * from roomTypes where type like '%". $type ."%' order by dateCreated desc ";
     }
 
-    // $select = "Select * from roomTypes";
+    $select .= $pagination; 
     $result = mysqli_query($conn, $select);
 
     $rows = array();

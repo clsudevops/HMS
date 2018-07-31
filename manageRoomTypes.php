@@ -56,6 +56,7 @@
                                     
                                 </tbody>
                             </table>
+                            <ul class="pagination right" id="pagination"></ul>
                         </div>
 
                         <div class="col s12 m6">

@@ -62,8 +62,9 @@
                                 </thead>
                                 <tbody id="roomTable">
                                     
-                                </tbody>
+                                </tbody>    
                             </table>
+                            <ul class="pagination right" id="pagination"></ul>
                         </div>
                         <div class="col s12 m5">
                             <div class="card" style="margin-top:15px;">

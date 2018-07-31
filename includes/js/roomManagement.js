@@ -125,8 +125,4 @@ function changeStatus(roomNo, status, curstatus){
     }
 }
 
-function forPagination(table, filter, returnFunction){
-    $.getScript("includes/js/pagination.js", function () { getPaginationData(table, filter, returnFunction); });
-}
-
 

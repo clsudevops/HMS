@@ -20,9 +20,15 @@ function changeLeft(returnfunction) {
 }
 
 function createMyPagination(noOfPage, returnfunction) {
-    $('#pagination').html("");
-    $('#pagination').append(createPagination(noOfPage, returnfunction));
-    $("#page_" + curpage).addClass("active");
+    // console.log(noOfPage);
+    if(Math.floor(noOfPage) > 1){
+        $('#pagination').html("");
+        $('#pagination').append(createPagination(noOfPage, returnfunction));
+        $("#page_" + curpage).addClass("active");
+    }
+    else{
+        $('#pagination').html("");
+    }
 }
 
 function createPagination(noOfPage, returnfunction) {

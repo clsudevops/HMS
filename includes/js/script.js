@@ -105,3 +105,7 @@ function removeComma(str){
     var mystr = str.replace(",", "");
     return mystr;
 }
+
+function forPagination(table, filter, returnFunction) {
+    $.getScript("includes/js/pagination.js", function () { getPaginationData(table, filter, returnFunction); });
+}

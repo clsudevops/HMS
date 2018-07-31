@@ -494,3 +494,13 @@ span.guestName{
 .input-field.col .prefix ~ label, .input-field.col .prefix ~ .validate ~ label{
     margin-left: 2.7rem;
 }
+
+#pagination li.active{
+    /* background-color:  #2196f3; */
+     background-color:  white;
+    border: 1px solid #2196f3;
+}
+#pagination li.active a{
+    color:black;
+}
+

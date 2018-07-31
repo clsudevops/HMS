@@ -5,7 +5,7 @@
     $filtering = $_GET['filtering'];
     
     $select = "Select count(*) as count from " . $tableName . " where " . $filtering;
-
+    // echo $select;
     $result = mysqli_query($conn, $select);
 
     $rows = array();
