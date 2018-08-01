@@ -99,7 +99,6 @@ function submitReservationModal() {
     var childrenCount = $('#childrenCount').val();
     var idTypeSelect = $('#idTypeSelect').val();
     var personal_id = $('#personal_id').val();
-    // console.log(checkindate);
     if (roomNo != "" && name != "" && contact != "" && checkindate != "" && checkoutdate != "" && adultsCount != "" && idTypeSelect != "" && childrenCount != "" && personal_id != "") {
         $.ajax({
             url: 'pages/api/insertReservation.php',
@@ -123,31 +122,4 @@ function submitReservationModal() {
         });
     }
 }
-
-// function changeStatus(roomNo, status, curstatus) {
-//     if (status != curstatus) {
-//         $.ajax({
-//             url: 'pages/api/updateRoomStatus.php',
-//             data: "roomNo=" + roomNo + "&status=" + curstatus,
-//             type: "POST",
-//             success: function () {
-//                 populateRoomsRoomNo();
-//                 M.AutoInit()
-//                 $.alert({ title: 'Change status', content: 'Room Status Updated Succesfully', boxWidth: '40%', theme: 'dark', useBootstrap: false });
-//             },
-//             error: function (asd, asf, ass) {
-//                 console.log(asd);
-//             }
-//         });
-//     }
-//     else {
-//         $.alert({
-//             title: 'Change status',
-//             content: 'The status of this Room is already ' + status,
-//             boxWidth: '40%',
-//             theme: 'dark',
-//             useBootstrap: false
-//         });
-//     }
-// }
 
