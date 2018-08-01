@@ -1,8 +1,23 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <?php include('cssInclude.php') ?>
+    <?php 
+        include('cssInclude.php');
+        if(!isset($_SESSION['username'])){
+            header("Location:login.php");  
+        }
+        else{
+            if($_SESSION["type"] != 'admin'){
+                header("Location:index.php"); 
+            }
+            else{
+                $username = $_SESSION["username"];
+                $type = $_SESSION["type"];
+            }
+        }
+    ?>
     <style>
         .select-wrapper input.select-dropdown{
             height:36px;
@@ -47,12 +62,13 @@
                                 </thead>
                                 <tbody id="roomTable">
                                     
-                                </tbody>
+                                </tbody>    
                             </table>
+                            <ul class="pagination right" id="pagination"></ul>
                         </div>
                         <div class="col s12 m5">
                             <div class="card" style="margin-top:15px;">
-                                <h5 class="h5-adding z-depth-1">Add New Room</h5>
+                                <h5 class="h5-adding z-depth-1">Add or Update Room</h5>
                                 <div class="row" style="padding:0 15px;">
                                     <div class="col s12 m4" style="margin-bottom:0px;">
                                         <label>Room No:</label>
@@ -99,9 +115,15 @@
                                     <div class="input-field col s12 m12">
                                         <a class="btn right btn-1" id="submitRoom" style="margin-left:5px; height:36px; line-height:36px;">
                                             <i class="material-icons left" style="margin-right:10px;">
-                                                send
+                                                save
                                             </i>
-                                            Submit
+                                            save
+                                        </a>
+                                        <a class="btn right btn-1" id="clearRoom" onclick="clearRoom()" style="margin-left:5px; height:36px; line-height:36px;">
+                                            <i class="material-icons left" style="margin-right:10px;">
+                                                clear_all
+                                            </i>
+                                            Clear
                                         </a>
                                     </div>
                                 </div>

@@ -1,5 +1,4 @@
 <?php session_start(); ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,7 +23,7 @@
     
     <main>
         <div class="row">
-            <div class="col s12 mycontainer">
+            <div class="col s12 mycontainer1">
                 <div class="card-1">
                     <!-- query for roomtype -->
                     <?php
@@ -32,7 +31,7 @@
                         $result = mysqli_query($conn, $sql);
                     ?>
                     <div class="page-header valign-wrapper z-depth-1">
-                        <h5>Book Reservation</h5>
+                        <h5>Reservation List</h5>
                     </div>
                     <!-- Filterings -->
                     <div class="row"  style="margin-bottom:10px;">
@@ -41,45 +40,27 @@
                                 <i class="material-icons left">search</i>Search</a>
         
                             <div class="file-path-wrapper">
-                                <input placeholder="Search Room No" id="search" class="file-path validate myinput" type="text" required />
+                                <input placeholder="Search Guest Name or Room No" id="search" class="file-path validate myinput" type="text" required />
                             </div>
-                        </div>
-                        <div class="input-field col m3 s12">
-                            <select id="typeSelect">
-                                <option value="1" disabled selected>Room Type</option>
-                                <?php
-                                    if (mysqli_num_rows($result) > 0) {
-                                        while($row = mysqli_fetch_assoc($result)) {
-                                            echo "<option value=" . $row["type"] .">". $row["type"] . "</option>";
-                                        }
-                                    }
-                                ?> 
-                            </select>
-                        </div>
-                        <div class="input-field col m3 s12">
-                            <select id="floorSelect">
-                                <option value="" disabled selected>Floor</option>
-                                <?php
-                                    for($i = 1 ; $i <= 11 ; $i++){
-                                        echo "<option value=" . $i . ">" . $i . "</option>";
-                                    }
-                                ?>
-                            </select>
                         </div>
                     </div>
                     <!-- Table -->
                     <table class="z-depth-2 highlight responsive-table roomTypeTable">
                         <thead>
                             <tr>
-                                <th>Room No.</th>
-                                <th>Room Type</th>
-                                <th>Floor</th>
-                                <th>Rate</th>
-                                <th>Rate/Hour</th>
-                                <th style="width:20%">Action</th>
+                                <th>Name</th>
+                                <th>Contact</th>
+                                <!-- <th>ID Type</th>
+                                <th>Personal ID</th>
+                                <th>Company Name</th>
+                                <th>Company Address</th> -->
+                                <th>Room No</th>
+                                <th>Checkin Date</th>
+                                <th>Checkout Date</th>
+                                <th style="width:23%;">Action</th>
                             </tr>
                         </thead>
-                        <tbody id="roomManagementTable">
+                        <tbody id="reservationListTable">
                             
                         </tbody>
                     </table>
@@ -162,7 +143,7 @@
                     </div>
                     
                     <div class="input-field col s6 m6">
-                        <a class="btn btn-1 waves-effect waves-green right" onclick="submitReservationModal()"  style="margin-bottom:10px;">
+                        <a class="btn btn-1 waves-effect waves-green right modal-close                                  " onclick="submitReservationModal()"  style="margin-bottom:10px;">
                             <i class="material-icons left" style="margin-right:10px;">
                                 send
                             </i>
@@ -175,7 +156,7 @@
     <!-- modal up to here -->
 <section class="jsIncludes">
     <?php require('jsInclude.php') ?>
-    <script type="text/javascript" src="includes/js/bookReservation.js"></script>
+    <script type="text/javascript" src="includes/js/reservationList.js"></script>
 </section>
 
 </html>

@@ -1,8 +1,23 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <?php include('cssInclude.php') ?>
+    <?php 
+        include('cssInclude.php');
+        if(!isset($_SESSION['username'])){
+            header("Location:login.php");  
+        }
+        else{
+            if($_SESSION["type"] != 'admin'){
+                header("Location:index.php"); 
+            }
+            else{
+                $username = $_SESSION["username"];
+                $type = $_SESSION["type"];
+            }
+        }
+    ?>
     <style>
         .select-wrapper input.select-dropdown{
             height:36px;
@@ -34,7 +49,7 @@
                                     <input style="height:36px; line-height:36px;" placeholder="Search Extra" id="search" class="file-path validate myinput" type="text"/>
                                 </div>
                             </div>
-                            <table class="z-depth-2 highlight responsive-table roomTypeTable">
+                            <table class="z-depth-2 responsive-table highlight roomTypeTable">
                                 <thead>
                                     <tr>
                                         <th>Description</th>

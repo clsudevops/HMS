@@ -1,8 +1,18 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <?php include('cssInclude.php') ?>
+    <?php 
+        include('cssInclude.php');
+        if(!isset($_SESSION['username'])){
+            header("Location:login.php");  
+        }
+        else{
+            $username = $_SESSION["username"];
+            $type = $_SESSION["type"];
+        }
+    ?>
 </head>
 
 <body>
@@ -39,7 +49,7 @@
                                 <?php
                                     if (mysqli_num_rows($result) > 0) {
                                         while($row = mysqli_fetch_assoc($result)) {
-                                            echo "<option value=" . $row["type"] .">". $row["type"] . "</option>";
+                                            echo "<option value='" . $row["type"] ."'>". $row["type"] . "</option>";
                                         }
                                     }
                                 ?> 
@@ -72,15 +82,9 @@
                             
                         </tbody>
                     </table>
-                    <!-- <ul class="pagination right">
-                        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-                        <li class="active"><a href="#!">1</a></li>
-                        <li class="waves-effect"><a href="#!">2</a></li>
-                        <li class="waves-effect"><a href="#!">3</a></li>
-                        <li class="waves-effect"><a href="#!">4</a></li>
-                        <li class="waves-effect"><a href="#!">5</a></li>
-                        <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-                    </ul> -->
+                    <ul class="pagination right" id="pagination">
+                       
+                    </ul>
                 </div>
             </div>
         </div>

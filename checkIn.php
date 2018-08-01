@@ -1,15 +1,26 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <?php include('cssInclude.php') ?>
+    <?php 
+        include('cssInclude.php');
+        if(!isset($_SESSION['username'])){
+            header("Location:login.php");  
+        }
+        else{
+            $username = $_SESSION["username"];
+            $type = $_SESSION["type"];
+        }
+    ?>
+
     <?php
         if(isset($_POST['submitCheckIn'])) {
 
             // insert into guests table
             $guestname = $_POST['name']; $mobile = $_POST['mobile']; $room_no = $_POST['room_no'];
-            $checkOutDate = $_POST['checkOutDate']; $checkOutTime = $_POST['checkOutTime'];
-            $adultsCount = $_POST['adultsCount']; $childCount = $_POST['childCount']; $compName = $_POST['compName'];
+            $checkOutDate = $_POST['checkOutDate']; $adultsCount = $_POST['adultsCount'];
+            $childCount = $_POST['childCount']; $compName = $_POST['compName'];
             $compAddress = $_POST['compAddress'];   
 
             $sql = "Insert into guests(name,mobile,companyName,companyAddress) values('". $guestname ."','". $mobile ."','". $compName ."','". $compAddress ."')";
@@ -25,12 +36,26 @@
             }
 
             // convert checkoutdate
-            // $checkOutTime = date("H:i", strtotime($checkOutTime));
+            date_default_timezone_set('Asia/Manila');
+            $checkOutTime = "23:59:59";
             $checkOut = $checkOutDate . " " . $checkOutTime;
-            $checkOut = date('Y-m-d H:i', strtotime($checkOut));
+            $checkOut = date('Y-m-d H:i:s' , strtotime($checkOut));
+            // echo  $checkOut;
             // echo $checkOut;
             // insert into checkin
+
             $sql = "Insert into checkin(roomNo,guestId,checkOutDate,adultsCount,childrenCount) values('". $room_no ."',". $guest_id .",'". $checkOut ."',". $adultsCount .",". $childCount .")";
+            $result = mysqli_query($conn, $sql);
+
+            $select = "Select id from checkin where roomNo = '". $room_no ."'";
+            $result = mysqli_query($conn, $select);
+
+            while($row = mysqli_fetch_assoc($result)) {
+                $checkInId = $row['id'];
+            }
+
+            $sql = "Insert into billing(checkInId) values(". $checkInId .")";
+            // echo $sql;
             $result = mysqli_query($conn, $sql);
 
             $sql = "update rooms set status = 'Occupied' where roomNo='". $room_no ."'";
@@ -138,10 +163,6 @@
                                 <div class="input-field col s6 m3">
                                     <label>Check Out Date</label>
                                     <input name="checkOutDate" type="text" class="datepicker" required>
-                                </div>
-                                <div class="input-field col s6 m3">
-                                    <label>Check Out Time</label>
-                                    <input name="checkOutTime" type="text" class="timepicker" required>
                                 </div>
                                 <div class="input-field col s6 m2">
                                     <label>No. of Adults</label>
