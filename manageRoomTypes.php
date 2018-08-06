@@ -34,7 +34,7 @@
                         <h5>Manage Room Types</h5>
                     </div>
                     <div class="row" style="margin-top:20px;">
-                        <div class="col s12 m6">
+                        <div class="col s12 m7">
                             <div class="file-field input-field col m12 s12" style="padding-left:0px; padding-right:0px;">
                                 <a class="btn right btn-1" id="searchRoomType" style="margin-left:5px; height:36px; line-height:36px;">
                                     <i class="material-icons left">search</i>Search</a>
@@ -47,9 +47,11 @@
                                 <thead>
                                     <tr>
                                         <th>Type</th>
+                                        <th>Rate</th>
+                                        <th>Hourly</th>
                                         <th>Adult</th>
-                                        <th>Children</th>
-                                        <th style="width:23%;">Action</th>
+                                        <th>Child</th>
+                                        <th style="width:25%;">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody id="roomTypeTable">
@@ -59,20 +61,28 @@
                             <ul class="pagination right" id="pagination"></ul>
                         </div>
 
-                        <div class="col s12 m6">
-                            <div class="input-field col s12 m12" style="margin-bottom:0px;">
-                                <label>Name:</label>
+                        <div class="col s12 m5">
+                            <div class="col s12 m12" style="margin-bottom:0px;">
+                                <label>Name</label>
                                 <input name="typeName" style="height:36px; line-height:36px;" id="typeName" type="text" class="validate" required>
                             </div>
-                            <div class="input-field col s12 m4" style="margin-bottom:0px;">
-                                <label>Max Adult:</label>
+                            <div class="col s12 m3" style="margin-bottom:0px;">
+                                <label>Rate</label>
+                                <input name="maxAdult" style="height:36px; line-height:36px;" id="rate" type="number" class="validate" required>
+                            </div>
+                            <div class="col s12 m3" style="margin-bottom:0px;">
+                                <label>Rate/Hour</label>
+                                <input name="maxChildren" style="height:36px; line-height:36px;" id="rateperhour" type="number" class="validate" required>
+                            </div>
+                            <div class="col s12 m3" style="margin-bottom:0px;">
+                                <label>Child</label>
                                 <input name="maxAdult" style="height:36px; line-height:36px;" id="maxAdult" type="number" class="validate" required>
                             </div>
-                            <div class="input-field col s12 m4" style="margin-bottom:0px;">
-                                <label>Max Children:</label>
+                            <div class="col s12 m3" style="margin-bottom:0px;">
+                                <label>Adult</label>
                                 <input name="maxChildren" style="height:36px; line-height:36px;" id="maxChildren" type="number" class="validate" required>
                             </div>
-                            <div class="input-field col s12 m4">
+                            <div class="input-field col s12 m12">
                                 <a class="btn right btn-1" id="submitRoomType" style="margin-left:5px; height:36px; line-height:36px;">
                                     <i class="material-icons left" style="margin-right:10px;">
                                         send
@@ -87,7 +97,29 @@
         </div>
         
     <!-- Modal Structure -->
-
+    <div id="updateRoomType" class="modal">
+        <div class="modal-content" style="">
+            <h4 id="h4-roomNo">Add Item to Room <span id="modalRoomNo"></span></h4>
+            <div class="row">
+                <div class="input-field col s8 m7">
+                    <label>Item Description</label>
+                    <input style="height:36px; line-height:36px;" id="itemDescription" name="description" type="text" class="validate">                        
+                </div>
+                <div class="input-field col s4 m2">
+                    <label>Quantity</label>
+                    <input style="height:36px; line-height:36px;" id="itemQuantity" type="number" class="validate">
+                </div>
+                <div class="input-field col s4 m3">
+                    <a class="btn btn-1 waves-effect waves-green right" onclick="submitItemInventoryModal()"  style="margin-bottom:10px;">
+                        <i class="material-icons left" style="margin-right:10px;">
+                            send
+                        </i>
+                        Submit
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
     </main>
     
     <footer>

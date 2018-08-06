@@ -15,7 +15,6 @@ $(document).ready(function () {
             $.ajax({
                 url: 'pages/api/insertRoom.php',
                 type: "POST",
-                // dataType: "json",
                 data: "roomNo=" + roomNo + "&roomType=" + roomType + "&roomFloor=" + roomFloor + "&rate=" + rate + "&rateperhour=" + rateperhour,
                 success: function () {
                     $('#roomNo').val("");
@@ -54,6 +53,22 @@ function clearRoom(){
 
     M.AutoInit();
 }
+
+$('#roomType').on("change",function(){
+    var roomTypeID = $('#roomType').val();
+    $.ajax({
+        url: 'pages/api/getRoomRate.php',
+        data: {
+            roomTypeID: roomTypeID
+        },
+        dataType: 'json',
+        success: function (data) {
+            $('#rate').val(data[0].rate);
+            $('#rateperhour').val(data[0].rateperhour);
+        }
+    })
+})
+
 function populateRooms(pageNo) {
     var search = $('#search').val();
     $.ajax({
@@ -143,11 +158,11 @@ function deleteRoom(id) {
         type: "POST",
         data: "id=" + id,
         success: function () {
-            populateRooms(page);
+            populateRooms(curpage);
             clearRoom();
             $.alert({
                 title: 'Status',
-                content: 'Room ' + id + 'Deleted Succesfully!!!',
+                content: 'Room ' + id + ' Deleted Succesfully!!!',
                 boxWidth: '40%',
                 theme: 'dark',
                 useBootstrap: false

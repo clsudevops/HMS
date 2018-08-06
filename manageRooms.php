@@ -76,11 +76,11 @@
                                     </div>
                                     <div class=" col s12 m4" style="margin-bottom:0px;">
                                         <label>Rate:</label>
-                                        <input style="height:36px; line-height:36px;" id="rate" type="text" class="validate" required>
+                                        <input style="height:36px; line-height:36px;" id="rate" type="text" class="validate" required disabled>
                                     </div>
                                     <div class=" col s12 m4" style="margin-bottom:0px;">
                                         <label>Rate/Hour:</label>
-                                        <input style="height:36px; line-height:36px;" id="rateperhour" type="text" class="validate">
+                                        <input style="height:36px; line-height:36px;" id="rateperhour" type="text" class="validate" disabled>
                                     </div>
                                 </div>
                                 <div class="row" style="padding:0 15px;margin-bottom:0px;">

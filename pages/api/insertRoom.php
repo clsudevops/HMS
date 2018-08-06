@@ -26,18 +26,22 @@
     }
 
     if($forUpdate == true){
-        $stmt = $conn->prepare("Update rooms set roomType = ? , floor = ? , rate = ? , rateperhour = ? where roomNo = ?");
-        $stmt->bind_param('iidds', $roomType,$roomFloor,$rate,$rateperhour,$roomNo); 
+        $stmt = $conn->prepare("Update rooms set rate = ? , rateperhour = ? where roomNo = ?");
+        $stmt->bind_param('iis', $rate,$rateperhour,$roomNo); 
         $stmt->execute();
         $result = $stmt->get_result() or die($conn->error);
         // $response = "Update";
     }
     else{
+        // $stmt = $conn->prepare("Insert Into rate_history(roomNo,roomType,floor,rate,rateperhour) values(?,?,?,?,?)");
+        // $stmt->bind_param('siidd', $roomNo,$roomType,$roomFloor,$rate,$rateperhour); 
+        // $stmt->execute();
+        // $result = $stmt->get_result() or die($conn->error);
+
         $stmt = $conn->prepare("Insert Into rooms(roomNo,roomType,floor,rate,rateperhour) values(?,?,?,?,?)");
         $stmt->bind_param('siidd', $roomNo,$roomType,$roomFloor,$rate,$rateperhour); 
         $stmt->execute();
         $result = $stmt->get_result() or die($conn->error);
-        // $response = "Insert";
     }
     
     // return $response;

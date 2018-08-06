@@ -292,12 +292,7 @@ h5.sum-heading{
     padding: 5px;
     font-size: 20px;    
 }
-.materialboxed{
-    cursor: pointer;
-}
-.summary table td{
-    cursor: pointer;
-}
+
 .index-summaries{
     box-shadow: none;
     margin: 3px 0px !important;
@@ -318,9 +313,7 @@ h5.sum-heading{
     padding: 10px 10px 10px 15px !important;  
     
 }
-.index-summaries .collapsible-body table tr{
-    cursor:pointer;
-}
+
 .index-summaries .collapsible-body table tr:last-child{
     border: none !important;
 }
@@ -443,9 +436,7 @@ span.guestName{
     opacity: 0.8;
     font-size: 18px;
 }
-#roomTable{
-   cursor: pointer;
-}
+
 #roomtoDisplayInventory{
     font-size:18px;
 }
@@ -495,8 +486,8 @@ span.guestName{
     margin-left: 2.7rem;
 }
 
-#pagination li a{
-    cursor: pointer;
+#roomTable, #roomTypeTable, #pagination li a,
+.materialboxed, .summary table td,
+.index-summaries .collapsible-body table tr{
+   cursor: pointer;
 }
-
-

@@ -71,11 +71,8 @@
                     <table class="z-depth-2 highlight responsive-table roomTypeTable">
                         <thead>
                             <tr>
-                                <th>Room No.</th>
                                 <th>Room Type</th>
-                                <th>Floor</th>
-                                <th>Rate</th>
-                                <th>Rate/Hour</th>
+                                <th>Available</th>
                                 <th style="width:20%">Action</th>
                             </tr>
                         </thead>
