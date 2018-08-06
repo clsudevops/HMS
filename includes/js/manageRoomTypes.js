@@ -56,7 +56,7 @@ function populateRoomTypes(pageNo) {
             loopRoomTypes(data);
             if (search != "") { forPagination("roomTypes", "type like '%"+ type +"%'", "populateRoomTypes"); }
             else { forPagination("roomTypes", 1, "populateRoomTypes"); }
-            // M.AutoInit();
+            M.AutoInit();
         }
     });
 }
@@ -76,24 +76,24 @@ function loopRoomTypes(data) {
 }
 
 function createRoomTypeTable(id, type, maxAdult, maxChildren, rate, rateperhour) {
-    var myRoomType = '<tr onclick="forUpdate(\'' + id + '\',\'' + type + '\',\'' + maxAdult + '\',\'' + maxChildren + '\',\'' + rate + '\',\'' + rateperhour + '\',)">' +
+    var myRoomType = '<tr>' +
         '<td>' + type + '</td>' +
         '<td>' + rate + '</td>' +
         '<td>' + rateperhour + '</td>' +
         '<td>' + maxAdult + '</td>' +
         '<td>' + maxChildren + '</td>' +
-        '<td><a class="btn btn-flat btn-2 tooltipped" data-tooltip="Delete" onclick="deleteRoomType('+ id +')" "><i class="material-icons">delete</i></a>' +
-        '<a class="btn btn-flat btn-2 tooltipped" data-tooltip="Delete" onclick="updateRoomType('+ id +')" "><i class="material-icons">delete</i></a></td>' +
+        '<td><a class="btn btn-flat btn-2 modal-trigger" href="#updateRoomType" onclick="forUpdate(\'' + id + '\',\'' + type + '\',\'' + maxAdult + '\',\'' + maxChildren + '\',\'' + rate + '\',\'' + rateperhour + '\')"><i class="material-icons">edit</i></a>' +
+        '<a class="btn btn-flat btn-2" onclick="deleteRoomType('+ id +')"><i class="material-icons">delete</i></a></td>' +
         '</tr>'
     return myRoomType;
 }
+
 function forUpdate(id, type, maxAdult, maxChildren, rate, rateperhour){
-    selectedType = id;
-    $('#typeName').val(type);
-    $('#maxAdult').val(maxAdult);
-    $('#maxChildren').val(maxChildren);
-    $('#rate').val(rate);
-    $('#rateperhour').val(rateperhour);
+    // $('#typeName').val(type);
+    // $('#maxAdult').val(maxAdult);
+    // $('#maxChildren').val(maxChildren);
+    // $('#rate').val(rate);
+    // $('#rateperhour').val(rateperhour);
 }
 function deleteRoomType(id){
     $.ajax({

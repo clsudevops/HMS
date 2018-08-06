@@ -95,22 +95,40 @@
                 </div>
             </div>
         </div>
-        
-    <!-- Modal Structure -->
-    <div id="updateRoomType" class="modal">
+    </main>
+    
+    <footer>
+        <?php require('pages/layout/footer.php') ?>
+        <!-- modals -->
+    </footer>
+    
+</body>
+   <div id="updateRoomType" class="modal">
         <div class="modal-content" style="">
             <h4 id="h4-roomNo">Add Item to Room <span id="modalRoomNo"></span></h4>
             <div class="row">
-                <div class="input-field col s8 m7">
-                    <label>Item Description</label>
-                    <input style="height:36px; line-height:36px;" id="itemDescription" name="description" type="text" class="validate">                        
+                <div class="input-field col s6 m4">
+                    <label>Room Type</label>
+                    <input style="height:36px; line-height:36px;" id="upd_roomType" name="description" type="text" class="validate">                        
+                </div>
+                <div class="input-field col s3 m2">
+                    <label>Rate</label>
+                    <input style="height:36px; line-height:36px;" id="upd_rate" type="number" class="validate">
+                </div>
+                <div class="input-field col s3 m2">
+                    <label>Rate/Hour</label>
+                    <input style="height:36px; line-height:36px;" id="upd_rateperhour" type="number" class="validate">
                 </div>
                 <div class="input-field col s4 m2">
-                    <label>Quantity</label>
-                    <input style="height:36px; line-height:36px;" id="itemQuantity" type="number" class="validate">
+                    <label>Child</label>
+                    <input style="height:36px; line-height:36px;" id="upd_child" type="number" class="validate">
                 </div>
-                <div class="input-field col s4 m3">
-                    <a class="btn btn-1 waves-effect waves-green right" onclick="submitItemInventoryModal()"  style="margin-bottom:10px;">
+                <div class="input-field col s4 m2">
+                    <label>Adult</label>
+                    <input style="height:36px; line-height:36px;" id="upd_adult" type="number" class="validate">
+                </div>
+                <div class="input-field col s4 m12">
+                    <a class="btn btn-1 waves-effect waves-green right" onclick="updateRoomType()"  style="margin-bottom:10px;">
                         <i class="material-icons left" style="margin-right:10px;">
                             send
                         </i>
@@ -120,15 +138,6 @@
             </div>
         </div>
     </div>
-    </main>
-    
-    <footer>
-        <?php require('pages/layout/footer.php') ?>
-        <!-- modals -->
-    </footer>
-    
-</body>
-
 <section class="jsIncludes">
     <?php require('jsInclude.php') ?>
     <script type="text/javascript" src="includes/js/manageRoomTypes.js"></script>
