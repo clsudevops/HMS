@@ -34,6 +34,32 @@ $(document).ready(function () {
             });
         }
     });
+    $('#btnupdateRoomType').on("click", function () {
+        var id = $('#upd_id').val();
+        var type = $('#upd_roomType').val();
+        var maxAdult = $('#upd_adult').val();
+        var maxChildren =  $('#upd_child').val();
+        var rate = $('#upd_rate').val();
+        var rateperhour = $('#upd_rateperhour').val();
+
+        $.ajax({
+            url: 'pages/api/updateRoomTypes.php',
+            type: "POST",
+            data: {
+                id: id,
+                type: type,
+                maxAdult : maxAdult,
+                maxChildren: maxChildren,
+                rate: rate,
+                rateperhour: rateperhour
+            },
+            success: function () {
+                displayMessage("Update Status", "Room Type updated succesfully");
+                populateRoomTypes(curpage);
+            }
+        });
+
+    });
 
     $("#searchRoomType").on("click", function () {
         populateRoomTypes(page);
@@ -89,12 +115,14 @@ function createRoomTypeTable(id, type, maxAdult, maxChildren, rate, rateperhour)
 }
 
 function forUpdate(id, type, maxAdult, maxChildren, rate, rateperhour){
-    // $('#typeName').val(type);
-    // $('#maxAdult').val(maxAdult);
-    // $('#maxChildren').val(maxChildren);
-    // $('#rate').val(rate);
-    // $('#rateperhour').val(rateperhour);
+    $('#upd_id').val(id);
+    $('#upd_roomType').val(type);
+    $('#upd_adult').val(maxAdult);
+    $('#upd_child').val(maxChildren);
+    $('#upd_rate').val(rate);
+    $('#upd_rateperhour').val(rateperhour);
 }
+
 function deleteRoomType(id){
     $.ajax({
         url: 'pages/api/deleteRoomTypes.php',

@@ -107,28 +107,29 @@
         <div class="modal-content" style="">
             <h4 id="h4-roomNo">Add Item to Room <span id="modalRoomNo"></span></h4>
             <div class="row">
-                <div class="input-field col s6 m4">
+                <input style="height:36px; line-height:36px;" id="upd_id" type="hidden" class="">
+                <div class="col s6 m4">
                     <label>Room Type</label>
                     <input style="height:36px; line-height:36px;" id="upd_roomType" name="description" type="text" class="validate">                        
                 </div>
-                <div class="input-field col s3 m2">
+                <div class="col s3 m2">
                     <label>Rate</label>
                     <input style="height:36px; line-height:36px;" id="upd_rate" type="number" class="validate">
                 </div>
-                <div class="input-field col s3 m2">
+                <div class="col s3 m2">
                     <label>Rate/Hour</label>
                     <input style="height:36px; line-height:36px;" id="upd_rateperhour" type="number" class="validate">
                 </div>
-                <div class="input-field col s4 m2">
+                <div class="col s4 m2">
                     <label>Child</label>
                     <input style="height:36px; line-height:36px;" id="upd_child" type="number" class="validate">
                 </div>
-                <div class="input-field col s4 m2">
+                <div class="col s4 m2">
                     <label>Adult</label>
                     <input style="height:36px; line-height:36px;" id="upd_adult" type="number" class="validate">
                 </div>
-                <div class="input-field col s4 m12">
-                    <a class="btn btn-1 waves-effect waves-green right" onclick="updateRoomType()"  style="margin-bottom:10px;">
+                <div class="col s4 m12" style="margin-top:15px;">
+                    <a class="btn btn-1 waves-effect waves-green right modal-close" id ="btnupdateRoomType" style="margin-bottom:10px;">
                         <i class="material-icons left" style="margin-right:10px;">
                             send
                         </i>
